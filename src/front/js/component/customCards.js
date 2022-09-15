@@ -1,14 +1,14 @@
 import React from "react";
 import '../../styles/index.css';
 import rigoImageUrl from "../../img/rigo-baby.jpg";
+import Barra_Blanco_35 from "../../img/Barras/blanco-35.png";
 import { Link } from "react-router-dom";
 
 
 export const CustomCard = () => {
     
     const divStyle = {
-        color: 'blue',
-        backgroundImage: 'url(' + rigoImageUrl + ')',
+        backgroundColor: 'red',
     };
 
     return (
@@ -26,7 +26,7 @@ export const CustomCard = () => {
                                     <h2 className="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold text-black noa">Prueba de imagen</h2>
                                     <ul className="d-flex list-unstyled mt-auto">
                                         <li className="me-auto">
-                                            <img src={rigoImageUrl} alt="Bootstrap" width="32" height="32" className="rounded-circle border border-white" />
+                                            <img src={Barra_Blanco_35} alt="Bootstrap" width="200" height="200" className="rounded-circle border border-white" />
                                         </li>
                                         <li className="d-flex align-items-center me-3">
                                             <small>Prueba</small>
