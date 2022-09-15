@@ -1,4 +1,4 @@
-# WebApp boilerplate with React JS and Flask API
+# Kurius chocolate e-commerce webpage
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io#https://github.com/4GeeksAcademy/react-flask-hello.git)
 
