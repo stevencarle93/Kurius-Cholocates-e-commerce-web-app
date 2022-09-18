@@ -1,7 +1,21 @@
 import React from "react";
 import '../../styles/index.css';
 import rigoImageUrl from "../../img/rigo-baby.jpg";
-import Barra_Blanco_35 from "../../img/Barras/blanco-35.png";
+import Barra_Blanco_35 from "../../img/Barras/barra-blanco-35.png";
+import Barra_Chocoleche_42 from "../../img/Barras/barra-chocoleche-42.png";
+import Barra_Negro_54 from "../../img/Barras/barra-negro-54.png";
+import Barra_Negro_70 from "../../img/Barras/barra-negro-70.png";
+import Portada_Principal_Barras from "../../img/Barras/portada-principal-barras.jpg";
+import Cajas_1 from "../../img/Bombones/Cajas1.jpg";
+import Cajas_2 from "../../img/Bombones/Cajas2.jpg";
+import Cajas_4 from "../../img/Bombones/Cajas4.jpg";
+import Portada_Principal_Bombones from "../../img/Bombones/portada-principal-bombones.jpg";
+import Cobertura_Blanco_35 from "../../img/Coberturas/cobertura-blanco-35.png";
+import Cobertura_Chocoleche_42 from "../../img/Coberturas/cobertura-chocoleche-42.png";
+import Cobertura_Chocoleche_60 from "../../img/Coberturas/cobertura-chocoleche-60.png";
+import Cobertura_Negro_54 from "../../img/Coberturas/cobertura-negro-54.png";
+import Cobertura_Negro_70 from "../../img/Coberturas/cobertura-negro-70.png";
+import Portada_Principal_Coberturas from "../../img/Coberturas/portada-principal-coberturas.jpg";
 import { Link } from "react-router-dom";
 
 
@@ -47,7 +61,7 @@ export const CustomCard = () => {
                                 <h2 className="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold text-black noa">Prueba de imagen dos</h2>
                                     <ul className="d-flex list-unstyled mt-auto">
                                         <li className="me-auto">
-                                            <img src={rigoImageUrl} alt="Bootstrap" width="32" height="32" className="rounded-circle border border-white" />
+                                            <img src={Cajas_1} alt="Bootstrap" width="200" height="200" className="rounded-circle border border-white" />
                                         </li>
                                         <li className="d-flex align-items-center me-3">
                                             <small>Prueba</small>
@@ -69,7 +83,7 @@ export const CustomCard = () => {
                                     <h2 className="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold text-black noa">Prueba de imagen uno</h2>
                                     <ul className="d-flex list-unstyled mt-auto">
                                         <li className="me-auto">
-                                            <img src={rigoImageUrl} alt="Bootstrap" width="32" height="32" className="rounded-circle border border-white" />
+                                            <img src={Cobertura_Blanco_35} alt="Bootstrap" width="200" height="200" className="rounded-circle border border-white" />
                                         </li>
                                         <li className="d-flex align-items-center me-3">
                                             <small>Prueba</small>
