@@ -47,7 +47,7 @@ export const CustomCard = () => {
       <div className="container px-4 py-5" id="custom-cards">
         <div className="row row-cols-1  row-cols-lg-3 align-items-stretch g-4 py-5">
           <div className="col">
-            <Link to="#">
+            <Link to ="/Details">
               <div class="row row-cols-1 row-cols-md-2">
                 <div className="col mb-4">
                   <div className="card">
@@ -58,7 +58,7 @@ export const CustomCard = () => {
                     ></img>
                     <div className="card-body">
                       <h6 className="card-title">Barra de Chocolate Blanco 35%</h6>
-                      <button type="button" class="btn btn-info">Ver más</button>
+                      <button type="button" className="btn btn-info">Ver más</button>
                     </div>
                   </div>
                 </div>
@@ -66,12 +66,12 @@ export const CustomCard = () => {
                   <div className="card">
                     <img
                       src={Barra_Chocoleche_42}
-                      class="card-img-top"
+                      className="card-img-top"
                       alt="..."
                     ></img>
                     <div className="card-body">
                       <h6 className="card-title">Barra de Chocolate Blanco 42%</h6>
-                      <button type="button" class="btn btn-info">Ver más</button>
+                      <button type="button" className="btn btn-info">Ver más</button>
                     </div>
                   </div>
                 </div>
@@ -79,12 +79,12 @@ export const CustomCard = () => {
                   <div className="card">
                     <img
                       src={Barra_Negro_54}
-                      class="card-img-top"
+                      className="card-img-top"
                       alt="..."
                     ></img>
                     <div className="card-body">
                       <h6 className="card-title">Barra de Chocolate Negro 54%</h6>
-                      <button type="button" class="btn btn-info">Ver más</button>
+                      <button type="button" className="btn btn-info">Ver más</button>
                     </div>
                   </div>
                 </div>
@@ -92,12 +92,12 @@ export const CustomCard = () => {
                   <div className="card">
                     <img
                       src={Barra_Negro_70}
-                      class="card-img-top"
+                      className="card-img-top"
                       alt="..."
                     ></img>
                     <div className="card-body">
                       <h6 className="card-title">Barra de Chocolate Negro 70%</h6>
-                      <button type="button" class="btn btn-info">Ver más</button>
+                      <button type="button" className="btn btn-info">Ver más</button>
                     </div>
                   </div>
                 </div>
@@ -107,7 +107,7 @@ export const CustomCard = () => {
 
           <div className="col">
             <Link to="#">
-            <div class="row row-cols-1 row-cols-md-2">
+            <div className="row row-cols-1 row-cols-md-2">
                 <div className="col mb-4">
                   <div className="card">
                     <img
@@ -117,7 +117,7 @@ export const CustomCard = () => {
                     ></img>
                     <div className="card-body">
                       <h6 className="card-title">Bombones Caja 1</h6>
-                      <button type="button" class="btn btn-info">Ver más</button>
+                      <button type="button" className="btn btn-info">Ver más</button>
                     </div>
                   </div>
                 </div>
@@ -125,12 +125,12 @@ export const CustomCard = () => {
                   <div className="card">
                     <img
                       src={Cajas_2}
-                      class="card-img-top"
+                      className="card-img-top"
                       alt="..."
                     ></img>
                     <div className="card-body">
                       <h6 className="card-title">Bombones Caja 2</h6>
-                      <button type="button" class="btn btn-info">Ver más</button>
+                      <button type="button" className="btn btn-info">Ver más</button>
                     </div>
                   </div>
                 </div>
@@ -138,12 +138,12 @@ export const CustomCard = () => {
                   <div className="card">
                     <img
                       src={Cajas_4}
-                      class="card-img-top"
+                      className="card-img-top"
                       alt="..."
                     ></img>
                     <div className="card-body">
                       <h6 className="card-title">Bombones Caja 4</h6>
-                      <button type="button" class="btn btn-info">Ver más</button>
+                      <button type="button" className="btn btn-info">Ver más</button>
                     </div>
                   </div>
                 </div>
@@ -151,12 +151,12 @@ export const CustomCard = () => {
                   <div className="card">
                     <img
                       src={Portada_Principal_Bombones}
-                      class="card-img-top"
+                      className="card-img-top"
                       alt="..."
                     ></img>
                     <div className="card-body">
                       <h6 className="card-title">Portada Principal Bombones</h6>
-                      <button type="button" class="btn btn-info">Ver más</button>
+                      <button type="button" className="btn btn-info">Ver más</button>
                     </div>
                   </div>
                 </div>
@@ -166,7 +166,7 @@ export const CustomCard = () => {
 
           <div className="col">
             <Link to="#">
-            <div class="row row-cols-1 row-cols-md-2">
+            <div className="row row-cols-1 row-cols-md-2">
                 <div className="col mb-4">
                   <div className="card">
                     <img
@@ -176,7 +176,7 @@ export const CustomCard = () => {
                     ></img>
                     <div className="card-body">
                       <h6 className="card-title">Cobertura de Blanco 35%</h6>
-                      <button type="button" class="btn btn-info">Ver más</button>
+                      <button type="button" className="btn btn-info">Ver más</button>
                     </div>
                   </div>
                 </div>
@@ -184,12 +184,12 @@ export const CustomCard = () => {
                   <div className="card">
                     <img
                       src={Cobertura_Chocoleche_42}
-                      class="card-img-top"
+                      className="card-img-top"
                       alt="..."
                     ></img>
                     <div className="card-body">
                       <h6 className="card-title">Cobertura de Chocolate Con Leche 42%</h6>
-                      <button type="button" class="btn btn-info">Ver más</button>
+                      <button type="button" className="btn btn-info">Ver más</button>
                     </div>
                   </div>
                 </div>
@@ -197,12 +197,12 @@ export const CustomCard = () => {
                   <div className="card">
                     <img
                       src={Cobertura_Chocoleche_60}
-                      class="card-img-top"
+                      className="card-img-top"
                       alt="..."
                     ></img>
                     <div className="card-body">
                       <h6 className="card-title">Cobertura de Chocolate con Leche 60%</h6>
-                      <button type="button" class="btn btn-info">Ver más</button>
+                      <button type="button" className="btn btn-info">Ver más</button>
                     </div>
                   </div>
                 </div>
@@ -210,12 +210,12 @@ export const CustomCard = () => {
                   <div className="card">
                     <img
                       src={Cobertura_Negro_54}
-                      class="card-img-top"
+                      className="card-img-top"
                       alt="..."
                     ></img>
                     <div className="card-body">
                       <h6 className="card-title">Cobertura de Chocolate Semi Dulce 54%</h6>
-                      <button type="button" class="btn btn-info">Ver más</button>
+                      <button type="button" className="btn btn-info">Ver más</button>
                     </div>
                   </div>
                 </div>
@@ -223,12 +223,12 @@ export const CustomCard = () => {
                   <div className="card">
                     <img
                       src={Cobertura_Negro_70}
-                      class="card-img-top"
+                      className="card-img-top"
                       alt="..."
                     ></img>
                     <div className="card-body">
                       <h6 className="card-title">Cobertura de Chocolate Semi Amargo 70%</h6>
-                      <button type="button" class="btn btn-info">Ver más</button>
+                      <button type="button" className="btn btn-info">Ver más</button>
                     </div>
                   </div>
                 </div>
