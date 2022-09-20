@@ -6,7 +6,7 @@ import Barra_Chocoleche_42 from "../../img/Barras/barra-chocoleche-42.png";
 import Barra_Negro_54 from "../../img/Barras/barra-negro-54.png";
 import Barra_Negro_70 from "../../img/Barras/barra-negro-70.png";
 import Portada_Principal_Barras from "../../img/Barras/portada-principal-barras.jpg";
-import Cajas_1 from "../../img/Bombones/Cajas1.jpg";
+import Cajas_1 from "../../img/Bombones/Cajas1_Modified.jpg";
 import Cajas_2 from "../../img/Bombones/Cajas2.jpg";
 import Cajas_4 from "../../img/Bombones/Cajas4.jpg";
 import Portada_Principal_Bombones from "../../img/Bombones/portada-principal-bombones.jpg";
@@ -105,7 +105,7 @@ export const CustomCard = () => {
             </Link>
           </div>
 
-          <div className="col">
+          {/*<div className="col">
             <Link to="#">
             <div className="row row-cols-1 row-cols-md-2">
                 <div className="col mb-4">
@@ -162,7 +162,7 @@ export const CustomCard = () => {
                 </div>
               </div>
             </Link>
-          </div>
+  </div>*/}
 
           <div className="col">
             <Link to="#">
