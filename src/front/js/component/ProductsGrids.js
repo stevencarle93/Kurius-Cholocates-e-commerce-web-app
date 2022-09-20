@@ -48,7 +48,7 @@ export const CustomCard = () => {
         <div className="row row-cols-1  row-cols-lg-3 align-items-stretch g-4 py-5">
           <div className="col">
             <Link to ="/Details">
-              <div class="row row-cols-1 row-cols-md-2">
+              <div className="row row-cols-1 row-cols-md-2">
                 <div className="col mb-4">
                   <div className="card">
                     <img
