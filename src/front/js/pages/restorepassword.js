@@ -32,14 +32,14 @@ export const RestorePassword = () => {
   return (
     <>
       <div
-        className="container d-flex justify-content-center align-items-center letraKurius"
+        className="container d-flex justify-content-center align-items-center"
         style={{ height: "40vw" }}
       >
-        <div className="card text-center border-0" style={{ width: "50%" }}>
-          <div className="card-header cabezoteRegistro" style={{ width: "100%" }}>
+        <div className="card text-center" style={{ width: "50%" }}>
+          <div className="card-header" style={{ width: "100%" }}>
             <h3>Recuperar contraseña</h3>
           </div>
-          <div className="card-body cajatextoRegistro" style={{ width: "100%" }}>
+          <div className="card-body" style={{ width: "100%" }}>
             <form onSubmit="{(e) => restore(e)}">
               <div className=" d-flex flex-column bd-highlight mb-3">
                 <div className="d-flex">
