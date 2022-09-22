@@ -1,7 +1,9 @@
-import React from "react";
+import React, {useState} from "react";
 import { Link } from "react-router-dom";
 
 export const Navbar = () => {
+	const [color, changeColor] = useState("#0000");
+	document.body.style.backgroundColor = color;
 	return (
 		<nav className="navbar navbar-black bg-black">
 			<div className="mx-5">
@@ -20,10 +22,10 @@ export const Navbar = () => {
 			</div>
 
 			<div className="text-end mx-5">
-				<Link to="/login">
+				<Link to="/login" onClick={() => changeColor("#F2EBE1")}>
 					<button type="button" className="btn btn-outline-light me-2">Login</button>
 				</Link>
-				<Link to="/signup">
+				<Link to="/signup" onClick={() => changeColor("#F2EBE1")}>
 				<button type="button" className="btn btn-warning">Sign-up</button>
 				</Link>
 			</div>
