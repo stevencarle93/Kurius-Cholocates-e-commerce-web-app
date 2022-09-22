@@ -41,9 +41,9 @@ The `Provider` is already set. You can consume from any component using the useC
 ```jsx
 import { Context } from "../store/appContext";
 const MyComponentSuper = () => {
-    //here you use useContext to get store and actions
-    const { store, actions } = useContext(Context);
-    return <div>{/* you can use your actions or store inside the html */}</div>;
+  //here you use useContext to get store and actions
+  const { store, actions } = useContext(Context);
+  return <div>{/* you can use your actions or store inside the html */}</div>;
 };
 ```
 
@@ -61,7 +61,7 @@ It is recomended to install the backend first, make sure you have Python 3.8, Pi
 | MySQL     | mysql://username:password@localhost:port/example    |
 | Postgress | postgres://username:password@localhost:5432/example |
 
-4. Migrate the migrations: `$ pipenv run migrate` (skip if you have not made changes to the models on the `./src/api/models.py`)
+4. Migrate the migrations: `$ pipenv run reset_db` `$ pipenv run migrate` (skip if you have not made changes to the models on the `./src/api/models.py`)
 5. Run the migrations: `$ pipenv run upgrade`
 6. Run the application: `$ pipenv run start`
 
@@ -89,7 +89,7 @@ To update with all yours tables you can edit the file app.py and go to the line 
 
 ### Front-End Manual Installation:
 
--   Make sure you are using node version 14+ and that you have already successfully installed and runned the backend.
+- Make sure you are using node version 14+ and that you have already successfully installed and runned the backend.
 
 1. Install the packages: `$ npm install`
 2. Start coding! start the webpack dev server `$ npm run start`
