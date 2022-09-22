@@ -47,62 +47,84 @@ export const CustomCard = () => {
       <div className="container px-4 py-5" id="custom-cards">
         <div className="row row-cols-1  row-cols-lg-3 align-items-stretch g-4 py-5">
           <div className="col">
-            <Link to ="/Details">
-              <div className="row row-cols-1 row-cols-md-2">
+            <div className="row row-cols-1 row-cols-md-2">
+              <Link to="/Details/1">
                 <div className="col mb-4">
-                  <div className="card">
+                  <div className="card2">
                     <img
                       src={Barra_Blanco_35}
                       className="card-img-top"
                       alt="..."
                     ></img>
                     <div className="card-body">
-                      <h6 className="card-title">Barra de Chocolate Blanco 35%</h6>
-                      <button type="button" className="btn btn-info">Ver más</button>
+                      <h6 className="card-title">
+                        Barra de Chocolate Blanco 35%
+                      </h6>
+                      <button type="button" className="btn btn-info">
+                        Ver más
+                      </button>
                     </div>
                   </div>
                 </div>
+              </Link>
+              <Link to="/Details/2">
                 <div className="col mb-4">
-                  <div className="card">
+                  <div className="card2">
                     <img
                       src={Barra_Chocoleche_42}
                       className="card-img-top"
                       alt="..."
                     ></img>
                     <div className="card-body">
-                      <h6 className="card-title">Barra de Chocolate Blanco 42%</h6>
-                      <button type="button" className="btn btn-info">Ver más</button>
+                      <h6 className="card-title">
+                        Barra de Chocolate Blanco 42%
+                      </h6>
+                      <button type="button" className="btn btn-info">
+                        Ver más
+                      </button>
                     </div>
                   </div>
                 </div>
+              </Link>
+              <Link to="/Details/3">
                 <div className="col mb-4">
-                  <div className="card">
+                  <div className="card2">
                     <img
                       src={Barra_Negro_54}
                       className="card-img-top"
                       alt="..."
                     ></img>
                     <div className="card-body">
-                      <h6 className="card-title">Barra de Chocolate Negro 54%</h6>
-                      <button type="button" className="btn btn-info">Ver más</button>
+                      <h6 className="card-title">
+                        Barra de Chocolate Negro 54%
+                      </h6>
+                      <button type="button" className="btn btn-info">
+                        Ver más
+                      </button>
                     </div>
                   </div>
                 </div>
+              </Link>
+              <Link to="/Details/4">
                 <div className="col mb-4">
-                  <div className="card">
+                  <div className="card2">
                     <img
                       src={Barra_Negro_70}
                       className="card-img-top"
                       alt="..."
                     ></img>
                     <div className="card-body">
-                      <h6 className="card-title">Barra de Chocolate Negro 70%</h6>
-                      <button type="button" className="btn btn-info">Ver más</button>
+                      <h6 className="card-title">
+                        Barra de Chocolate Negro 70%
+                      </h6>
+                      <button type="button" className="btn btn-info">
+                        Ver más
+                      </button>
                     </div>
                   </div>
                 </div>
-              </div>
-            </Link>
+              </Link>
+            </div>
           </div>
 
           {/*<div className="col">
@@ -165,10 +187,10 @@ export const CustomCard = () => {
   </div>*/}
 
           <div className="col">
-            <Link to="#">
             <div className="row row-cols-1 row-cols-md-2">
+              <Link to="/Details/5">
                 <div className="col mb-4">
-                  <div className="card">
+                  <div className="card2">
                     <img
                       src={Cobertura_Blanco_35}
                       className="card-img-top"
@@ -176,64 +198,90 @@ export const CustomCard = () => {
                     ></img>
                     <div className="card-body">
                       <h6 className="card-title">Cobertura de Blanco 35%</h6>
-                      <button type="button" className="btn btn-info">Ver más</button>
+                      <button type="button" className="btn btn-info">
+                        Ver más
+                      </button>
                     </div>
                   </div>
                 </div>
+              </Link>
+              <Link to="/Details/6">
                 <div className="col mb-4">
-                  <div className="card">
+                  <div className="card2">
                     <img
                       src={Cobertura_Chocoleche_42}
                       className="card-img-top"
                       alt="..."
                     ></img>
                     <div className="card-body">
-                      <h6 className="card-title">Cobertura de Chocolate Con Leche 42%</h6>
-                      <button type="button" className="btn btn-info">Ver más</button>
+                      <h6 className="card-title">
+                        Cobertura de Chocolate Con Leche 42%
+                      </h6>
+                      <button type="button" className="btn btn-info">
+                        Ver más
+                      </button>
                     </div>
                   </div>
                 </div>
+              </Link>
+              <Link to="/Details/7">
                 <div className="col mb-4">
-                  <div className="card">
+                  <div className="card2">
                     <img
                       src={Cobertura_Chocoleche_60}
                       className="card-img-top"
                       alt="..."
                     ></img>
                     <div className="card-body">
-                      <h6 className="card-title">Cobertura de Chocolate con Leche 60%</h6>
-                      <button type="button" className="btn btn-info">Ver más</button>
+                      <h6 className="card-title">
+                        Cobertura de Chocolate con Leche 60%
+                      </h6>
+                      <button type="button" className="btn btn-info">
+                        Ver más
+                      </button>
                     </div>
                   </div>
                 </div>
+              </Link>
+              <Link to="/Details/8">
                 <div className="col mb-4">
-                  <div className="card">
+                  <div className="card2">
                     <img
                       src={Cobertura_Negro_54}
                       className="card-img-top"
                       alt="..."
                     ></img>
                     <div className="card-body">
-                      <h6 className="card-title">Cobertura de Chocolate Semi Dulce 54%</h6>
-                      <button type="button" className="btn btn-info">Ver más</button>
+                      <h6 className="card-title">
+                        Cobertura de Chocolate Semi Dulce 54%
+                      </h6>
+                      <button type="button" className="btn btn-info">
+                        Ver más
+                      </button>
                     </div>
                   </div>
                 </div>
+              </Link>
+              <Link to="/Details/9">
                 <div className="col mb-4">
-                  <div className="card">
+                  <div className="card2">
                     <img
                       src={Cobertura_Negro_70}
                       className="card-img-top"
                       alt="..."
                     ></img>
                     <div className="card-body">
-                      <h6 className="card-title">Cobertura de Chocolate Semi Amargo 70%</h6>
-                      <button type="button" className="btn btn-info">Ver más</button>
+                      <h6 className="card-title">
+                        Cobertura de Chocolate Semi Amargo 70%
+                      </h6>
+                      <button type="button" className="btn btn-info">
+                        Ver más
+                      </button>
                     </div>
                   </div>
                 </div>
-              </div>
-            </Link>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
