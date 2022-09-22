@@ -5,3 +5,14 @@
     one more css for each page that will contain the selected used 
     on that page only (the ones not reused in other pages).
 */
+.cabezoteRegistro{
+    background-color: rgb(108, 114, 57);
+    color: white;
+}
+.cajatextoRegistro{
+    
+    color: black;
+}
+.letraKurius{
+    font-family: 'Libre Baskerville', serif
+}
