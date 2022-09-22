@@ -1,10 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/home.css";
 
 export const Login = () => {
   const { store, actions } = useContext(Context);
+  const [color, changeColor] = useState("#F2EBE1");
+	document.body.style.backgroundColor = color;
   /*
   const login = async (e) => {
     e.preventDefault();
@@ -35,14 +37,14 @@ export const Login = () => {
   return (
     <>
       <div
-        className="container d-flex justify-content-center align-items-center"
+        className="container d-flex justify-content-center align-items-center letraKurius"
         style={{ height: "40vw" }}
       >
-        <div className="card text-center" style={{ width: "50%" }}>
-          <div className="card-header" style={{ width: "100%" }}>
+        <div className="card text-center border-0" style={{ width: "50%" }}>
+          <div className="card-header cabezoteRegistro" style={{ width: "100%" }}>
             <h3>Login</h3>
           </div>
-          <div className="card-body" style={{ width: "100%" }}>
+          <div className="card-body cajatextoRegistro" style={{ width: "100%" }}>
             <form onSubmit="{(e) => login(e)}">
               <div className=" d-flex flex-column bd-highlight mb-3">
                 <div className="d-flex mb-3">
@@ -69,7 +71,7 @@ export const Login = () => {
               </button>
             </form>
             <div className="mt-3">
-              <Link to={"/restorepassword"}>
+              <Link to={"/restorepassword"} onClick={() => changeColor("#F2EBE1")}>
                 <span>Olvidé mi contraseña</span>
               </Link>
             </div>
