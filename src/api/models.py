@@ -23,37 +23,51 @@ class User(db.Model):
             "last_name": self.last_name,
             "email": self.email
         }
+
+class Order(db.Model):
     
-    """     cover_chocolate_id = db.Column(db.Integer, db.ForeignKey('cover_chocolate.id'))
-    cover_chocolate = db.relationship(CoverChocolate)
-
-    bar_chocolate_id = db.Column(db.Integer, db.ForeignKey('bar_chocolate.id'))
-    bar_chocolate = db.relationship(BarChocolate)
-
-    bombon_id = db.Column(db.Integer, db.ForeignKey('bombon.id'))
-    bombon = db.relationship(Bombon) """
-
-class CoverChocolate(db.Model):
-    
-    __tablename__ = 'cover_chocolate'
+    __tablename__ = 'order'
 
     id = db.Column(db.Integer, primary_key=True)
+    amount = db.Column(db.Integer, unique=True, nullable=False)
+    shipping_address = db.Column(db.String(80), nullable=False)
+    order_state = db.Column(db.String(80), nullable=False)
+    
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship(User)
+
+    def __repr__(self):
+        return f'<Order {self.name}>'
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "amount": self.amount,
+            "shipping_address": self.shipping_address,
+            "order_state": self.order_state
+        }
+
+class Product(db.Model):
+    
+    __tablename__ = 'product'
+
+    id = db.Column(db.Integer, primary_key=True)
+    product_type = db.Column(db.String(20), unique=True, nullable=False)
     name = db.Column(db.String(20), unique=True, nullable=False)
+    product_type = db.Column(db.String(20), unique=True, nullable=False)
     percentage = db.Column(db.Integer, nullable=False)
     description = db.Column(db.String(200), nullable=False)
     presentation = db.Column(db.Float, nullable=False)
     price = db.Column(db.Float(10), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
-    
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    user = db.relationship(User)
 
     def __repr__(self):
-        return f'<CoverChocolate {self.name}>'
+        return f'<Product {self.name}>'
 
     def serialize(self):
         return {
             "id": self.id,
+            "product_type": self.product_type,
             "name": self.name,
             "percentage": self.percentage,
             "description": self.description,
@@ -62,60 +76,24 @@ class CoverChocolate(db.Model):
             "quantity": self.quantity
         }
 
-class BarChocolate(db.Model):
+class OrderDetail(db.Model):
     
-    __tablename__ = 'bar_chocolate'
+    __tablename__ = 'order_detail'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(20), unique=True, nullable=False)
-    percentage = db.Column(db.Integer, nullable=False)
-    description = db.Column(db.String(200), nullable=False)
-    price = db.Column(db.Float, nullable=False)
-    quantity = db.Column(db.Integer, nullable=False)
     
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    user = db.relationship(User)
+    order_id = db.Column(db.Integer, db.ForeignKey('order.id'))
+    order = db.relationship(Order)
+
+    product_id = db.Column(db.Integer, db.ForeignKey('product.id'))
+    product = db.relationship(Product)
 
     def __repr__(self):
-        return f'<BarChocolate {self.name}>'
+        return f'<OrderDetail {self.name}>'
 
     def serialize(self):
         return {
-            "id": self.id,
-            "name": self.name,
-            "percentage": self.percentage,
-            "description": self.description,
-            "price": self.price,
-            "quantity": self.quantity
-        }
-
-class Bombon(db.Model):
-    
-    __tablename__ = 'bombon'
-
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(20), unique=True, nullable=False)
-    percentage = db.Column(db.Integer, nullable=False)
-    description = db.Column(db.String(200), nullable=False)
-    presentation = db.Column(db.String(200), nullable=False)
-    price = db.Column(db.Float, nullable=False)
-    quantity = db.Column(db.Integer, nullable=False)
-    
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    user = db.relationship(User)
-
-    def __repr__(self):
-        return f'<Bombon {self.name}>'
-
-    def serialize(self):
-        return {
-            "id": self.id,
-            "name": self.name,
-            "percentage": self.percentage,
-            "description": self.description,
-            "presentation": self.presentation,
-            "price": self.price,
-            "quantity": self.quantity
+            "id": self.id
         }
 
 class TokenBlockedList(db.Model):

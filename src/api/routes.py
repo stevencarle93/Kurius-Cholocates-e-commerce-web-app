@@ -3,7 +3,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
 from api.utils import generate_sitemap, APIException
-from api.models import db, User, CoverChocolate, BarChocolate, Bombon,TokenBlockedList
+from api.models import db, User, Order, OrderDetail, Product, TokenBlockedList
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity, get_jwt
 from datetime import date, time, datetime, timezone
 from flask_bcrypt import Bcrypt
@@ -13,9 +13,9 @@ app = Flask(__name__)
 bcrypt = Bcrypt(app)
 
 """
-Landing page access from a registered User
+Checkout page access fromgit a registered User
 """
-@api.route('/registered_welcome', methods = ['GET'])
+@api.route('/checkout', methods = ['GET'])
 @jwt_required()
 def registered_welcome():
     user = User.query.get(get_jwt_identity())
