@@ -15,6 +15,10 @@ import {ProductsDetails7} from "./component/ProductsDetails7";
 import {ProductsDetails8} from "./component/ProductsDetails8";
 import {ProductsDetails9} from "./component/ProductsDetails9";
 import injectContext from "./store/appContext";
+import { Signup } from "./pages/signup";
+import { Login } from "./pages/login";
+import {RestorePassword} from "./pages/restorepassword";
+
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
