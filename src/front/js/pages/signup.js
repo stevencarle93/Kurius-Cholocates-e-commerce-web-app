@@ -12,22 +12,17 @@ export const Signup = () => {
     let last_name = data.get("last_name")
     let email = data.get("email");
     let password = data.get("password");
-
     let signupData = {
       name: name,
       last_name:last_name,
       email: email,
       password: password
     };
-
     let response = await actions.login("signup", signupData, 'POST');
-
     if (response.ok) {
       response = await response.json();
       alert(response.message);
-
       //redirigir a la landingPage
-
     } else {
       response = await response.json();
       if (response != undefined) alert(response.message);
@@ -39,14 +34,14 @@ export const Signup = () => {
   return (
     <>
       <div
-        className="container d-flex justify-content-center align-items-center"
+        className="container d-flex justify-content-center align-items-center letraKurius"
         style={{ height: "40vw" }}
       >
-        <div className="card text-center" style={{ width: "55%" }}>
-          <div className="card-header" style={{ width: "100%" }}>
+        <div className="card text-center border-0" style={{ width: "55%" }}>
+          <div className="card-header cabezoteRegistro" style={{ width: "100%" }}>
             <h3>Sign-up</h3>
           </div>
-          <div className="card-body" style={{ width: "100%" }}>
+          <div className="card-body cajatextoRegistro" style={{ width: "100%" }}>
             <form onSubmit="{(e) => signup(e)}">
               <div className=" d-flex flex-column bd-highlight mb-3">
                 <div className="row d-flex my-3 me-0 justify-content-center">
