@@ -1,11 +1,10 @@
 /* 
     General Styles used on every website (Don't Repeat Yourself)
 */
-:root{
-
-    /* Colors */
+:root {
+  /* Colors */
   --kurius-green-color: rgb(108, 114, 57);
-  --bg-landingpage: #F2EBE1;
+  --bg-landingpage: #f2ebe1;
   --kurius-darkgreen-color: hsl(89, 38%, 19%);
 
   /* Fonts-size */
@@ -21,33 +20,30 @@
 
   /* Fonts-family */
 
-  --font-family-1:'Libre Baskerville', serif ;
+  --font-family-1: "Libre Baskerville", serif;
   --font-family-2: ;
   --font-family-3: ;
-
 }
 
 /* Juanca */
-.cabezoteRegistro{
+.cabezoteRegistro {
   background-color: rgb(108, 114, 57);
   color: white;
 }
-.cajatextoRegistro{
-  
+.cajatextoRegistro {
   color: black;
 }
-.letraKurius{
-  font-family: 'Libre Baskerville', serif
+.letraKurius {
+  font-family: "Libre Baskerville", serif;
 }
-
 
 /* Julian */
 .bd-placeholder-img {
   height: 50vh;
 }
-a:link, a:active
-{
-    text-decoration: none;
+a:link,
+a:active {
+  text-decoration: none;
 }
 
 .navbar {
@@ -63,8 +59,8 @@ a:link, a:active
   position: relative;
   transition: transform 0.2s;
   -webkit-box-shadow: -2px 9px 46px -14px rgb(15, 15, 15);
-  -moz-box-shadow: -2px 9px 46px -14px rgba(15,15,15,1);
-  box-shadow: -2px 9px 46px -14px rgba(15,15,15,1);
+  -moz-box-shadow: -2px 9px 46px -14px rgba(15, 15, 15, 1);
+  box-shadow: -2px 9px 46px -14px rgba(15, 15, 15, 1);
 }
 .card2:hover {
   cursor: pointer;
