@@ -4,7 +4,7 @@ import Cajas_1 from "../../img/Bombones/Cajas1.jpg";
 import Cajas_2 from "../../img/Bombones/Cajas2.jpg";
 import Cajas_4 from "../../img/Bombones/Cajas4.jpg";
 import Portada_Principal_Bombones from "../../img/Bombones/portada-principal-bombones.jpg";
-import "../../styles/home.css";
+import "../../styles/index.css";
 import { CustomCard } from "../component/ProductsGrids";
 
 export const Home = () => {

@@ -1,10 +1,47 @@
 /* 
     General Styles used on every website (Don't Repeat Yourself)
 */
+:root{
+
+    /* Colors */
+  --kurius-green-color: rgb(108, 114, 57);
+  --bg-landingpage: #F2EBE1;
 
 
+  /* Fonts-size */
+  --font-size-1: ;
+  --font-size-2: ;
+  --font-size-3: ;
+
+  /* Fonts-Weight */
+
+  --font-weight-regular: 400;
+  --font-weight-semi-bold: 600;
+  --font-weight-bold: 800;
+
+  /* Fonts-family */
+
+  --font-family-1:'Libre Baskerville', serif ;
+  --font-family-2: ;
+  --font-family-3: ;
+
+}
+
+/* Juanca */
+.cabezoteRegistro{
+  background-color: rgb(108, 114, 57);
+  color: white;
+}
+.cajatextoRegistro{
+  
+  color: black;
+}
+.letraKurius{
+  font-family: 'Libre Baskerville', serif
+}
 
 
+/* Julian */
 .bd-placeholder-img {
   height: 50vh;
 }
@@ -13,6 +50,15 @@ a:link, a:active
     text-decoration: none;
 }
 
+.navbar {
+  background-color: var(--kurius-green-color);
+}
+
+.bold {
+  font-weight: var(--font-weight-bold);
+}
+
+/* Steven */
 .card2 {
   position: relative;
   transition: transform 0.2s;
@@ -24,3 +70,5 @@ a:link, a:active
   cursor: pointer;
   transform: scale(1.1);
 }
+
+/* Richard */

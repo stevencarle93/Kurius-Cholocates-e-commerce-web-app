@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
-import "../../styles/home.css";
+import "../../styles/index.css";
 
 export const RestorePassword = () => {
   const { store, actions } = useContext(Context);
