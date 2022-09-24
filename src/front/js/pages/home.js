@@ -139,29 +139,21 @@ export const Home = () => {
         <div className="carousel-item active" style={{height:"20%"}}>
           <img src={Cajas_1} className="" width="100%" alt="..."/>
           <div className="carousel-caption d-none d-md-block">
-            <h5 className="text-dark">First slide label</h5>
-            <p className="text-dark">Some representative placeholder content for the first slide.</p>
           </div>
         </div>
         <div className="carousel-item">
 		<img src={Cajas_2} className="" width="100%" alt="..."/>
           <div className="carousel-caption d-none d-md-block">
-            <h5 className="text-dark">Second slide label</h5>
-            <p className="text-dark">Some representative placeholder content for the second slide.</p>
           </div>
         </div>
         <div className="carousel-item">
           <img src={Cajas_4} className="" width="100%" alt="..."/>
           <div className="carousel-caption d-none d-md-block">
-            <h5 className="text-dark">Third slide label</h5>
-            <p className="text-dark">Some representative placeholder content for the third slide.</p>
           </div>
 		</div>
 		<div className="carousel-item">
           <img src={Portada_Principal_Bombones} className="" width="100%" alt="..."/>
           <div className="carousel-caption d-none d-md-block">
-            <h5 className="text-dark">Fourth slide label</h5>
-            <p className="text-dark">Some representative placeholder content for the fourth slide.</p>
           </div>
 		</div>
         </div>
