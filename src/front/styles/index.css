@@ -2,10 +2,25 @@
     General Styles used on every website (Don't Repeat Yourself)
 */
 
+
+
+
 .bd-placeholder-img {
   height: 50vh;
 }
 a:link, a:active
 {
     text-decoration: none;
+}
+
+.card2 {
+  position: relative;
+  transition: transform 0.2s;
+  -webkit-box-shadow: -2px 9px 46px -14px rgb(15, 15, 15);
+  -moz-box-shadow: -2px 9px 46px -14px rgba(15,15,15,1);
+  box-shadow: -2px 9px 46px -14px rgba(15,15,15,1);
+}
+.card2:hover {
+  cursor: pointer;
+  transform: scale(1.1);
 }

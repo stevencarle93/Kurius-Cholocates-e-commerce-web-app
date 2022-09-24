@@ -12,22 +12,17 @@ export const Signup = () => {
     let last_name = data.get("last_name")
     let email = data.get("email");
     let password = data.get("password");
-
     let signupData = {
       name: name,
       last_name:last_name,
       email: email,
       password: password
     };
-
     let response = await actions.login("signup", signupData, 'POST');
-
     if (response.ok) {
       response = await response.json();
       alert(response.message);
-
       //redirigir a la landingPage
-
     } else {
       response = await response.json();
       if (response != undefined) alert(response.message);
