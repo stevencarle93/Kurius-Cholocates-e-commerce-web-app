@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
-import "../../styles/home.css";
+import "../../styles/index.css";
 
 export const Login = () => {
   const { store, actions } = useContext(Context);
@@ -13,14 +13,11 @@ export const Login = () => {
     const data = new FormData(e.target);
     let email = data.get("email");
     let password = data.get("password");
-
     let loginData = {
       email: email,
       password: password,
     };
-
     let response = await actions.login("login", loginData, 'POST');
-
     if (response.ok) {
       response = await response.json()
       

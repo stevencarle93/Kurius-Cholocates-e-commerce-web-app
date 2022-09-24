@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
-import "../../styles/home.css";
+import "../../styles/index.css";
 
 export const RestorePassword = () => {
   const { store, actions } = useContext(Context);
@@ -9,13 +9,10 @@ export const RestorePassword = () => {
     e.preventDefault();
     const data = new FormData(e.target);
     let email = data.get("email");
-
     let restoreData = {
       email: email,
     };
-
     let response = await actions.login("login", restoreData, //'GET');
-
     if (response.ok) {
       response = await response.json()
       
