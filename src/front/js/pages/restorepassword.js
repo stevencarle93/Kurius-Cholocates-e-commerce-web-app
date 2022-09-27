@@ -30,9 +30,9 @@ export const RestorePassword = () => {
     <>
       <div
         className="container d-flex justify-content-center align-items-center letraKurius"
-        style={{ height: "40vw" }}
+        style={{ minHeight: "40vw", maxHeight: "100%", marginTop: "5%" }}
       >
-        <div className="card text-center border-0" style={{ width: "50%" }}>
+        <div className="card text-center border-0" style={{ minWidth: "50%", maxWidth: "100%", maxHeight: "100%" }}>
           <div className="card-header cabezoteRegistro" style={{ width: "100%" }}>
             <h3>Recuperar contraseña</h3>
           </div>
@@ -40,7 +40,7 @@ export const RestorePassword = () => {
             <form onSubmit="{(e) => restore(e)}">
               <div className=" d-flex flex-column bd-highlight mb-3">
                 <div className="d-flex">
-                  <h5 className="col-4">Email</h5>
+                  <h5 className="col-4 text-end pe-3">Email:</h5>
                   <input
                     className="col-6"
                     name="email"

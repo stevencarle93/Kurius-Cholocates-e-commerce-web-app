@@ -1,13 +1,15 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../../styles/index.css";
+
 
 export const Login = () => {
   const { store, actions } = useContext(Context);
+  const navigate = useNavigate();
   const [color, changeColor] = useState("#F2EBE1");
 	document.body.style.backgroundColor = color;
-  /*
+  
   const login = async (e) => {
     e.preventDefault();
     const data = new FormData(e.target);
@@ -17,46 +19,43 @@ export const Login = () => {
       email: email,
       password: password,
     };
-    let response = await actions.login("login", loginData, 'POST');
-    if (response.ok) {
-      response = await response.json()
+    let response = await actions.login(loginData);
+    if (response == "ok"){
       
-      //redirigir a la landingPage
-    
-    } else {
-      response = await response.json();
-      console.log(response.message)
-      alert("Usuario o constraseña inválidos");
-      return;
+      navigate("/") //ususario registrado
     }
+    else{
+      alert(response)
+    }
+
   };
-  */
+  
   return (
     <>
       <div
         className="container d-flex justify-content-center align-items-center letraKurius"
-        style={{ height: "40vw" }}
+        style={{ minHeight: "40vw", maxHeight: "100%", marginTop: "5%" }}
       >
-        <div className="card text-center border-0" style={{ width: "50%" }}>
+        <div className="card text-center border-0" style={{ minWidth: "50%", maxWidth: "100%", maxHeight: "100%" }}>
           <div className="card-header cabezoteRegistro" style={{ width: "100%" }}>
             <h3>Login</h3>
           </div>
           <div className="card-body cajatextoRegistro" style={{ width: "100%" }}>
-            <form onSubmit="{(e) => login(e)}">
+            <form onSubmit={(e) => login(e)}>
               <div className=" d-flex flex-column bd-highlight mb-3">
-                <div className="d-flex mb-3">
-                  <h5 className="col-4">Email</h5>
+                <div className="mb-3">
+                  <h5>Email:</h5>
                   <input
-                    className="col-6"
+                    className="col-7"
                     name="email"
                     placeholder="Escriba aquí su email"
                     type="email"
                   />
                 </div>
-                <div className="d-flex ">
-                  <h5 className="col-4">Contraseña</h5>
+                <div>
+                  <h5>Contraseña:</h5>
                   <input
-                    className="col-6"
+                    className="col-7"
                     name="password"
                     placeholder="Escriba aquí su clave"
                     type="password"
