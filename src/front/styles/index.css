@@ -27,14 +27,14 @@
 
 /* Juanca */
 .cabezoteRegistro {
-  background-color: rgb(108, 114, 57);
+  background-color: var(--kurius-green-color);
   color: white;
 }
 .cajatextoRegistro {
   color: black;
 }
 .letraKurius {
-  font-family: "Libre Baskerville", serif;
+  font-family: var(--font-family-1);
 }
 
 /* Julian */
