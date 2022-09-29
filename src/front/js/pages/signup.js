@@ -1,56 +1,51 @@
 import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
-import "../../styles/home.css";
+import "../../styles/index.css";
 
 export const Signup = () => {
   const { store, actions } = useContext(Context);
-  /*
+  const navigate = useNavigate();
+
   const signup = async (e) => {
     e.preventDefault();
     const data = new FormData(e.target);
-    let name = data.get("name")
-    let last_name = data.get("last_name")
+    let name = data.get("name");
+    let last_name = data.get("last_name");
     let email = data.get("email");
     let password = data.get("password");
-
     let signupData = {
       name: name,
-      last_name:last_name,
+      last_name: last_name,
       email: email,
-      password: password
+      password: password,
     };
-
-    let response = await actions.login("signup", signupData, 'POST');
-
-    if (response.ok) {
-      response = await response.json();
-      alert(response.message);
-
-      //redirigir a la landingPage
-
-    } else {
-      response = await response.json();
-      if (response != undefined) alert(response.message);
-      else alert("Internal error");
-      return;
-    }
+    let response = await actions.signup(signupData);
+    alert(response);
+    navigate("/login") //se redirige para hacer el login
   };
-  */
+
   return (
     <>
       <div
-        className="container d-flex justify-content-center align-items-center"
-        style={{ height: "40vw" }}
+        className="container d-flex justify-content-center align-items-center letraKurius"
+        style={{ minHeight: "40vw", maxHeight: "100%", marginTop: "5%" }}
       >
-        <div className="card text-center" style={{ width: "55%" }}>
-          <div className="card-header" style={{ width: "100%" }}>
+        <div className="card text-center border-0" style={{ minWidth: "50%", maxWidth: "100%", maxHeight: "100%" }}>
+          <div
+            className="card-header cabezoteRegistro"
+            style={{ width: "100%" }}
+          >
             <h3>Sign-up</h3>
           </div>
-          <div className="card-body" style={{ width: "100%" }}>
-            <form onSubmit="{(e) => signup(e)}">
+          <div
+            className="card-body cajatextoRegistro"
+            style={{ width: "100%" }}
+          >
+            <form onSubmit={(e) => signup(e)}>
               <div className=" d-flex flex-column bd-highlight mb-3">
                 <div className="row d-flex my-3 me-0 justify-content-center">
-                  <h6 className="col-2 text-end">Nombre</h6>
+                  <h6>Nombre:</h6>
                   <input
                     className="col-7"
                     name="name"
@@ -59,7 +54,7 @@ export const Signup = () => {
                   />
                 </div>
                 <div className="row d-flex mb-3 me-0 justify-content-center">
-                  <h6 className="col-2 text-end">Apellido</h6>
+                  <h6>Apellido:</h6>
                   <input
                     className="col-7"
                     name="last_name"
@@ -68,7 +63,7 @@ export const Signup = () => {
                   />
                 </div>
                 <div className="row d-flex mb-3 me-0 justify-content-center">
-                  <h6 className="col-2 text-end">Email</h6>
+                  <h6>Email:</h6>
                   <input
                     className="col-7"
                     name="email"
@@ -77,15 +72,15 @@ export const Signup = () => {
                   />
                 </div>
                 <div className="row d-flex mb-3 me-0 justify-content-center">
-                  <h6 className="col-2 text-end">Contraseña</h6>
+                  <h6>Contraseña:</h6>
                   <input
-                    className="col-3"
+                    className="col-5"
                     name="password"
                     placeholder="Escriba aquí su clave"
                     type="password"
                   />
-                  <div class="col-4">
-                    <span id="passwordHelpInline" class="form-text">
+                  <div>
+                    <span id="passwordHelpInline" className="form-text">
                       Debe tener entre 8-20 caracteres
                     </span>
                   </div>
