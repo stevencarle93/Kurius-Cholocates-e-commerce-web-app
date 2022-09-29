@@ -64,8 +64,17 @@ def login():
     if not bcrypt.check_password_hash(user.password, password):
         return jsonify({"message": "Wrong password, please try again"}), 401
     
+
+    refresh_token = create_refresh_token(identity = user.id)
     access_token = create_access_token(identity = user.id)
-    return jsonify({"token": access_token})
+    return jsonify({"token": access_token, "refresh_token": refresh_token })
+
+@api.route('/refresh', methods=['POST'])
+@jwt_required(refresh=True)
+def refresh ():
+    identity = get_jwt_identity()
+    access_token = create_access_token(identity=identity)
+    return jsonify(access_token=access_token)
 
 @api.route('/logout', methods = ['POST'])
 @jwt_required()
@@ -82,3 +91,9 @@ def logout():
         db.session.rollback()
         print(error) 
         return jsonify({"message": "UPS! something went wrong... please, comeback later"}), 500
+
+@jwt.token_in_blocklist_loader
+def check_if_token_revoked(jwt_header, jwt_payload: dict) -> bool:
+    jti = jwt_payload["jti"]
+    token = db.session.query(TokenBlockedList.id).filter_by(jti = jti).scalar()
+    return token is not None
