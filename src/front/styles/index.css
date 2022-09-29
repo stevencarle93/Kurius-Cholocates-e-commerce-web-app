@@ -8,9 +8,9 @@
   --kurius-darkgreen-color: hsl(89, 38%, 19%);
 
   /* Fonts-size */
-  --font-size-1: ;
-  --font-size-2: ;
-  --font-size-3: ;
+  --font-size-1: 2rem;
+  --font-size-2: 1.5rem;
+  --font-size-3: 18px;
 
   /* Fonts-Weight */
 
@@ -38,6 +38,289 @@
 }
 
 /* Julian */
+.App {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0 auto;
+  box-shadow: 0 5px 6px var(--kurius-darkgreen-color);
+  box-sizing: border-box;
+}
+
+.title {
+  margin-left: 2rem;
+  font-size: var(--font-size-1);
+  padding: 10rem 0 0 0;
+  color: var(--kurius-darkgreen-color);
+}
+
+/* --------------------- NAVBAR ------------------------ */
+
+.navbar .cart {
+  position: relative;
+  cursor: pointer;
+}
+
+.navbar .cart box-icon {
+  width: 30px;
+  height: 30px;
+}
+
+.navbar .cart span {
+  position: absolute;
+  top: -0.5rem;
+  right: -1rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 1px solid red;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  padding: 0rem;
+  font-size: 1rem;
+  font-weight: 700;
+  background-color: crimson;
+}
+/* -------------------  CARRITO -------------------------  */
+
+.carrito-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: all 300ms ease-in-out;
+  background-color: var(--bg-landingpage);
+  z-index: 2;
+  padding-bottom: 5rem;
+  visibility: hidden;
+}
+
+.carrito {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.5);
+  width: 80%;
+  height: 80%;
+  border-radius: 8px;
+  overflow-x: scroll;
+  transition: all 300ms ease-in-out;
+  background-color: var(--bg-landingpage);
+  opacity: 0;
+  visibility: hidden;
+}
+
+.carrito h2 {
+  text-align: center;
+  font-size: 2rem;
+}
+.carrito.show {
+  visibility: visible;
+}
+.carrito.show {
+  transform: translate(-50%, -50%) scale(1.1);
+  opacity: 1;
+  visibility: visible;
+}
+
+.carrito__close box-icon {
+  /* X debe tener posicion fija, que siempre se pueda salir del carrito sin tener que volver a subir */
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  transform: all 300ms ease-in-out;
+  margin: 3rem 0 0 2rem;
+}
+.carrito__close box-icon:hover {
+  fill: crimson;
+}
+.carrito__items {
+  width: 90%;
+  margin: 0 auto;
+}
+.carrito__item {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 1fr;
+  width: 80%;
+  margin: 2rem auto;
+  box-shadow: 0 1px 10px var(--kurius-green-color);
+  border-radius: 5px;
+}
+.carrito__item img {
+  width: 9rem;
+}
+.carrito__item h3 {
+  margin-top: var(--font-size-2);
+  font-family: var(--font-family-1);
+  font-weight: var(--font-weight-semi-bold);
+}
+.carrito__item .price {
+  color: var(--kurius-darkgreen-color);
+  font-size: var(--font-size-1);
+  font-weight: var(--font-weight-bold);
+  text-align: start;
+  margin-left: -0.5rem;
+}
+.carrito__item box-icon {
+  fill: var(--kurius-darkgreen-color);
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  margin-top: 0.3rem;
+}
+
+.carrito__item box-icon:hover {
+  fill: hsl(15, 16%, 56%);
+}
+.cantidades {
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  margin-right: 1rem;
+  padding-right: 1rem;
+}
+
+.carrito__item .cantidad {
+  font-size: var(--font-size-1);
+  font-weight: var(--font-weight-bold);
+  margin-top: 1rem;
+} 
+
+.carrito__item .remove__item box-icon {
+  width: 60px;
+  height: 80px;
+  fill: crimson;
+  margin-top: 2rem; 
+  margin-left: 5rem;
+}
+.carrito__footer{
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.carrito__footer h3{
+  font-size: var(--font-size-1);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.carrito__footer .btn{
+  font-weight: var(--font-weight-bold);
+  color: var(--bg-landingpage);
+  display: inline-block;
+  padding: .3rem 1rem;
+  font-size: 1.2rem;
+  background-color: var(--kurius-darkgreen-color);
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+}
+.carrito__footer .btn:hover{
+  color: white;
+  background-color: green;
+}
+/*  ------------------  PRODUCTOS ----------------------- */
+
+.productos {
+  padding: 5rem 3rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 3rem 1rem;
+  box-sizing: border-box;
+}
+.producto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 1px 10px 10px 2px var(--kurius-darkgreen-color);
+  border: 6px solid transparent;
+  border-radius: 5px;
+}
+
+.producto:hover {
+  /* color: var(--bg-landingpage);
+  background-color: hsl(15, 16%, 56%); */
+  border: 3px solid hsl(15, 17%, 45%);
+}
+
+.producto__img img {
+  width: 310px;
+}
+.buysession {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.producto__footer {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.producto__footer h1 {
+  font-weight: var(--font-weight-semi-bold);
+  font-size: var(--font-size-2);
+  color: var(--kurius-darkgreen-color) var(--font-family-1);
+}
+.producto__footer p {
+  font-weight: var(--font-weight-regular);
+  color: var(--kurius-green-color);
+  text-transform: uppercase;
+  font-size: var(--font-size-3);
+}
+.producto__footer .price {
+  font-size: var(--font-family-1);
+  color: var(--kurius-darkgreen-color);
+}
+
+.producto .button {
+  width: 100%;
+  height: 45px;
+  display: grid;
+  grid-template-columns: 2fr 1.5fr;
+  margin-bottom: 2rem;
+}
+
+.button .btn {
+  border: none;
+  outline: 0;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.button button {
+  background-color: var(--kurius-darkgreen-color);
+  max-width: 250px;
+  width: 100%;
+  margin: 0 auto;
+  font-size: var(--font-size-2);
+  color: var(--bg-landingpage);
+  font-weight: var(--font-weight-semi-bold);
+}
+.button button:hover {
+  color: white;
+}
+.button div {
+  background-color: var(--kurius-green-color);
+  display: grid;
+  align-items: center;
+  text-align: center;
+  margin-left: -2rem;
+  border-radius: 5px;
+  margin-right: 5rem;
+}
+.button div a {
+  width: 100%;
+  color: var(--bg-landingpage);
+  font-weight: var(--font-weight-bold);
+}
+.button div a:hover {
+  color: white;
+}
 .bd-placeholder-img {
   height: 50vh;
 }
@@ -68,3 +351,32 @@ a:active {
 }
 
 /* Richard */
+
+
+
+/* ------------- MEDIA --------------- */
+
+@media only screen and (max-width: 1000px){
+  .carrito__item{
+    width: 90%;
+  }
+  .carrito__item .remove__item box-icon {
+    width: 60px;
+    height: 80px;
+    fill: crimson;
+    margin-top: 2rem; 
+    margin-right: 2rem;
+  }
+}
+@media only screen and (width: 680px){
+  .carrito__item{
+    width: 90%;
+  }
+  .carrito__item .remove__item box-icon {
+    width: 60px;
+    height: 80px;
+    fill: crimson;
+    margin-top: 2rem; 
+    margin-right: 5rem;
+  }
+}

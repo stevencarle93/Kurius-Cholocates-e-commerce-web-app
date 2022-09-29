@@ -1,7 +1,16 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 import { Link } from "react-router-dom";
+import { DataContext } from "../store/Dataprovider";
 
 export const Navbar = () => {
+
+	const value = useContext(DataContext);
+	const [menu, setMenu] = value.menu;
+	const [carrito] = value.carrito
+	
+	const toogleMenu = () => {
+		setMenu(!menu)
+	}
 	const [color, changeColor] = useState("#0000");
 	document.body.style.backgroundColor = color;
 	return (
@@ -21,7 +30,11 @@ export const Navbar = () => {
 				</form>
 			</div>
 
-			<div className="text-end mx-5">
+			<div className="d-flex text-end mx-5">
+				<div className="cart mx-5" onClick={toogleMenu}>
+					<box-icon name="cart"></box-icon>
+					<span className="items__count">{carrito.length}</span>
+				</div>
 				<Link to="/login" onClick={() => changeColor("#F2EBE1")}>
 					<button type="button" className="btn btn-outline-light me-2">Login</button>
 				</Link>
