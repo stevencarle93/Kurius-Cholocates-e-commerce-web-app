@@ -26,6 +26,14 @@ app.config["JWT_REFRESH_TOKEN_EXPIRES"] = timedelta(days = int(os.getenv("JWT_RE
 jwt = JWTManager(app)
 bcrypt = Bcrypt(app)
 
+@jwt.token_in_blocklist_loader
+def check_token_blocklist(jwt_header, jwt_payload)-> bool:
+    TokenBlocked = TokenBlockedList.query.filter_by(token=jwt_payload['jti']).first()
+    if isinstance(TokenBlocked, TokenBlockedList):
+        return True
+    else:
+        return False  
+
 db_url = os.getenv("DATABASE_URL")
 if db_url is not None:
     app.config['SQLALCHEMY_DATABASE_URI'] = db_url.replace("postgres://", "postgresql://")
