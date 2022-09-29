@@ -1,9 +1,31 @@
-import React, {useState} from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
+import { Context } from '../store/appContext'
 
 export const Navbar = () => {
 	const [color, changeColor] = useState("#0000");
 	document.body.style.backgroundColor = color;
+	const { store, actions } = useContext(Context)
+	const loginBar = () => {
+		if (store.token == true){
+			return (
+				<div className="text-end mx-5">
+				Bienvenido 
+			</div>
+			)
+		}
+		return (
+			<div className="text-end mx-5">
+				<Link to="/login" onClick={() => changeColor("#F2EBE1")}>
+					<button type="button" className="btn btn-outline-light me-2">Login</button>
+				</Link>
+				<Link to="/signup" onClick={() => changeColor("#F2EBE1")}>
+				<button type="button" className="btn btn-warning">Sign-up</button>
+				</Link>
+			</div>
+		)
+	}
+
 	return (
 		<nav className="navbar navbar-black">
 			<div className="mx-5">
@@ -20,15 +42,8 @@ export const Navbar = () => {
 					<input type="search" className="form-control form-control-dark" placeholder="Search..." aria-label="Search" />
 				</form>
 			</div>
-
-			<div className="text-end mx-5">
-				<Link to="/login" onClick={() => changeColor("#F2EBE1")}>
-					<button type="button" className="btn btn-outline-light me-2">Login</button>
-				</Link>
-				<Link to="/signup" onClick={() => changeColor("#F2EBE1")}>
-				<button type="button" className="btn btn-warning">Sign-up</button>
-				</Link>
-			</div>
+			{loginBar()}
+			
 		</nav>
 	);
 };

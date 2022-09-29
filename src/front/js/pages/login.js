@@ -21,7 +21,7 @@ export const Login = () => {
     };
     let response = await actions.login(loginData);
     if (response == "ok"){
-      
+      console.log("success login")
       navigate("/") //ususario registrado
     }
     else{

@@ -109,4 +109,4 @@ class TokenBlockedList(db.Model):
             "token": self.token,
             "email": self.email,
             "created_at": self.created_at
-        } 
+        }
