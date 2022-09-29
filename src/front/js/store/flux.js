@@ -2,6 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			token: "",
+			user: "",
 			message: null,
 			demo: [
 				{
@@ -41,7 +42,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					let response = await getActions().apiFetch("login", 'POST', data)
 					if (response.ok){
 						let responseJson = await response.json()
-						setStore({ token: responseJson.token }); //se resetea todo el store
+						setStore({ token: responseJson.token }); //se resetea el store con el token
 						let infoRequest = await getActions().apiFetch("checkout")
 						if (infoRequest.ok){
 							let userInfo = await infoRequest.json()
@@ -61,11 +62,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.error({error})
 				}
       },
+			logout: async () => {
+				const store = getStore()
+				try{
+					let response = await getActions().apiFetch("logout", 'POST')
+					if (response.ok){
+						let responseJson = await response.json()
+						setStore({ token: "", user: "" }); //se resetea todo el store
+						console.log(responseJson.msg)
+						return "ok"
+						}
+					else {
+						let responseJson = await response.json();
+						if (responseJson != undefined) return responseJson.message;
+						else return "Internal error";
+					}
+				}
+				catch(error){
+					console.error({error})
+				}
+      },
 			apiFetch: async (endpoint, metodo='GET', data=null) => {
 				const store = getStore()
 				let url = process.env.BACKEND_URL;
 				let headers = {"Content-Type": "application/json", "Access-Control-Allow-Origin": "*",}
-				console.log(store.token)
 				if (store.token){
 					headers["Authorization"] = "Bearer " + store.token
 				}

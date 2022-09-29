@@ -21,8 +21,9 @@ export const Login = () => {
     };
     let response = await actions.login(loginData);
     if (response == "ok"){
-      console.log("success login")
-      navigate("/") //ususario registrado
+      console.log("login successful")
+      changeColor("#ffffff")
+      navigate("/")
     }
     else{
       alert(response)
@@ -69,6 +70,11 @@ export const Login = () => {
             <div className="mt-3">
               <Link to={"/restorepassword"} onClick={() => changeColor("#F2EBE1")}>
                 <span>Olvidé mi contraseña</span>
+              </Link>
+            </div>
+            <div>
+              <Link to={"/signup"} onClick={() => changeColor("#F2EBE1")}>
+                <span>¿Aún no eres usuario? Regístrate</span>
               </Link>
             </div>
           </div>
