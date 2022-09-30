@@ -7,9 +7,7 @@ import "../../styles/index.css";
 export const Login = () => {
   const { store, actions } = useContext(Context);
   const navigate = useNavigate();
-  const [color, changeColor] = useState("#F2EBE1");
-	document.body.style.backgroundColor = color;
-  
+    
   const login = async (e) => {
     e.preventDefault();
     const data = new FormData(e.target);
@@ -22,7 +20,6 @@ export const Login = () => {
     let response = await actions.login(loginData);
     if (response == "ok"){
       console.log("login successful")
-      changeColor("#ffffff")
       navigate("/")
     }
     else{
@@ -63,7 +60,7 @@ export const Login = () => {
                   />
                 </div>
               </div>
-              <button className="btn btn-success" type="submit">
+              <button className="btn buttonRegister" type="submit">
                 Acceder
               </button>
             </form>

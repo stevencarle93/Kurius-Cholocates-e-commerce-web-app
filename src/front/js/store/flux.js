@@ -2,6 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			token: "",
+			refresh_token:"",
 			user: "",
 			message: null,
 			demo: [
@@ -20,21 +21,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 		actions: {
 			// Use getActions to call a function within a fuction
 			signup: async (data) => {
-				try {
-					let response = await getActions().apiFetch("signup", 'POST', data)
-					if (response.ok){
-						let responseJson = await response.json();
-						return responseJson.message + ". Please continue with the login";
+				for (const key in data) {
+					if (data[key] == "") return "Complete all spaces in the form"
+				}
+				let password = data.password.replaceAll(/\s/g,'')
+				if (password.length > 7){
+					try {
+						let response = await getActions().apiFetch("signup", 'POST', data)
+						if (response.ok){
+							let responseJson = await response.json();
+							return {
+								"message" : responseJson.message + ". Please continue with the login",
+								"validation" : "ok"
+							}
+						}
+						else {
+							let responseJson = await response.json();
+							if (responseJson != undefined) return responseJson.message;
+							else return "Internal error";
+						}
 					}
-					else {
-						let responseJson = await response.json();
-						if (responseJson != undefined) return responseJson.message;
-						else return "Internal error";
+					catch(error){
+						console.error({error})
 					}
 				}
-				catch(error){
-					console.error({error})
-				}
+				else return "Invalid password"
       },
 			login: async (data) => {
 				const store = getStore()
@@ -42,21 +53,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 					let response = await getActions().apiFetch("login", 'POST', data)
 					if (response.ok){
 						let responseJson = await response.json()
-						setStore({ token: responseJson.token }); //se resetea el store con el token
+						setStore({ token: responseJson.token, refresh_token: responseJson.refresh_token }); //se resetea el store con los tokens
 						let infoRequest = await getActions().apiFetch("checkout")
 						if (infoRequest.ok){
 							let userInfo = await infoRequest.json()
 							setStore({ ...store, user: userInfo.name }); //se añadela info del ususario al token
 							return "ok"
 						}
-						else return "Access revoked" //
+						else return "Access revoked"
 					}
 					else {
 						let responseJson = await response.json();
 						if (responseJson != undefined) return responseJson.message;
 						else return "Internal error";
 					}
-						//console.log(responseJson.token);
+					//console.log(responseJson.token)
 				}
 				catch(error){
 					console.error({error})
@@ -68,7 +79,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					let response = await getActions().apiFetch("logout", 'POST')
 					if (response.ok){
 						let responseJson = await response.json()
-						setStore({ token: "", user: "" }); //se resetea todo el store
+						setStore({ token: "", refresh_token: "", user: "" }); //se resetea todo el store
 						console.log(responseJson.msg)
 						return "ok"
 						}

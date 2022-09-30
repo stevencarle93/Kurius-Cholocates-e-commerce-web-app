@@ -50,7 +50,7 @@ export const RestorePassword = () => {
                   />
                 </div>
               </div>
-              <button className="btn btn-success" type="submit">
+              <button className="btn buttonRegister" type="submit">
                 Enviar
               </button>
             </form>

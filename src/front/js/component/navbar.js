@@ -14,14 +14,11 @@ export const Navbar = () => {
 	}
 
 	const navigate = useNavigate();
-	const [color, changeColor] = useState("#ffffff");
-	document.body.style.backgroundColor = color;
 	const { store, actions } = useContext(Context)
 
 	const handleLogout = async () => {
 		let response = await actions.logout()
 		if (response == "ok"){
-			changeColor("#ffffff")
       navigate("/")
     }
     else{
@@ -42,10 +39,10 @@ export const Navbar = () => {
 		}
 		return (
 			<>
-				<Link to="/login" onClick={() => changeColor("#F2EBE1")}>
+				<Link to="/login">
 					<button type="button" className="btn btn-outline-light me-2">Login</button>
 				</Link>
-				<Link to="/signup" onClick={() => changeColor("#F2EBE1")}>
+				<Link to="/signup">
 					<button type="button" className="btn btn-warning">Sign-up</button>
 				</Link>
 			</>
@@ -56,7 +53,7 @@ export const Navbar = () => {
 		<nav className="navbar navbar-black">
 			<div className="mx-5">
 				<ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-					<li><Link to="/" className="nav-link px-2 text-warning bold" onClick={() => changeColor("#ffffff")}>Home</Link></li>
+					<li><Link to="/" className="nav-link px-2 text-warning bold">Home</Link></li>
 					<li><a href="#" className="nav-link px-2 text-white">Features</a></li>
 					<li><a href="#" className="nav-link px-2 text-white">Pricing</a></li>
 					<li><a href="#" className="nav-link px-2 text-white">FAQs</a></li>
