@@ -81,6 +81,8 @@ class OrderDetail(db.Model):
     __tablename__ = 'order_detail'
 
     id = db.Column(db.Integer, primary_key=True)
+    price = db.Column(db.Float(10), nullable=False)
+    quantity = db.Column(db.Integer, nullable=False)
     
     order_id = db.Column(db.Integer, db.ForeignKey('order.id'))
     order = db.relationship(Order)
@@ -93,7 +95,9 @@ class OrderDetail(db.Model):
 
     def serialize(self):
         return {
-            "id": self.id
+            "id": self.id,
+            "price": self.price,
+            "quantity": self.quantity
         }
 
 class TokenBlockedList(db.Model):
