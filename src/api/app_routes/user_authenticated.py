@@ -5,7 +5,7 @@ from flask import Flask, Blueprint, request, jsonify
 #from firebase_admin import storage
 import tempfile
 
-from flask_jwt_extended import JWTManager, create_access_token, create_refresh_token, jwt_required, get_jwt_identity, get_jwt
+from flask_jwt_extended import JWTManager, create_access_token, create_refresh_token, jwt_required, get_jwt_identity, get_jwt, get_jti
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from datetime import date, time, datetime, timezone
@@ -40,17 +40,22 @@ def signup():
     last_name = request.json.get("last_name", None)
     email = request.json.get("email", None)
     password = request.json.get("password", None)
+
+    user = User.query.filter_by(email = email).first()
+
+    if user is None:
+        try:
+            password = bcrypt.generate_password_hash(password, rounds = None).decode("utf-8")
+            user = User(name = name, last_name = last_name, email = email, password = password, is_active = True)
+            db.session.add(user)
+            db.session.commit()
+            return jsonify({"message": "User registered"}), 201
+        except Exception as error:
+            db.session.rollback()
+            print(error) 
+            return jsonify({"message": "UPS! something went wrong... please, comeback later"}), 500
     
-    try:
-        password = bcrypt.generate_password_hash(password, rounds = None).decode("utf-8")
-        user = User(name = name, last_name = last_name, email = email, password = password, is_active = True)
-        db.session.add(user)
-        db.session.commit()
-        return jsonify({"message": "User registered"}), 201
-    except Exception as error:
-        db.session.rollback()
-        print(error) 
-        return jsonify({"message": "UPS! something went wrong... please, comeback later"}), 500
+    return jsonify({"message": "Email already registered, please login"}), 401
 
 @apiAuthUser.route('/login', methods = ['POST'])
 def login():
@@ -64,18 +69,30 @@ def login():
     
     if not bcrypt.check_password_hash(user.password, password):
         return jsonify({"message": "Wrong password, please try again"}), 401
-    
 
-    refresh_token = create_refresh_token(identity = user.id)
     access_token = create_access_token(identity = user.id)
+    access_token_jti = get_jti(access_token)
+    refresh_token = create_refresh_token(identity = user.id, additional_claims={"access_token":access_token_jti})
     return jsonify({"token": access_token, "refresh_token": refresh_token })
 
 @apiAuthUser.route('/refresh', methods=['POST'])
 @jwt_required(refresh=True)
 def refresh ():
-    identity = get_jwt_identity()
-    access_token = create_access_token(identity=identity)
-    return jsonify(access_token=access_token)
+    claims = get_jwt()
+    refresh_token = claims["jti"]
+    access_token = claims["access_token"]
+    now = datetime.now(timezone.utc)
+    id = get_jwt_identity()
+    accessTokenBlocked = TokenBlockedList(token = access_token, created_at = now, email = get_jwt_identity())
+    refreshTokenBlocked = TokenBlockedList(token = refresh_token, created_at = now, email = get_jwt_identity())
+    db.session.add(accessTokenBlocked)
+    db.session.add(refreshTokenBlocked)
+    db.session.commit()
+
+    access_token = create_access_token(identity = id)
+    access_token_jti = get_jti(access_token)
+    refresh_token = create_refresh_token(identity = id, additional_claims = {"accessToken":access_token_jti})
+    return jsonify({"token":access_token, "refresh_token":refresh_token})
 
 @apiAuthUser.route('/logout', methods = ['POST'])
 @jwt_required()

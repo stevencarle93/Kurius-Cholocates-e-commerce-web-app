@@ -2,7 +2,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			token: "",
-			refresh_token:"",
+			refresh_token: "",
+			loginDate: 0,
 			user: "",
 			message: null,
 			demo: [
@@ -53,7 +54,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					let response = await getActions().apiFetch("login", 'POST', data)
 					if (response.ok){
 						let responseJson = await response.json()
-						setStore({ token: responseJson.token, refresh_token: responseJson.refresh_token }); //se resetea el store con los tokens
+						setStore({ token: responseJson.token, refresh_token: responseJson.refresh_token, loginDate: Date.now() }); //se resetea el store con los tokens
 						let infoRequest = await getActions().apiFetch("checkout")
 						if (infoRequest.ok){
 							let userInfo = await infoRequest.json()
@@ -67,7 +68,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						if (responseJson != undefined) return responseJson.message;
 						else return "Internal error";
 					}
-					//console.log(responseJson.token)
 				}
 				catch(error){
 					console.error({error})
@@ -92,6 +92,58 @@ const getState = ({ getStore, getActions, setStore }) => {
 				catch(error){
 					console.error({error})
 				}
+      },
+			protectedTest: async () => {
+				const store = getStore()
+				let validation = await getActions().tokenTimeValidation()
+				console.log(validation)
+				if (validation === "Refresh successful" || "Token still valid"){
+					try{
+						let response = await getActions().apiFetch("checkout")
+						if (response.ok){
+							return "ok"
+							}
+						else {
+							let responseJson = await response.json();
+							return responseJson
+						}
+					}
+					catch(error){
+						console.error({error})
+					}
+				}
+				else return "token problem"
+      },
+			tokenTimeValidation: async () => {
+				const store = getStore()
+				let loginDate = store.loginDate
+				if (loginDate + 8000 < Date.now()){
+					console.log("dentro de validacion")
+					let refresh_token = store.refresh_token
+					setStore({token: refresh_token})
+					try{
+						let response = await getActions().apiFetch("refresh", 'POST')
+						if (response.ok){
+							console.log("dentro del refresh")
+							let responseJson = await response.json()
+							setStore({
+								token: responseJson.token,
+								refresh_token: responseJson.refresh_token,
+								loginDate: Date.now()
+							})
+							return "Refresh successful"
+							}
+						else {
+							let responseJson = await response.json();
+							if (responseJson != undefined) return responseJson
+							else return "Tokens revoked"
+						}
+					}
+					catch(error){
+						console.error({error})
+					}
+				}
+				else return "Token still valid"
       },
 			apiFetch: async (endpoint, metodo='GET', data=null) => {
 				const store = getStore()

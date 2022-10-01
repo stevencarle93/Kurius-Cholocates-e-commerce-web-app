@@ -7,8 +7,8 @@ class User(db.Model):
     __tablename__ = 'user'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(20), unique=True, nullable=False)
-    last_name = db.Column(db.String(20), unique=True, nullable=False)
+    name = db.Column(db.String(20), unique=False, nullable=False)
+    last_name = db.Column(db.String(20), unique=False, nullable=False)
     email = db.Column(db.String(20), unique=True, nullable=False)
     password = db.Column(db.String(200), unique=False, nullable=False)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
@@ -103,7 +103,7 @@ class OrderDetail(db.Model):
 class TokenBlockedList(db.Model):
 
     id = db.Column(db.Integer, primary_key = True)
-    token = db.Column(db.String(200), unique = True, nullable = False)
+    token = db.Column(db.String(1000), unique = True, nullable = False)
     email = db.Column(db.String(200), nullable = False, index = True)
     created_at = db.Column(db.DateTime, nullable = False)
 
