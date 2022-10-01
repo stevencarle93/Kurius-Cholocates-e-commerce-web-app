@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";
 import Cajas_1 from "../../img/Bombones/Cajas1.jpg";
 import Cajas_2 from "../../img/Bombones/Cajas2.jpg";
@@ -13,6 +13,9 @@ import { ProductList } from "../component/Products/ProductList";
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
+
+  const [color, changeColor] = useState("#ffffff");
+	document.body.style.backgroundColor = color;
 
   /*<div id="carouselExampleCaptions" className="carousel slide" data-bs-ride="carousel">
   <div className="carousel-indicators">

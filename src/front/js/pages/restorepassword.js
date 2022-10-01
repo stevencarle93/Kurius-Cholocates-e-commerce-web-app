@@ -17,6 +17,7 @@ export const RestorePassword = () => {
       response = await response.json()
       
       //definir las acciones que se harán
+      flaskmail
     
     } else {
       response = await response.json();
@@ -49,7 +50,7 @@ export const RestorePassword = () => {
                   />
                 </div>
               </div>
-              <button className="btn btn-success" type="submit">
+              <button className="btn buttonRegister" type="submit">
                 Enviar
               </button>
             </form>

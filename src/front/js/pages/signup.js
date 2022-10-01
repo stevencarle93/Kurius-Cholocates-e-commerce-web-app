@@ -21,8 +21,11 @@ export const Signup = () => {
       password: password,
     };
     let response = await actions.signup(signupData);
-    alert(response);
-    navigate("/login") //se redirige para hacer el login
+    if (response.validation == "ok"){
+      alert(response.message);
+      navigate("/login") //se redirige para hacer el login
+    }
+    else alert(response);
   };
 
   return (
@@ -86,7 +89,7 @@ export const Signup = () => {
                   </div>
                 </div>
               </div>
-              <button className="btn btn-success" type="submit">
+              <button className="btn buttonRegister" type="submit">
                 Registrarse
               </button>
             </form>
