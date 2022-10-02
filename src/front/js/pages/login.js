@@ -7,9 +7,7 @@ import "../../styles/index.css";
 export const Login = () => {
   const { store, actions } = useContext(Context);
   const navigate = useNavigate();
-  const [color, changeColor] = useState("#F2EBE1");
-	document.body.style.backgroundColor = color;
-  
+    
   const login = async (e) => {
     e.preventDefault();
     const data = new FormData(e.target);
@@ -21,8 +19,8 @@ export const Login = () => {
     };
     let response = await actions.login(loginData);
     if (response == "ok"){
-      
-      navigate("/") //ususario registrado
+      console.log("login successful")
+      navigate("/")
     }
     else{
       alert(response)
@@ -62,13 +60,18 @@ export const Login = () => {
                   />
                 </div>
               </div>
-              <button className="btn btn-success" type="submit">
+              <button className="btn buttonRegister" type="submit">
                 Acceder
               </button>
             </form>
             <div className="mt-3">
               <Link to={"/restorepassword"} onClick={() => changeColor("#F2EBE1")}>
                 <span>Olvidé mi contraseña</span>
+              </Link>
+            </div>
+            <div>
+              <Link to={"/signup"} onClick={() => changeColor("#F2EBE1")}>
+                <span>¿Aún no eres usuario? Regístrate</span>
               </Link>
             </div>
           </div>

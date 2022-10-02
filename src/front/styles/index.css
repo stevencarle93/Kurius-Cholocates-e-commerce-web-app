@@ -32,9 +32,14 @@
 }
 .cajatextoRegistro {
   color: black;
+  background-color: var(--bg-landingpage);
 }
 .letraKurius {
   font-family: var(--font-family-1);
+}
+.buttonRegister{
+  color: white;
+  background-color: var(--kurius-darkgreen-color);
 }
 
 /* Julian */
