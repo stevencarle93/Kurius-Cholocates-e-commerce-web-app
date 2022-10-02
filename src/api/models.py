@@ -53,6 +53,7 @@ class Product(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     product_type = db.Column(db.String(20), unique=True, nullable=False)
+    picture = db.Column(db.String(80), unique=False, nullable=True)
     name = db.Column(db.String(20), unique=True, nullable=False)
     product_type = db.Column(db.String(20), unique=True, nullable=False)
     percentage = db.Column(db.Integer, nullable=False)
@@ -100,6 +101,7 @@ class OrderDetail(db.Model):
             "quantity": self.quantity
         }
 
+#List of bloked tokens from authenticated users
 class TokenBlockedList(db.Model):
 
     id = db.Column(db.Integer, primary_key = True)
