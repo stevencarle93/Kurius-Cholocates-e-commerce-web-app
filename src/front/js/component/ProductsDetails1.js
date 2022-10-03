@@ -14,7 +14,7 @@ export const ProductsDetails1 = () => {
           <div className="card-body">
             <h5 className="card-title">Barra de Chocolate Blanco 35%</h5>
             <p className="card-text">
-            Para quienes quieres recordar su infancia en cada bocado. Su intenso y cremoso sabor a leche y es un cariño al paladar.
+            Para quienes quieren recordar su infancia en cada bocado. Su intenso y cremoso sabor a leche y es un cariño al paladar.
             </p>
           </div>
         </div>
