@@ -34,6 +34,7 @@ export const Navbar = () => {
     else{
       console.log(response)
     }
+		if (response == "Sesion expired") alert("Inicia sesión nuevamente")
 	}
 
 	const loginBar = () => {

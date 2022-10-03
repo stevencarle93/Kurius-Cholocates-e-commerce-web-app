@@ -91,7 +91,7 @@ def refresh ():
 
     access_token = create_access_token(identity = id)
     access_token_jti = get_jti(access_token)
-    refresh_token = create_refresh_token(identity = id, additional_claims = {"accessToken":access_token_jti})
+    refresh_token = create_refresh_token(identity = id, additional_claims = {"access_token":access_token_jti})
     return jsonify({"token":access_token, "refresh_token":refresh_token})
 
 @apiAuthUser.route('/logout', methods = ['POST'])
