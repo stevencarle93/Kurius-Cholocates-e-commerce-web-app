@@ -10,6 +10,7 @@ import { DataProvider } from '../store/Dataprovider'
 import "../../styles/index.css";
 import { CustomCard } from "../component/ProductsGrids";
 import { ProductList } from "../component/Products/ProductList";
+import { ReviewsCarousel } from "../component/ReviewsCarousel";
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
@@ -186,6 +187,7 @@ export const Home = () => {
       <Carrito />
       <ProductList />
       <CustomCard />
+      <ReviewsCarousel />
     </>
   );
 };

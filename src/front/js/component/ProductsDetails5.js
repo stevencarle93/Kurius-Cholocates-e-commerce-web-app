@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export const ProductsDetails5 = () => {
   return (
-    <div className="card mb-3" style={{ maxWidth: "540px" }}>
+    <div className="card mb-3">
       <div className="row no-gutters">
         <div className="col-md-4">
           <img src={Cobertura_Blanco_35} className="card-img" alt="..."></img>
