@@ -141,7 +141,7 @@ export const ReviewsCarousel = () => {
         <button
           className="carousel-control-prev"
           type="button"
-          data-bs-target="#carouselExampleCaptions"
+          data-bs-target="#carouselExampleCaptions2"
           data-bs-slide="prev"
         >
           <span
@@ -153,7 +153,7 @@ export const ReviewsCarousel = () => {
         <button
           className="carousel-control-next"
           type="button"
-          data-bs-target="#carouselExampleCaptions"
+          data-bs-target="#carouselExampleCaptions2"
           data-bs-slide="next"
         >
           <span
