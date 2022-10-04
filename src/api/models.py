@@ -9,7 +9,11 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20), unique=False, nullable=False)
     last_name = db.Column(db.String(20), unique=False, nullable=False)
+<<<<<<< HEAD
     email = db.Column(db.String(80), unique=True, nullable=False)
+=======
+    email = db.Column(db.String(50), unique=True, nullable=False)
+>>>>>>> develop
     password = db.Column(db.String(200), unique=False, nullable=False)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
 

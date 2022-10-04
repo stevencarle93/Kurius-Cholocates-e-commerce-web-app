@@ -15,7 +15,7 @@ export const ProductoItem = ({
 
     return(
         <div>
-            <div className='producto'>
+            <div className='producto card2'>
                     <a>
                         <div className='producto__img'>
                             <img src={image.default} alt={title} />
@@ -32,7 +32,7 @@ export const ProductoItem = ({
                                 Añadir al carrito
                             </button>
                             <div>
-                                <a href='#' className='btn'>Ver más</a>
+                                <a href={'/Details/'+ id} className='btn'>Ver más</a>
                             </div>
                         </div>
                     </div>

@@ -1,5 +1,5 @@
 import os
-import firebase_admin
+#import firebase_admin
 
 from flask import Flask, request, jsonify, url_for, send_from_directory
 from flask_migrate import Migrate
@@ -13,7 +13,7 @@ from api.commands import setup_commands
 
 from flask_jwt_extended import JWTManager, create_access_token, create_refresh_token, jwt_required, get_jwt_identity, get_jwt
 from flask_sqlalchemy import SQLAlchemy
-from firebase_admin import credentials
+#from firebase_admin import credentials
 from flask_bcrypt import Bcrypt
 from datetime import timedelta
 
@@ -23,8 +23,8 @@ app = Flask(__name__)
 app.url_map.strict_slashes = False
 
 app.config["JWT_SECRET_KEY"] = os.getenv("FLASK_APP_KEY")
-app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(minutes = int(os.getenv("JWT_ACCESS_TOKEN_EXPIRES_HOURS")))
-app.config["JWT_REFRESH_TOKEN_EXPIRES"] = timedelta(minutes = int(os.getenv("JWT_REFRESH_TOKEN_EXPIRES_DAYS")))
+app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(minutes = int(os.getenv("JWT_ACCESS_TOKEN_EXPIRES_MINUTES")))
+app.config["JWT_REFRESH_TOKEN_EXPIRES"] = timedelta(minutes = int(os.getenv("JWT_REFRESH_TOKEN_EXPIRES_MINUTES")))
 
 jwt = JWTManager(app)
 bcrypt = Bcrypt(app)
@@ -81,8 +81,8 @@ def serve_any_other_file(path):
     return response
 
 #Firebase credentials to initialize IT
-firebase_credentials = credentials.Certificate("fb_credentials.json")
-firebase_admin.initialize_app(firebase_credentials)
+#firebase_credentials = credentials.Certificate("fb_credentials.json")
+#firebase_admin.initialize_app(firebase_credentials)
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
