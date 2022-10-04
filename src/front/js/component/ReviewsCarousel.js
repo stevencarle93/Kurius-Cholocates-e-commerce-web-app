@@ -9,14 +9,14 @@ import Barra_Negro_70 from "../../img/Barras/barra-negro-70.png";
 export const ReviewsCarousel = () => {
   return (
       <div
-        id="carouselExampleCaptions"
+        id="carouselExampleCaptions2"
         className="carousel slide"
         data-bs-ride="carousel"
       >
         <div className="carousel-indicators">
           <button
             type="button"
-            data-bs-target="#carouselExampleCaptions"
+            data-bs-target="#carouselExampleCaptions2"
             data-bs-slide-to="0"
             className="active bg-dark"
             aria-current="true"
@@ -24,21 +24,21 @@ export const ReviewsCarousel = () => {
           ></button>
           <button
             type="button"
-            data-bs-target="#carouselExampleCaptions"
+            data-bs-target="#carouselExampleCaptions2"
             data-bs-slide-to="1"
             className="active bg-dark"
             aria-label="Slide 2"
           ></button>
           <button
             type="button"
-            data-bs-target="#carouselExampleCaptions"
+            data-bs-target="#carouselExampleCaptions2"
             data-bs-slide-to="2"
             className="active bg-dark"
             aria-label="Slide 3"
           ></button>
           <button
             type="button"
-            data-bs-target="#carouselExampleCaptions"
+            data-bs-target="#carouselExampleCaptions2"
             data-bs-slide-to="3"
             className="active bg-dark"
             aria-label="Slide 4"

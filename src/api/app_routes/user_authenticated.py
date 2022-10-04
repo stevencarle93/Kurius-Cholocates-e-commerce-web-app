@@ -53,7 +53,7 @@ def signup():
         except Exception as error:
             db.session.rollback()
             print(error) 
-            return jsonify({"message": "UPS! something went wrong... please, comeback later"}), 500
+            return jsonify({"message": "UPS! something went wrong... please, come back later"}), 500
     
     return jsonify({"message": "Email already registered, please login"}), 401
 
