@@ -2,45 +2,87 @@ import tempfile
 from api.models import db, Product
 from api.utils import generate_sitemap, APIException
 from flask import Flask, Blueprint, request, jsonify
-from flask_jwt_extended import jwt_required, get_jwt_identity
-from firebase_admin import storage
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-db = SQLAlchemy(app)
 
 apiProduct = Blueprint('apiProduct', __name__)
 
-@apiProduct.route('/uploadPhoto', methods = ['POST'])
-@jwt_required()
-def uploadPhoto():
-    # Se recibe un archivo en la peticion
-    file = request.files['productPicture']
-    product_name = request.form['name']
-    # Extraemos la extension del archivo
-    extension = file.filename.split(".")[1]
-    # Se genera el nombre de archivo con el id de la imagen y la extension
-    filename = "product/" + str(get_jwt_identity()) + "." + extension
-    # Guardar el archivo recibido en un archivo temporal
-    temp = tempfile.NamedTemporaryFile(delete=False)
-    file.save(temp.name)
-    # Subir el archivo a firebase
-    ## Se llama al bucket
-    bucket = storage.bucket(name="gs://kuriuschocolate.appspot.com")
-    ## Se hace referencia al espacio dentro del bucket
-    blob = bucket.blob(filename)
-    ## Se sube el archivo temporal al espacio designado en el bucket
-    # Se debe especificar el tipo de contenido en base a la extension
-    blob.upload_from_filename(temp.name,content_type="image/"+extension)
+@apiProduct.route('/products', methods = ['GET'])
+def get_products():
+
+    products = Product.query.all()
+    products = list(map(lambda product: product.serialize(), products))
+
+    return jsonify(products), 200
+
+@apiProduct.route('/product/<product_id>', methods = ['GET'])
+def get_product(product_id):
+
+    product = Product.query.get(product_id)
+
+    if isinstance(product, Product):
+        return jsonify(product.serialize()), 200
+    else:
+        return jsonify({"messsage":"product not found"})
+
+@apiProduct.route('/product', methods=['POST'])
+def register_product():
+
+    product = Product()
+    body = request.json
     
-    #Buscamos el usuario en la BD partiendo del id del token
-    user = User.query.get(get_jwt_identity())
-    if user is None:
-        return "Usuario no encontrado", 403
-    # Actualizar el campo de la foto
-    user.picture=filename
-    # Se crear el registro en la base de datos 
-    db.session.add(user)
-    db.session.commit()
+    product.product_type = body["product_type"]
+    product.name = body["name"]
+    product.percentage = body["percentage"]
+    product.description = body["description"]
+    product.presentation = body["presentation"]
+    product.price = body["price"]
+    product.quantity = body["quantity"]
+
+    try:        
+        db.session.add(product)
+        db.session.commit()
+        return jsonify(product.serialize()), 201
+    except Exception as error:
+        print(error)
+        db.session.rollback()
+        return jsonify({"message":"something went wrong registering a new product"}), 400
+
+@apiProduct.route('/product/<product_id>', methods=['PUT'])
+def update_product(product_id):
+
+    body = request.json
+    product = Product.query.get(product_id)
     
-    return "Ok", 200
+    product.product_type = body["product_type"]
+    product.name = body["name"]
+    product.percentage = body["percentage"]
+    product.description = body["description"]
+    product.presentation = body["presentation"]
+    product.price = body["price"]
+    product.quantity = body["quantity"]
+
+    try:        
+        db.session.add(product)
+        db.session.commit()
+        return jsonify(product.serialize()), 201
+    except Exception as error:
+        print(error)
+        db.session.rollback()
+        return jsonify({"message":"something went wrong updating this product"}), 400
+
+@apiProduct.route('/product/<product_id>', methods=['DELETE'])
+def delete_product(product_id):
+
+    product = Product.query.get(product_id)
+
+    if product:
+        db.session.delete(product)
+        try:
+            db.session.commit()
+            return jsonify({"message": "Product deleted successfully"}), 200
+        except Exception as error:
+            print(error)
+            db.session.rollback()
+            return jsonify({"message": "Product doesn't exist"}), 400
