@@ -2,18 +2,17 @@ import tempfile
 from api.models import db, Product
 from api.utils import generate_sitemap, APIException
 from flask import Flask, Blueprint, request, jsonify
-from flask_jwt_extended import jwt_required, get_jwt_identity
 from firebase_admin import storage
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-db = SQLAlchemy(app)
 
 apiPhoto = Blueprint('apiPhoto', __name__)
 
 @apiPhoto.route('/uploadPhoto', methods = ['POST'])
 @jwt_required()
 def uploadPhoto():
+
     # Se recibe un archivo en la peticion
     file = request.files['productPicture']
     product_name = request.form['name']
