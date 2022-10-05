@@ -32,7 +32,7 @@ export const ProductoItem = ({
                                 Añadir al carrito
                             </button>
                             <div>
-                                <a href='#' className='btn'>Ver más</a>
+                                <a href={'/Details/'+ id} className='btn'>Ver más</a>
                             </div>
                         </div>
                     </div>

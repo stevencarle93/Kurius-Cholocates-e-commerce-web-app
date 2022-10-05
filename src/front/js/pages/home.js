@@ -186,7 +186,6 @@ export const Home = () => {
       </div>
       <Carrito />
       <ProductList />
-      <CustomCard />
       <ReviewsCarousel />
     </>
   );
