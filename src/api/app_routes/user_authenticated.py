@@ -12,7 +12,6 @@ from datetime import date, time, datetime, timezone
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
-db = SQLAlchemy(app)
 jwt = JWTManager(app)
 
 apiAuthUser = Blueprint('apiAuthUser', __name__)
@@ -75,46 +74,36 @@ def login():
     refresh_token = create_refresh_token(identity = user.id, additional_claims={"access_token":access_token_jti})
     return jsonify({"token": access_token, "refresh_token": refresh_token })
 
-@apiAuthUser.route('/restore', methods = ['GET'])
+@apiAuthUser.route('/restore', methods = ['POST', 'PATCH'])
 def restore():
+    email = request.json.get("email", None)
+    user = User.query.filter_by(email = email).first()
     
-    if request.method == 'GET':
-        email = request.json.get("email", None)
-        user = User.query.filter_by(email = email).first()
+    if request.method == 'POST':
         if user is None:
             return jsonify({"message": "User not found"}), 400
-        
         response_body = {
             "email": email,
             "message": "User found"
         }
         return jsonify(response_body), 201
 
-    #if request.method == 'PATCH':
-    #    email = request.json.get("email", None)
-    #    password = request.json.get("password", None)
-    #    user = User.query.filter_by(email = email).first()
-    #    for field in body:
-	#	    setattr(user, field, body[field])
-    #        
-    #    db.session.add(user)
-    #
-    #    try:        
-    #        db.session.commit()
-    #        response_body = {
-    #            user.serialize(),
-    #            "message": "Password restablished"
-    #        }
-    #        return jsonify(response_body), 200
-    #    except Exception as error:
-    #        print(error)
-    #        db.session.rollback()
-    #        return jsonify({"message":error}), 400
-    #try:
-    #        password = bcrypt.generate_password_hash(password, rounds = None).decode("utf-8")
-    #        user = User(name = name, last_name = last_name, email = email, password = password, is_active = True)
-    #
-    #return jsonify({"token": access_token, "refresh_token": refresh_token })
+    if request.method == 'PATCH':
+        password = request.json.get("password", None)
+        try:        
+            password = bcrypt.generate_password_hash(password, rounds = None).decode("utf-8")
+            setattr(user, "password", password)
+            db.session.add(user)
+            db.session.commit()
+            response_body = {
+                #user.serialize()
+                "message": "Password restablished"
+            }
+            return jsonify(response_body), 200
+        except Exception as error:
+            print(error)
+            db.session.rollback()
+            return jsonify({"message": error}), 400
 
 @apiAuthUser.route('/refresh', methods=['POST'])
 @jwt_required(refresh = True)

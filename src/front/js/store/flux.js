@@ -21,20 +21,42 @@ const getState = ({ getStore, getActions, setStore }) => {
     },
     actions: {
       // Use getActions to call a function within a fuction
-      restoreGET: async (data) => {
+      restorePOST: async (data) => {
+        const store = getStore()
         try {
-          let response = await getActions().apiFetch("restore", "GET", data);
+          let response = await getActions().apiFetch("restore", "POST", data);
           if (response.ok) {
             let responseJson = await response.json()
+            setStore({user: responseJson.email,})
             return responseJson
           } else {
             let responseJson = await response.json()
-            return responseJson;
+            return responseJson
           }
         } catch (error) {
-          console.log("en el error")
-          console.error({ error });
+          console.error({ error })
         }
+      },
+      restorePATCH: async (data) => {
+        const store = getStore()
+        let password = data.password.replaceAll(/\s/g, "")
+        if (password.length > 7){
+          data = {...data, email:store.user}
+          try {
+            let response = await getActions().apiFetch("restore", "PATCH", data)
+            if (response.ok) {
+              let responseJson = await response.json()
+              setStore({user:""})
+              return responseJson
+            } else {
+              let responseJson = await response.json()
+              return responseJson;
+            }
+          } catch (error) {
+            console.log("en el error")
+            console.error({ error });
+          }
+        } else return "Invalid password"
       },
       signup: async (data) => {
         for (const key in data) {
@@ -59,10 +81,10 @@ const getState = ({ getStore, getActions, setStore }) => {
           } catch (error) {
             console.error({ error });
           }
-        } else return "Invalid password";
+        } else return "Invalid password"
       },
       login: async (data) => {
-        const store = getStore();
+        const store = getStore()
         try {
           let response = await getActions().apiFetch("login", "POST", data);
           if (response.ok) {
@@ -192,7 +214,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
         return await fetch(url + "/api/" + endpoint, request);
       },
-
+/*
       exampleFunction: () => {
         getActions().changeColor(0, "green");
       },
@@ -221,7 +243,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         //reset the global store
         setStore({ demo: demo });
-      },
+      },*/
     },
   };
 };
