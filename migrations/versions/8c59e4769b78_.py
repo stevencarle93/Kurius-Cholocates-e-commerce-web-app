@@ -1,14 +1,8 @@
 """empty message
 
-<<<<<<<< HEAD:migrations/versions/cd9942b69d04_.py
-Revision ID: cd9942b69d04
+Revision ID: 8c59e4769b78
 Revises: 
-Create Date: 2022-10-04 02:09:58.271541
-========
-Revision ID: 4f945fcca92f
-Revises: 
-Create Date: 2022-10-04 02:07:19.090263
->>>>>>>> develop:migrations/versions/4f945fcca92f_.py
+Create Date: 2022-10-05 02:23:52.801457
 
 """
 from alembic import op
@@ -16,11 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-<<<<<<<< HEAD:migrations/versions/cd9942b69d04_.py
-revision = 'cd9942b69d04'
-========
-revision = '4f945fcca92f'
->>>>>>>> develop:migrations/versions/4f945fcca92f_.py
+revision = '8c59e4769b78'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -31,6 +21,7 @@ def upgrade():
     op.create_table('product',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('product_type', sa.String(length=20), nullable=False),
+    sa.Column('picture', sa.String(length=200), nullable=True),
     sa.Column('name', sa.String(length=20), nullable=False),
     sa.Column('percentage', sa.Integer(), nullable=False),
     sa.Column('description', sa.String(length=200), nullable=False),
@@ -38,7 +29,6 @@ def upgrade():
     sa.Column('price', sa.Float(precision=10), nullable=False),
     sa.Column('quantity', sa.Integer(), nullable=False),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('name'),
     sa.UniqueConstraint('product_type')
     )
     op.create_table('token_blocked_list',
@@ -54,11 +44,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=20), nullable=False),
     sa.Column('last_name', sa.String(length=20), nullable=False),
-<<<<<<<< HEAD:migrations/versions/cd9942b69d04_.py
     sa.Column('email', sa.String(length=80), nullable=False),
-========
-    sa.Column('email', sa.String(length=50), nullable=False),
->>>>>>>> develop:migrations/versions/4f945fcca92f_.py
     sa.Column('password', sa.String(length=200), nullable=False),
     sa.Column('is_active', sa.Boolean(), nullable=False),
     sa.PrimaryKeyConstraint('id'),

@@ -9,11 +9,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20), unique=False, nullable=False)
     last_name = db.Column(db.String(20), unique=False, nullable=False)
-<<<<<<< HEAD
     email = db.Column(db.String(80), unique=True, nullable=False)
-=======
-    email = db.Column(db.String(50), unique=True, nullable=False)
->>>>>>> develop
     password = db.Column(db.String(200), unique=False, nullable=False)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
 
@@ -57,8 +53,8 @@ class Product(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     product_type = db.Column(db.String(20), unique=True, nullable=False)
-    #picture = db.Column(db.String(80), unique=False, nullable=True)
-    name = db.Column(db.String(20), unique=True, nullable=False)
+    picture = db.Column(db.String(200), unique=False, nullable=True)
+    name = db.Column(db.String(20), unique=False, nullable=False)
     percentage = db.Column(db.Integer, nullable=False)
     description = db.Column(db.String(200), nullable=False)
     presentation = db.Column(db.Float, nullable=False)
@@ -72,6 +68,7 @@ class Product(db.Model):
         return {
             "id": self.id,
             "product_type": self.product_type,
+            "picture": self.picture,
             "name": self.name,
             "percentage": self.percentage,
             "description": self.description,
