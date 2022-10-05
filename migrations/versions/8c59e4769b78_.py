@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 4f945fcca92f
+Revision ID: 8c59e4769b78
 Revises: 
-Create Date: 2022-10-04 02:07:19.090263
+Create Date: 2022-10-05 02:23:52.801457
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '4f945fcca92f'
+revision = '8c59e4769b78'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -21,6 +21,7 @@ def upgrade():
     op.create_table('product',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('product_type', sa.String(length=20), nullable=False),
+    sa.Column('picture', sa.String(length=200), nullable=True),
     sa.Column('name', sa.String(length=20), nullable=False),
     sa.Column('percentage', sa.Integer(), nullable=False),
     sa.Column('description', sa.String(length=200), nullable=False),
@@ -28,7 +29,6 @@ def upgrade():
     sa.Column('price', sa.Float(precision=10), nullable=False),
     sa.Column('quantity', sa.Integer(), nullable=False),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('name'),
     sa.UniqueConstraint('product_type')
     )
     op.create_table('token_blocked_list',
@@ -44,7 +44,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=20), nullable=False),
     sa.Column('last_name', sa.String(length=20), nullable=False),
-    sa.Column('email', sa.String(length=50), nullable=False),
+    sa.Column('email', sa.String(length=80), nullable=False),
     sa.Column('password', sa.String(length=200), nullable=False),
     sa.Column('is_active', sa.Boolean(), nullable=False),
     sa.PrimaryKeyConstraint('id'),
