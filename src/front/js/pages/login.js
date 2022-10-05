@@ -1,18 +1,17 @@
-import React, { useContext, useState } from "react";
-import { Context } from "../store/appContext";
-import { Link, useNavigate } from "react-router-dom";
-import "../../styles/index.css";
-
+import React, { useContext, useEffect } from "react"
+import { Context } from "../store/appContext"
+import { Link, useNavigate } from "react-router-dom"
+import "../../styles/index.css"
 
 export const Login = () => {
-  const { store, actions } = useContext(Context);
-  const navigate = useNavigate();
-    
+  const { store, actions } = useContext(Context)
+  const navigate = useNavigate()
+
   const login = async (e) => {
-    e.preventDefault();
-    const data = new FormData(e.target);
-    let email = data.get("email");
-    let password = data.get("password");
+    e.preventDefault()
+    const data = new FormData(e.target)
+    let email = data.get("email")
+    let password = data.get("password")
     let loginData = {
       email: email,
       password: password,
@@ -78,5 +77,5 @@ export const Login = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}

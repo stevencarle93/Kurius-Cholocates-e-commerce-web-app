@@ -12,7 +12,6 @@ from datetime import date, time, datetime, timezone
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
-db = SQLAlchemy(app)
 jwt = JWTManager(app)
 
 apiAuthUser = Blueprint('apiAuthUser', __name__)
@@ -75,8 +74,39 @@ def login():
     refresh_token = create_refresh_token(identity = user.id, additional_claims={"access_token":access_token_jti})
     return jsonify({"token": access_token, "refresh_token": refresh_token })
 
+@apiAuthUser.route('/restore', methods = ['POST', 'PATCH'])
+def restore():
+    email = request.json.get("email", None)
+    user = User.query.filter_by(email = email).first()
+    
+    if request.method == 'POST':
+        if user is None:
+            return jsonify({"message": "User not found"}), 400
+        response_body = {
+            "email": email,
+            "message": "User found"
+        }
+        return jsonify(response_body), 201
+
+    if request.method == 'PATCH':
+        password = request.json.get("password", None)
+        try:        
+            password = bcrypt.generate_password_hash(password, rounds = None).decode("utf-8")
+            setattr(user, "password", password)
+            db.session.add(user)
+            db.session.commit()
+            response_body = {
+                #user.serialize()
+                "message": "Password restablished"
+            }
+            return jsonify(response_body), 200
+        except Exception as error:
+            print(error)
+            db.session.rollback()
+            return jsonify({"message": error}), 400
+
 @apiAuthUser.route('/refresh', methods=['POST'])
-@jwt_required(refresh=True)
+@jwt_required(refresh = True)
 def refresh ():
     claims = get_jwt()
     refresh_token = claims["jti"]
@@ -95,7 +125,7 @@ def refresh ():
     return jsonify({"token":access_token, "refresh_token":refresh_token})
 
 @apiAuthUser.route('/logout', methods = ['POST'])
-@jwt_required()
+@jwt_required(verify_type = False)
 def logout():
     jwt = get_jwt()["jti"]
     now = datetime.now(timezone.utc)

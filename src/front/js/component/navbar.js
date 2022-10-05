@@ -1,20 +1,18 @@
-import React, { useState, useContext } from "react";
-import { Link,useNavigate } from "react-router-dom";
+import React, { useState, useContext } from "react"
+import { Link, useNavigate } from "react-router-dom"
 import { Context } from '../store/appContext'
-import { DataContext } from "../store/Dataprovider";
+import { DataContext } from "../store/Dataprovider"
 
 export const Navbar = () => {
-
-	const value = useContext(DataContext);
-	const [menu, setMenu] = value.menu;
+	const value = useContext(DataContext)
+	const [menu, setMenu] = value.menu
 	const [carrito] = value.carrito
+	const navigate = useNavigate();
+	const { store, actions } = useContext(Context)
 	
 	const toogleMenu = () => {
 		setMenu(!menu)
 	}
-
-	const navigate = useNavigate();
-	const { store, actions } = useContext(Context)
 
 	const handleLogout = async () => {
 		let response = await actions.logout()
@@ -60,6 +58,21 @@ export const Navbar = () => {
 		)
 	}
 
+	const carritoView = () => {
+		let restrictedViews = ["login", "signup", "restorepassword"]
+		for (let views of restrictedViews) {
+			if (window.location.href.indexOf(views) > -1) return
+		}
+		return (
+			<>
+				<div className="cart mx-5" onClick={() => toogleMenu()}>
+					<box-icon name="cart"></box-icon>
+					<span className="items__count">{carrito.length}</span>
+				</div>
+			</>
+		)
+	}
+
 	return (
 		<nav className="navbar navbar-black">
 			<div className="mx-5">
@@ -77,12 +90,9 @@ export const Navbar = () => {
 				</form>
 			</div>
 			<div className="d-flex text-end mx-5">
-				<div className="cart mx-5" onClick={() => toogleMenu()}>
-					<box-icon name="cart"></box-icon>
-					<span className="items__count">{carrito.length}</span>
-				</div>
+				{carritoView()}
 				{loginBar()}
 			</div>
 		</nav>
-	);
-};
+	)
+}

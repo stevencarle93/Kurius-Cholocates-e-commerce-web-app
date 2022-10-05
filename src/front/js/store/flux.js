@@ -21,6 +21,43 @@ const getState = ({ getStore, getActions, setStore }) => {
     },
     actions: {
       // Use getActions to call a function within a fuction
+      restorePOST: async (data) => {
+        const store = getStore()
+        try {
+          let response = await getActions().apiFetch("restore", "POST", data);
+          if (response.ok) {
+            let responseJson = await response.json()
+            setStore({user: responseJson.email,})
+            return responseJson
+          } else {
+            let responseJson = await response.json()
+            return responseJson
+          }
+        } catch (error) {
+          console.error({ error })
+        }
+      },
+      restorePATCH: async (data) => {
+        const store = getStore()
+        let password = data.password.replaceAll(/\s/g, "")
+        if (password.length > 7){
+          data = {...data, email:store.user}
+          try {
+            let response = await getActions().apiFetch("restore", "PATCH", data)
+            if (response.ok) {
+              let responseJson = await response.json()
+              setStore({user:""})
+              return responseJson
+            } else {
+              let responseJson = await response.json()
+              return responseJson;
+            }
+          } catch (error) {
+            console.log("en el error")
+            console.error({ error });
+          }
+        } else return "Invalid password"
+      },
       signup: async (data) => {
         for (const key in data) {
           if (data[key] == "") return "Complete all spaces in the form";
@@ -44,10 +81,10 @@ const getState = ({ getStore, getActions, setStore }) => {
           } catch (error) {
             console.error({ error });
           }
-        } else return "Invalid password";
+        } else return "Invalid password"
       },
       login: async (data) => {
-        const store = getStore();
+        const store = getStore()
         try {
           let response = await getActions().apiFetch("login", "POST", data);
           if (response.ok) {
@@ -75,15 +112,26 @@ const getState = ({ getStore, getActions, setStore }) => {
       logout: async () => {
         const store = getStore();
         try {
-          let response = await getActions().apiFetch("logout", "POST");
-          if (response.ok) {
-            let responseJson = await response.json();
-            setStore({ token: "", refresh_token: "", loginDate: 0, user: "" }); //se resetea todo el store
-            //console.log(responseJson.msg);
-            return "ok";
+          let firstResponse = await getActions().apiFetch("logout", "POST");
+          if (firstResponse.ok) {
+            let accessTokRevoked = await firstResponse.json()
+            let refresh_token = store.refresh_token
+            setStore({ token: refresh_token})
+            let secondResponse = await getActions().apiFetch("logout", "POST");
+            if (secondResponse.ok) {
+              let refreshTokRevoked = await secondResponse.json()
+              setStore({ token: "", refresh_token: "", loginDate: 0, user: "" }); //se resetea todo el store
+              return "ok";
+            }
+            else {
+              let refreshTokRevoked = await secondResponse.json()
+            if (refreshTokRevoked != undefined) return refreshTokRevoked.message;
+            else return "Internal error";
+            }
+            //console.log(accessTokRevoked.msg);
           } else {
-            let responseJson = await response.json();
-            if (responseJson != undefined) return responseJson.message;
+            let accessTokRevoked = await firstResponse.json()
+            if (accessTokRevoked != undefined) return accessTokRevoked.message;
             else return "Internal error";
           }
         } catch (error) {
@@ -121,7 +169,8 @@ const getState = ({ getStore, getActions, setStore }) => {
       tokenTimeValidation: async () => {
         const store = getStore();
         let loginDate = store.loginDate;
-        if (loginDate + 6000 < Date.now()) {
+        let timeSession = process.env.JWT_ACCESS_TOKEN_EXPIRES_MINUTES*60000
+        if (loginDate + timeSession < Date.now()) {
           let refresh_token = store.refresh_token;
           setStore({ token: refresh_token });
           try {
@@ -165,11 +214,10 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
         return await fetch(url + "/api/" + endpoint, request);
       },
-
+/*
       exampleFunction: () => {
         getActions().changeColor(0, "green");
       },
-
       getMessage: async () => {
         try {
           // fetching data from the backend
@@ -195,7 +243,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         //reset the global store
         setStore({ demo: demo });
-      },
+      },*/
     },
   };
 };

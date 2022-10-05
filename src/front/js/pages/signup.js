@@ -1,32 +1,32 @@
-import React, { useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import { Context } from "../store/appContext";
-import "../../styles/index.css";
+import React, { useContext, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
+import { Context } from "../store/appContext"
+import "../../styles/index.css"
 
 export const Signup = () => {
-  const { store, actions } = useContext(Context);
-  const navigate = useNavigate();
+  const { store, actions } = useContext(Context)
+  const navigate = useNavigate()
 
   const signup = async (e) => {
-    e.preventDefault();
-    const data = new FormData(e.target);
-    let name = data.get("name");
-    let last_name = data.get("last_name");
-    let email = data.get("email");
-    let password = data.get("password");
+    e.preventDefault()
+    const data = new FormData(e.target)
+    let name = data.get("name")
+    let last_name = data.get("last_name")
+    let email = data.get("email")
+    let password = data.get("password")
     let signupData = {
       name: name,
       last_name: last_name,
       email: email,
       password: password,
-    };
-    let response = await actions.signup(signupData);
+    }
+    let response = await actions.signup(signupData)
     if (response.validation == "ok"){
-      alert(response.message);
+      alert(response.message)
       navigate("/login") //se redirige para hacer el login
     }
-    else alert(response);
-  };
+    else alert(response)
+  }
 
   return (
     <>
@@ -97,5 +97,5 @@ export const Signup = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
