@@ -19,8 +19,7 @@ import { Signup } from "./pages/signup";
 import { Login } from "./pages/login";
 import { RestorePassword } from "./pages/restorepassword";
 import { DataProvider } from './store/Dataprovider'
-
-
+import { Checkout } from './component/Checkout/Checkout'
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 
@@ -43,7 +42,7 @@ const Layout = () => {
               <Route element={<RestorePassword />} path="/restorepassword" />
               <Route element={<Demo />} path="/demo" />
               <Route element={<Single />} path="/single/:theid" />
-
+              <Route element={<Checkout/>} path="/checkout"/>
               <Route element={<h1>Not found!</h1>} />
               <Route element={<ProductsDetails1 />} path="/Details/1" />
               <Route element={<ProductsDetails2 />} path="/Details/2" />

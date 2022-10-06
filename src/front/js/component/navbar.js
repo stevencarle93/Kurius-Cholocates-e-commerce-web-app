@@ -11,13 +11,16 @@ export const Navbar = () => {
 	const toogleMenu = () => {
 		setMenu(!menu)
 	}
+
+	const [reset, setReset] = useState([])
+
 	const [color, changeColor] = useState("#0000");
 	document.body.style.backgroundColor = color;
 	return (
 		<nav className="navbar navbar-black">
 			<div className="mx-5">
 				<ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-					<li><Link to="/" className="nav-link px-2 text-warning bold" onClick={() => changeColor("#0000")}>Home</Link></li>
+					<li><Link to="/" className="nav-link px-2 text-warning bold" onClick={() => changeColor("#0000") [reset]}>Home</Link></li>
 					<li><a href="#" className="nav-link px-2 text-white">Features</a></li>
 					<li><a href="#" className="nav-link px-2 text-white">Pricing</a></li>
 					<li><a href="#" className="nav-link px-2 text-white">FAQs</a></li>
@@ -31,6 +34,7 @@ export const Navbar = () => {
 			</div>
 
 			<div className="d-flex text-end mx-5">
+				
 				<div className="cart mx-5" onClick={toogleMenu}>
 					<box-icon name="cart"></box-icon>
 					<span className="items__count">{carrito.length}</span>

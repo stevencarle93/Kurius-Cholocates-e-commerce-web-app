@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import prueba from '../../../img/Barras/barra-blanco-35.png'
+import { Link } from "react-router-dom";
 import { DataContext } from "../../store/Dataprovider";
 
 export const Carrito = () => {
@@ -80,7 +80,9 @@ export const Carrito = () => {
                 </div>
                 <div className="carrito__footer">
                     <h3>Total: ${total}</h3>
+                    <Link to="/checkout">
                     <button className="btn">Comprar</button>
+                    </Link>
                 </div>
             </div>
         </div>

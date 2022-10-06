@@ -138,8 +138,14 @@
   fill: crimson;
 }
 .carrito__items {
+  
   width: 90%;
   margin: 0 auto;
+}
+
+.carrito__items2 {
+  display: grid;
+  justify-content: start;
 }
 .carrito__item {
   display: grid;
@@ -188,38 +194,99 @@
   font-size: var(--font-size-1);
   font-weight: var(--font-weight-bold);
   margin-top: 1rem;
-} 
+}
 
 .carrito__item .remove__item box-icon {
   width: 60px;
   height: 80px;
   fill: crimson;
-  margin-top: 2rem; 
+  margin-top: 2rem;
   margin-left: 5rem;
 }
-.carrito__footer{
+.carrito__footer {
   text-align: center;
   margin-bottom: 3rem;
 }
-.carrito__footer h3{
+.carrito__footer h3 {
   font-size: var(--font-size-1);
   font-weight: 700;
   letter-spacing: 1px;
 }
-.carrito__footer .btn{
+.carrito__footer .btn {
   font-weight: var(--font-weight-bold);
   color: var(--bg-landingpage);
   display: inline-block;
-  padding: .3rem 1rem;
+  padding: 0.3rem 1rem;
   font-size: 1.2rem;
   background-color: var(--kurius-darkgreen-color);
   border: 0;
   outline: 0;
   cursor: pointer;
 }
-.carrito__footer .btn:hover{
+
+.card-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-footer .btn {
+  font-weight: var(--font-weight-bold);
+  color: var(--bg-landingpage);
+  display: inline-block;
+  padding: 0.3rem 1rem;
+  font-size: 1.2rem;
+  background-color: var(--kurius-darkgreen-color);
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+}
+.card-footer .btn:hover {
   color: white;
   background-color: green;
+}
+.carrito__footer .btn:hover {
+  color: white;
+  background-color: green;
+}
+/*  ------------------  CHECKOUT  ----------------------- */
+.checkout {
+  width: 100%;
+}
+.contenido {
+  width: 100%;
+  display: flex;
+  margin: 0 auto;
+  padding: 0;
+  justify-content: center;
+}
+.checkout-container {
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: all 300ms ease-in-out;
+  padding-bottom: 5rem;
+}
+.checkout h2 {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: var(--font-weight-bold);
+}
+.carrito2 {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.5);
+  width: 80%;
+  height: 80%;
+  border-radius: 8px;
+  overflow-x: scroll;
+  transition: all 300ms ease-in-out;
+  background-color: var(--bg-landingpage);
+  opacity: 0;
 }
 /*  ------------------  PRODUCTOS ----------------------- */
 
@@ -352,31 +419,29 @@ a:active {
 
 /* Richard */
 
-
-
 /* ------------- MEDIA --------------- */
 
-@media only screen and (max-width: 1000px){
-  .carrito__item{
+@media only screen and (max-width: 1000px) {
+  .carrito__item {
     width: 90%;
   }
   .carrito__item .remove__item box-icon {
     width: 60px;
     height: 80px;
     fill: crimson;
-    margin-top: 2rem; 
+    margin-top: 2rem;
     margin-right: 2rem;
   }
 }
-@media only screen and (width: 680px){
-  .carrito__item{
+@media only screen and (width: 680px) {
+  .carrito__item {
     width: 90%;
   }
   .carrito__item .remove__item box-icon {
     width: 60px;
     height: 80px;
     fill: crimson;
-    margin-top: 2rem; 
+    margin-top: 2rem;
     margin-right: 5rem;
   }
 }
