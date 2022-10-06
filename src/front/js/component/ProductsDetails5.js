@@ -3,7 +3,13 @@ import "../../styles/index.css";
 import Cobertura_Blanco_35 from "../../img/Coberturas/cobertura-blanco-35.png";
 import { Link } from "react-router-dom";
 
+
+
+
 export const ProductsDetails5 = () => {
+
+
+
   return (
     <div className="card mb-3 d-flex justify-content-center">
       <div className="row no-gutters">
