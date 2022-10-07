@@ -434,6 +434,11 @@ a:active {
 .carousel-indicators {
   z-index: 1;
 }
+.vl {
+  border-left: 2px solid green;
+  height: 500px;
+}
+
 /* Richard */
 
 /* ------------- MEDIA --------------- */
