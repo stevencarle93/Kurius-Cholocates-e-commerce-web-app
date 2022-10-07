@@ -2,6 +2,8 @@ import React, { useState, useContext } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { Context } from '../store/appContext'
 import { DataContext } from "../store/Dataprovider"
+import Logo from '../../img/LogoKurius.png'
+import Swal from "sweetalert2"
 
 export const Navbar = () => {
 	const value = useContext(DataContext)
@@ -9,7 +11,10 @@ export const Navbar = () => {
 	const [carrito] = value.carrito
 	const navigate = useNavigate();
 	const { store, actions } = useContext(Context)
-	
+	const [reset] = useState([])
+	const [color, changeColor] = useState("#0000");
+	document.body.style.backgroundColor = color;
+
 	const toogleMenu = () => {
 		setMenu(!menu)
 	}
@@ -32,7 +37,15 @@ export const Navbar = () => {
     else{
       console.log(response)
     }
-		if (response == "Sesion expired") alert("Inicia sesión nuevamente")
+		if (response == "Sesion expired") Swal.fire({
+			title: "Sesión expirada",
+			text: "Inicie sesión nuevamente",
+			icon: "warning",
+			confirmButtonText: "Ok",
+			confirmButtonColor: "orange",
+			timer: "4000",
+			background:"#f2ebe1"
+		})
 	}
 
 	const loginBar = () => {
@@ -49,7 +62,7 @@ export const Navbar = () => {
 		return (
 			<>
 				<Link to="/login">
-					<button type="button" className="btn btn-outline-light me-2">Login</button>
+					<button type="button" className="btn btn-success me-2">Login</button>
 				</Link>
 				<Link to="/signup">
 					<button type="button" className="btn btn-warning">Sign-up</button>
@@ -73,23 +86,16 @@ export const Navbar = () => {
 		)
 	}
 
+
+	
 	return (
 		<nav className="navbar navbar-black">
 			<div className="mx-5">
-				<ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-					<li><Link to="/" className="nav-link px-2 text-warning bold">Home</Link></li>
-					<li><Link to="#" onClick={()=>protectedCall()} className="nav-link px-2 text-danger bold">Protected Call</Link></li>
-					<li><a href="#" className="nav-link px-2 text-white">Pricing</a></li>
-					<li><a href="#" className="nav-link px-2 text-white">FAQs</a></li>
-					<li><a href="#" className="nav-link px-2 text-white">About</a></li>
+				<ul className="nav col-12 col-lg-auto me-lg-auto mb-2 align-items-center mb-md-0">
+					<li><Link to="/" className="nav-link px-2 text-warning bold" onClick={() => changeColor("#0000") [reset]}><img className="logoNavbar" src={Logo} width="110px"/></Link></li>
 				</ul>
 			</div>
-			<div className="align-items-end justify-content-center justify-content-lg-start">
-				<form className="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-					<input type="search" className="form-control form-control-dark" placeholder="Search..." aria-label="Search" />
-				</form>
-			</div>
-			<div className="d-flex text-end mx-5">
+			<div className="d-flex align-items-center text-end mx-5">
 				{carritoView()}
 				{loginBar()}
 			</div>

@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { Context } from "../store/appContext"
 import "../../styles/index.css"
+import Swal from "sweetalert2"
 
 export const Signup = () => {
   const { store, actions } = useContext(Context)
@@ -22,10 +23,26 @@ export const Signup = () => {
     }
     let response = await actions.signup(signupData)
     if (response.validation == "ok"){
-      alert(response.message)
+      Swal.fire({
+        title: "Datos incorrectos",
+        text: toString(response.message),
+        icon: "success",
+        confirmButtonText: "Aceptar",
+        confirmButtonColor: "crimson",
+        timer: "4000",
+        background:"#f2ebe1"
+    })
       navigate("/login") //se redirige para hacer el login
     }
-    else alert(response)
+    else Swal.fire({
+      title: "Rellene el formulario",
+      text: toString(response.message),
+      icon: "error",
+      confirmButtonText: "Ok",
+      confirmButtonColor: "crimson",
+      timer: "4000",
+      background:"#f2ebe1"
+  })
   }
 
   return (
