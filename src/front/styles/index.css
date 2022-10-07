@@ -355,6 +355,11 @@ a:active {
   transform: scale(1.05);
 }
 
+.vl {
+  border-left: 2px solid green;
+  height: 500px;
+}
+
 /* Richard */
 
 
