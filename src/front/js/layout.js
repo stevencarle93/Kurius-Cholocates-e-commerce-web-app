@@ -22,6 +22,7 @@ import { DataProvider } from './store/Dataprovider'
 import { Checkout } from './component/Checkout/Checkout'
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js"
 
 //create your first component
 const Layout = () => {
@@ -31,6 +32,12 @@ const Layout = () => {
 
   return (
     <DataProvider>
+      <PayPalScriptProvider
+        options={{
+          "client-id": "sb",
+          currency: "USD",
+        }}
+      >
       <div className="App">
         <BrowserRouter basename={basename}>
           <ScrollToTop>
@@ -58,6 +65,7 @@ const Layout = () => {
           </ScrollToTop>
         </BrowserRouter>
       </div>
+    </PayPalScriptProvider>
     </DataProvider>
   );
 };
