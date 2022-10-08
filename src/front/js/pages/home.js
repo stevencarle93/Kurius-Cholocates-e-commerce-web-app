@@ -104,12 +104,12 @@ export const Home = () => {
 <span classNameName="visually-hidden">Next</span>
 </button>*/
   const { store, actions } = useContext(Context)
-
+//<ProductList />
   return (
     <>
       <Carousel />
-      <ProductosPrivados products={store.products.result} />
       <Carrito />
+      <ProductosPrivados products={store.products.result} />
       <ProductList />
       <ReviewsCarousel />
     </>
