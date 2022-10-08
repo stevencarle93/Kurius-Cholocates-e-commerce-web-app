@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react"
 import { Context } from "../store/appContext"
 import { Link, useNavigate } from "react-router-dom"
 import "../../styles/index.css"
+import Swal from 'sweetalert2'
 
 export const Login = () => {
   const { store, actions } = useContext(Context)
@@ -18,11 +19,19 @@ export const Login = () => {
     };
     let response = await actions.login(loginData);
     if (response == "ok"){
-      console.log("login successful")
+      alert("Prueba")
       navigate("/")
     }
     else{
-      alert(response)
+      Swal.fire({
+        title: "Datos incorrectos",
+        text: toString(response.message),
+        icon: "error",
+        confirmButtonText: "Aceptar",
+        confirmButtonColor: "crimson",
+        timer: "4000",
+        background:"#f2ebe1"
+    })
     }
 
   };
