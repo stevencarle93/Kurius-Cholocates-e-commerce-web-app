@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
-import { DataContext } from "../../store/Dataprovider";
-import { PreviewCart } from "./VisualCart";
-import { Payment } from "./PaymentForm";
-export const Checkout = () => {
+import React, { useContext } from "react"
+import { DataContext } from "../../store/Dataprovider"
+import { PreviewCart } from "./VisualCart"
+import { PayPal } from "../paypal"
+
+export const Checkout = (props) => {
 
     const value = useContext(DataContext)
     const [menu, setMenu] = value.menu
@@ -26,7 +27,7 @@ export const Checkout = () => {
                     <div className="row">
                         <div className="carrito__items2">
                            {/* componente */}
-                           <Payment/>
+                           <PayPal total={total}/>
                         </div>
                     </div>
 

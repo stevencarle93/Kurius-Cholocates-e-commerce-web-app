@@ -1,9 +1,9 @@
 import React, { useState, useContext, useEffect } from "react"
 import { Context } from "../store/appContext"
-import { PayPalButtons } from "@paypal/react-paypal-js"
+import { PayPalButtons } from "@paypal/react-paypal-js";
 
 
-export const Paypal = ({ carrito }) => {
+export const PayPal = (props) => {
   const { store, actions } = useContext(Context)
 
   /////////////    PASAR AL STORE?    /////////////
@@ -19,15 +19,15 @@ export const Paypal = ({ carrito }) => {
     setPaidFor(false)
   }
 
-  if (paidFor) {
+  /* if (paidFor) {
     // Mostramos mensaje indicando al usuario que el pago se ha completado con exito
     actions.hacerPedido();
     notifyOk("Su pago ha sido realizado correctamente");
-  }
+  } */
 
   if (error) {
     // Mostramos mensaje de error
-    notifyError("Error al realizar el pago!!!");
+    notifyError("Error al realizar el pago!");
   }
 
   return (
@@ -50,7 +50,7 @@ export const Paypal = ({ carrito }) => {
               {
                 amount: {
                   currency_code: "USD",
-                  value: store.precioCesta,
+                  value: props.total,
                 },
               },
             ],
