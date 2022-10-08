@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { DataContext } from "../../store/Dataprovider";
 import { PreviewCart } from "./VisualCart";
 import { Payment } from "./PaymentForm";
+
 export const Checkout = () => {
 
     const value = useContext(DataContext)
@@ -11,9 +12,6 @@ export const Checkout = () => {
 
     // const show1 = menu ? "carrito-container show" : "carrito-container"
     // const show2 = menu ? "carrito show" : "carrito"
-
-
-  
 
     return (
         <div className="checkout-container">
