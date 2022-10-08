@@ -18,8 +18,24 @@ const getState = ({ getStore, getActions, setStore }) => {
           initial: "white",
         },
       ],
+      products:[],
     },
     actions: {
+      loadProducts:async() => {
+        try{
+          const URL = "https://3001-itsmerichar-kuriuschoco-a05vahzresi.ws-us70.gitpod.io/api/"
+          let result = await fetch(URL+"products")
+          if (result.ok) result = await result.json()
+          else return
+          const store = getStore()
+          setStore({
+            ...store,
+            products:result
+          })
+        } catch(error){
+          console.error(error)
+        }
+      },
       // Use getActions to call a function within a fuction
       restorePOST: async (data) => {
         const store = getStore()

@@ -411,7 +411,12 @@ a:active {
 }
 
 .logoNavbar {
-  filter: drop-shadow(-0.1rem 2px 12px black);
+  position: relative;
+  transition: transform 0.2s;
+}
+.logoNavbar:hover {
+  cursor: pointer;
+  transform: scale(1.1);
 }
 
 .bold {
