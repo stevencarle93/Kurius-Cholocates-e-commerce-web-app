@@ -22,7 +22,6 @@ import { DataProvider } from './store/Dataprovider'
 import { Checkout } from './component/Checkout/Checkout'
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
-import { PayPalScriptProvider } from "@paypal/react-paypal-js"
 
 //create your first component
 const Layout = () => {
