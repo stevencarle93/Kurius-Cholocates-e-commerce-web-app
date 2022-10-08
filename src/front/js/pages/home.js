@@ -6,10 +6,15 @@ import "../../styles/index.css";
 import { ProductList } from "../component/Products/ProductList";
 import { ReviewsCarousel } from "../component/ReviewsCarousel";
 import { Carousel } from "../component/Carousel"
+import { ProductosPrivados } from "../component/Products/ProductosPrivados";
+
+
 export const Home = () => {
 
+
   const [color, changeColor] = useState("#ffffff");
-	document.body.style.backgroundColor = color;
+  document.body.style.backgroundColor = color;
+
 
   /*<div id="carouselExampleCaptions" className="carousel slide" data-bs-ride="carousel">
   <div className="carousel-indicators">
@@ -98,9 +103,12 @@ export const Home = () => {
 <span classNameName="carousel-control-next-icon" aria-hidden="true"></span>
 <span classNameName="visually-hidden">Next</span>
 </button>*/
+  const { store, actions } = useContext(Context)
+
   return (
     <>
-      <Carousel/>
+      <Carousel />
+      <ProductosPrivados products={store.products.result} />
       <Carrito />
       <ProductList />
       <ReviewsCarousel />
