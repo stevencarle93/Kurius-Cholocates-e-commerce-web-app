@@ -56,13 +56,7 @@ class Product(db.Model):
     picture = db.Column(db.String(200), unique=False, nullable=True)
     name = db.Column(db.String(20), unique=False, nullable=False)
     percentage = db.Column(db.Integer, nullable=False)
-
     description = db.Column(db.String(200), nullable=False)
-    curva_temperatura = db.Column(db.String(200), nullable=False)
-    uso = db.Column(db.String(200), nullable=False)
-    perfil_organoleptico = db.Column(db.String(200), nullable=False)
-    fluidez = db.Column(db.String(50), nullable=False)
-
     presentation = db.Column(db.Float, nullable=False)
     price = db.Column(db.Float(10), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
@@ -78,10 +72,6 @@ class Product(db.Model):
             "name": self.name,
             "percentage": self.percentage,
             "description": self.description,
-            "curva_temperatura": self.curva_temperatura,
-            "uso": self.uso,
-            "perfil_organoleptico": self.perfil_organoleptico,
-            "fluidez": self.fluidez,
             "presentation": self.presentation,
             "price": self.price,
             "quantity": self.quantity
