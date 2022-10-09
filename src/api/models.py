@@ -29,7 +29,7 @@ class Order(db.Model):
     __tablename__ = 'order'
 
     id = db.Column(db.Integer, primary_key=True)
-    amount = db.Column(db.Integer, unique=True, nullable=False)
+    amount = db.Column(db.Integer, unique=False, nullable=False)
     shipping_address = db.Column(db.String(80), nullable=False)
     order_state = db.Column(db.String(80), nullable=False)
     

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import { Context } from "../store/appContext"
 import "../../styles/index.css"
@@ -24,8 +24,8 @@ export const Signup = () => {
     let response = await actions.signup(signupData)
     if (response.validation == "ok"){
       Swal.fire({
-        title: "Datos incorrectos",
-        text: toString(response.message),
+        title: "Registro satisfactorio",
+        text: response.message,
         icon: "success",
         confirmButtonText: "Aceptar",
         confirmButtonColor: "crimson",
@@ -35,8 +35,8 @@ export const Signup = () => {
       navigate("/login") //se redirige para hacer el login
     }
     else Swal.fire({
-      title: "Rellene el formulario",
-      text: toString(response.message),
+      title: "Rellene el formulario correctamente",
+      text: response,
       icon: "error",
       confirmButtonText: "Ok",
       confirmButtonColor: "crimson",

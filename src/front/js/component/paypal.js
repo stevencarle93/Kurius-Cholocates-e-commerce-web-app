@@ -1,40 +1,55 @@
-import React, { useState, useContext, useEffect } from "react"
+import React, { useContext } from "react"
+import { useNavigate } from "react-router-dom"
 import { Context } from "../store/appContext"
-import { PayPalButtons } from "@paypal/react-paypal-js";
+import { PayPalButtons } from "@paypal/react-paypal-js"
+import Swal from "sweetalert2"
 
 
 export const PayPal = (props) => {
   const { store, actions } = useContext(Context)
+  const navigate = useNavigate()
 
-  /////////////    PASAR AL STORE?    /////////////
-  // Creamos variable donde guardamos si el pago esta realizado
-  const [paidFor, setPaidFor] = useState(false)
-  // Creamos variable por si ocurre algun error
-  const [error, setError] = useState(null)
+  const handleAprove = async (order) => {
+    let shipping_address = 
+      order.payer.address.address_line_1 + ", " +
+      order.payer.address.admin_area_1 + ", " +
+      order.payer.address.country_code + ", " +
+      order.payer.address.postal_code
 
-  
-  // Llamamos a la funcion con el backend para cumplir con el pedido
-  const handleAprove = (orderId) => {
-    setPaidFor(true)
-    setPaidFor(false)
-  }
-
-  /* if (paidFor) {
-    // Mostramos mensaje indicando al usuario que el pago se ha completado con exito
-    actions.hacerPedido();
-    notifyOk("Su pago ha sido realizado correctamente");
-  } */
-
-  if (error) {
-    // Mostramos mensaje de error
-    notifyError("Error al realizar el pago!");
+    let orderData = {
+      amount: props.total,
+      shipping_address: shipping_address,
+      order_state: order.status,
+      user_id: "",
+    }
+    let response = await actions.crearOrden(orderData)
+    if (response == "ok"){
+      Swal.fire( {
+        title: "Pago realizado con exito",
+        text: "Tu orden ha sido creada",
+        icon: "success",
+        confirmButtonText: "Aceptar",
+        confirmButtonColor: "crimson",
+        timer: "2500",
+        background:"#f2ebe1"
+      } )
+      navigate("/")
+    }
+    else Swal.fire( {
+      title: "Pago realizado con exito",
+      text: response,
+      icon: "error",
+      confirmButtonText: "Aceptar",
+      confirmButtonColor: "crimson",
+      timer: "2500",
+      background:"#f2ebe1"
+    } )
   }
 
   return (
-    <>
       <PayPalButtons
         className="button-paypal"
-        style={{
+        style = { {
           color: "gold",
           layout: "vertical",
           heigth: 30,
@@ -42,50 +57,39 @@ export const PayPal = (props) => {
           label: "pay",
           size: "small",
           tagline: false,
-        }}
-        // Creamos la orden
+        } }
         createOrder={(data, actions) => {
           return actions.order.create({
-            purchase_units: [
-              {
-                amount: {
-                  currency_code: "USD",
-                  value: props.total,
-                },
-              },
-            ],
-          });
-        }}
-        // Aprobacion
-        onApprove={async (data, actions) => {
-          const order = await actions.order.capture();
-          handleAprove(data.orderID);
-        }}
-        onCancel={() => {
-          //Mostramos mensaje si hay una cancelacion
-          notifyError("La peticion de pago ha sido cancelada");
-        }}
-        // En caso de Error
+            purchase_units: [ { amount: {
+                currency_code: "USD",
+                value: props.total,
+              } } ]
+          } )
+        } }
+        onApprove = { async (data, actions) => {
+          const order = await actions.order.capture()
+            handleAprove(order)
+        } }
+        onCancel={(data) => {
+          Swal.fire( {
+            title: "Peticion de pago cancelada",
+            icon: "error",
+            confirmButtonText: "Aceptar",
+            confirmButtonColor: "crimson",
+            timer: "2500",
+            background:"#f2ebe1"
+        } )
+        } }
         onError={(error) => {
-          setError(true);
-          console.error("Error al realizarse la operación", error);
-          setError(false);
-        }}
+          Swal.fire( {
+            title: "Error en el pago. Inténtalo nuevamente",
+            icon: "error",
+            confirmButtonText: "Aceptar",
+            confirmButtonColor: "crimson",
+            timer: "2500",
+            background:"#f2ebe1"
+          } )
+        } }
       />
-      <div>
-        {/* Componente Alert  
-        <ToastContainer
-          position="bottom-center"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />*/}
-      </div>
-    </>
-  );
-};
+  )
+}

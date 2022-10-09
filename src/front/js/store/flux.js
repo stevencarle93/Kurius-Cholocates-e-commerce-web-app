@@ -6,6 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       loginDate: 0,
       user: "",
       message: null,
+      order: {"":""},
       demo: [
         {
           title: "FIRST",
@@ -23,8 +24,8 @@ const getState = ({ getStore, getActions, setStore }) => {
     actions: {
       loadProducts:async() => {
         try{
-          const URL = "https://3001-itsmerichar-kuriuschoco-a05vahzresi.ws-us70.gitpod.io/api/"
-          let result = await fetch(URL+"products")
+          const URL = process.env.BACKEND_URL
+          let result = await fetch(URL+"/api/products")
           if (result.ok) result = await result.json()
           else return
           const store = getStore()
@@ -37,6 +38,23 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
       // Use getActions to call a function within a fuction
+      crearOrden: async (data) => {
+        const store = getStore()        
+        try {
+          let response = await getActions().apiFetch("order", "POST", data);
+          if (response.ok) {
+            let responseJson = await response.json()
+            setStore({order: responseJson,})
+            console.log(responseJson)
+            return "ok"
+          } else {
+            let responseJson = await response.json()
+            return responseJson.message
+          }
+        } catch (error) {
+          console.error({ error })
+        }
+      },
       restorePOST: async (data) => {
         const store = getStore()
         try {
@@ -76,7 +94,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       signup: async (data) => {
         for (const key in data) {
-          if (data[key] == "") return "Complete all spaces in the form";
+          if (data[key] == "") return "Completa todos los campos del formulario";
         }
         let password = data.password.replaceAll(/\s/g, "");
         if (password.length > 7) {
@@ -86,7 +104,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               let responseJson = await response.json();
               return {
                 message:
-                  responseJson.message + ". Please continue with the login",
+                  responseJson.message + ". Ahora puedes iniciar sesión",
                 validation: "ok",
               };
             } else {
@@ -97,7 +115,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           } catch (error) {
             console.error({ error });
           }
-        } else return "Invalid password"
+        } else return "La clave debe tener mínimo 8 caratéres y sin espacios"
       },
       login: async (data) => {
         const store = getStore()
@@ -154,7 +172,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.error({ error });
         }
       },
-      protectedTest: async () => {
+      /* protectedTest: async () => {
         const store = getStore();
         let validation = await getActions().tokenTimeValidation();
         //console.log(validation);
@@ -181,7 +199,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.error({ error });
           }
         }
-      },
+      }, */
       tokenTimeValidation: async () => {
         const store = getStore();
         let loginDate = store.loginDate;
@@ -230,36 +248,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
         return await fetch(url + "/api/" + endpoint, request);
       },
-/*
-      exampleFunction: () => {
-        getActions().changeColor(0, "green");
-      },
-      getMessage: async () => {
-        try {
-          // fetching data from the backend
-          const resp = await fetch(process.env.BACKEND_URL + "/api/hello");
-          const data = await resp.json();
-          setStore({ message: data.message });
-          // don't forget to return something, that is how the async resolves
-          return data;
-        } catch (error) {
-          console.log("Error loading message from backend", error);
-        }
-      },
-      changeColor: (index, color) => {
-        //get the store
-        const store = getStore();
-
-        //we have to loop the entire demo array to look for the respective index
-        //and change its color
-        const demo = store.demo.map((elm, i) => {
-          if (i === index) elm.background = color;
-          return elm;
-        });
-
-        //reset the global store
-        setStore({ demo: demo });
-      },*/
     },
   };
 };

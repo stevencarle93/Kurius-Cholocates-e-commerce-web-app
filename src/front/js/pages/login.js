@@ -19,7 +19,15 @@ export const Login = () => {
     };
     let response = await actions.login(loginData);
     if (response == "ok"){
-      alert("Prueba")
+      Swal.fire({
+        title: "Bienvenido",
+        text: response.message,
+        icon: "success",
+        confirmButtonText: "Ok",
+        confirmButtonColor: "green",
+        timer: "1500",
+        background: "#f2ebe1"
+      })
       navigate("/")
     }
     else{
