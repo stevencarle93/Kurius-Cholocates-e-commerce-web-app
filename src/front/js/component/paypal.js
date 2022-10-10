@@ -33,7 +33,10 @@ export const PayPal = (props) => {
         timer: "2500",
         background:"#f2ebe1"
       } )
-      navigate("/")
+      /* let response_details = await actions.orderDetails(orderData)
+      if (response_details == "ok"){ */
+        navigate("/")
+      /* } */
     }
     else Swal.fire( {
       title: "Pago realizado con exito",

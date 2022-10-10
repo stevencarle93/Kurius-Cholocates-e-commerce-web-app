@@ -7,6 +7,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       user: "",
       message: null,
       order: {"":""},
+      products:[],
       demo: [
         {
           title: "FIRST",
@@ -19,7 +20,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           initial: "white",
         },
       ],
-      products:[],
     },
     actions: {
       loadProducts:async() => {
@@ -29,9 +29,8 @@ const getState = ({ getStore, getActions, setStore }) => {
           if (result.ok) result = await result.json()
           else return
           const store = getStore()
-          setStore({
-            ...store,
-            products:result
+          setStore({...store,
+            products: result
           })
         } catch(error){
           console.error(error)
@@ -55,6 +54,23 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.error({ error })
         }
       },
+      /* orderDetails: async (data) => {
+        const store = getStore()        
+        try {
+          let response = await getActions().apiFetch("order_details", "POST", data);
+          if (response.ok) {
+            let responseJson = await response.json()
+            setStore({order: responseJson,})
+            console.log(responseJson)
+            return "ok"
+          } else {
+            let responseJson = await response.json()
+            return responseJson.message
+          }
+        } catch (error) {
+          console.error({ error })
+        }
+      }, */
       restorePOST: async (data) => {
         const store = getStore()
         try {

@@ -38,7 +38,6 @@ def register_order():
     order.amount = body["amount"]
     order.shipping_address = body["shipping_address"]
     order.order_state = body["order_state"]
-    #order.user_id = body["user_id"]
     order.user_id = user
 
     try:        
