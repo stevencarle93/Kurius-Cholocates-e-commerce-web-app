@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 7a99727b5255
+Revision ID: c83a3e70dd03
 Revises: 
-Create Date: 2022-10-08 16:17:30.331824
+Create Date: 2022-10-10 02:43:51.560251
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '7a99727b5255'
+revision = 'c83a3e70dd03'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -22,9 +22,13 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('product_type', sa.String(length=20), nullable=False),
     sa.Column('picture', sa.String(length=200), nullable=True),
-    sa.Column('name', sa.String(length=20), nullable=False),
+    sa.Column('name', sa.String(length=50), nullable=False),
     sa.Column('percentage', sa.Integer(), nullable=False),
     sa.Column('description', sa.String(length=200), nullable=False),
+    sa.Column('curva_temperatura', sa.String(length=200), nullable=False),
+    sa.Column('uso', sa.String(length=200), nullable=False),
+    sa.Column('perfil_organoleptico', sa.String(length=200), nullable=False),
+    sa.Column('fluidez', sa.String(length=50), nullable=False),
     sa.Column('presentation', sa.Float(), nullable=False),
     sa.Column('price', sa.Float(precision=10), nullable=False),
     sa.Column('quantity', sa.Integer(), nullable=False),
