@@ -110,7 +110,6 @@ export const Home = () => {
       <Carousel />
       <Carrito />
       <ProductosPrivados products={store.products.result} />
-      <ProductList />
       <ReviewsCarousel />
     </>
   );
