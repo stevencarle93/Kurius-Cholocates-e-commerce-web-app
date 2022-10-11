@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext} from "react";
 import { DataContext } from "../../store/Dataprovider";
 import { Context } from "../../store/appContext";
 import '../../../styles/index.css';
+import { Link } from "react-router-dom";
 
 export const ProductosPrivados = () => {
   const value = useContext(DataContext);
@@ -11,7 +12,6 @@ export const ProductosPrivados = () => {
 
   return (
     <div>
-        <h2 className="border-bottom mx-5">Nuestros Productos</h2>
       {store.products.map((product, index) => {
         return (
             <div className="producto card2" key={index}>
@@ -34,9 +34,9 @@ export const ProductosPrivados = () => {
                     Añadir al carrito
                   </button>
                   <div>
-                    <a href={"/Details/" + product.id} className="btn">
+                    <Link to={"/Details/" + product.id} className="btn">
                       Ver más
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>

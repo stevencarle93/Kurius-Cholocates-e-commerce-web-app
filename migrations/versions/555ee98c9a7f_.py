@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: cae65ed2eac6
+Revision ID: 555ee98c9a7f
 Revises: 
-Create Date: 2022-10-10 22:13:17.288293
+Create Date: 2022-10-10 23:06:17.622133
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'cae65ed2eac6'
+revision = '555ee98c9a7f'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -21,7 +21,7 @@ def upgrade():
     op.create_table('product',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('product_type', sa.String(length=20), nullable=False),
-    sa.Column('picture', sa.String(length=200), nullable=True),
+    sa.Column('picture', sa.String(length=500), nullable=True),
     sa.Column('name', sa.String(length=50), nullable=False),
     sa.Column('percentage', sa.Integer(), nullable=False),
     sa.Column('description', sa.String(length=200), nullable=False),
@@ -32,8 +32,7 @@ def upgrade():
     sa.Column('presentation', sa.Float(), nullable=False),
     sa.Column('price', sa.Float(precision=10), nullable=False),
     sa.Column('quantity', sa.Integer(), nullable=False),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('product_type')
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('token_blocked_list',
     sa.Column('id', sa.Integer(), nullable=False),

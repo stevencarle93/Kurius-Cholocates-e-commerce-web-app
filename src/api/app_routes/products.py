@@ -33,6 +33,7 @@ def register_product():
     body = request.json
     
     product.product_type = body["product_type"]
+    product.picture = body["picture"]
     product.name = body["name"]
     product.percentage = body["percentage"]
     product.description = body["description"]
@@ -60,6 +61,7 @@ def update_product(product_id):
     product = Product.query.get(product_id)
     
     product.product_type = body["product_type"]
+    product.picture = body["picture"]
     product.name = body["name"]
     product.percentage = body["percentage"]
     product.description = body["description"]
