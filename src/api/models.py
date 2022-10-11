@@ -52,9 +52,9 @@ class Product(db.Model):
     __tablename__ = 'product'
 
     id = db.Column(db.Integer, primary_key=True)
-    product_type = db.Column(db.String(20), unique=True, nullable=False)
-    picture = db.Column(db.String(200), unique=False, nullable=True)
-    name = db.Column(db.String(20), unique=False, nullable=False)
+    product_type = db.Column(db.String(20), unique=False, nullable=False)
+    picture = db.Column(db.String(500), unique=False, nullable=True)
+    name = db.Column(db.String(50), unique=False, nullable=False)
     percentage = db.Column(db.Integer, nullable=False)
 
     description = db.Column(db.String(200), nullable=False)

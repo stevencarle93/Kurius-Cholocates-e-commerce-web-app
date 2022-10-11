@@ -33,9 +33,14 @@ def register_product():
     body = request.json
     
     product.product_type = body["product_type"]
+    product.picture = body["picture"]
     product.name = body["name"]
     product.percentage = body["percentage"]
     product.description = body["description"]
+    product.curva_temperatura = body["curva_temperatura"]
+    product.uso = body["uso"]
+    product.perfil_organoleptico = body["perfil_organoleptico"]
+    product.fluidez = body["fluidez"]
     product.presentation = body["presentation"]
     product.price = body["price"]
     product.quantity = body["quantity"]
@@ -56,9 +61,14 @@ def update_product(product_id):
     product = Product.query.get(product_id)
     
     product.product_type = body["product_type"]
+    product.picture = body["picture"]
     product.name = body["name"]
     product.percentage = body["percentage"]
     product.description = body["description"]
+    product.curva_temperatura = body["curva_temperatura"]
+    product.uso = body["uso"]
+    product.perfil_organoleptico = body["perfil_organoleptico"]
+    product.fluidez = body["fluidez"]
     product.presentation = body["presentation"]
     product.price = body["price"]
     product.quantity = body["quantity"]
