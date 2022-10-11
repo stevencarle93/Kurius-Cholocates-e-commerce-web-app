@@ -95,4 +95,6 @@ def delete_product(product_id):
         except Exception as error:
             print(error)
             db.session.rollback()
-            return jsonify({"message": "Product doesn't exist"}), 400
+            return jsonify({"message": "Internal error"}), 500
+    else:
+        return jsonify({"message": "Product doesn't exist"}), 404

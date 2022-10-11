@@ -9,7 +9,6 @@ import { Carousel } from "../component/Carousel";
 import { ProductosPrivados } from "../component/Products/ProductosPrivados";
 
 export const Home = () => {
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
   const [color, changeColor] = useState("#ffffff");
   document.body.style.backgroundColor = color;
 
