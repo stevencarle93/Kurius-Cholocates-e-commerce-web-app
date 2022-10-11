@@ -9,6 +9,7 @@ import { Carousel } from "../component/Carousel";
 import { ProductosPrivados } from "../component/Products/ProductosPrivados";
 
 export const Home = () => {
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
   const [color, changeColor] = useState("#ffffff");
   document.body.style.backgroundColor = color;
 
@@ -106,9 +107,7 @@ export const Home = () => {
       <Carousel />
       <Carrito />
       <h2 className="border-bottom mx-5">Nuestros Productos</h2>
-      <div className="productos">
-        <ProductosPrivados products={store.products.result} />
-      </div>
+      <ProductosPrivados products={store.products.result} />
       <ReviewsCarousel />
     </>
   );

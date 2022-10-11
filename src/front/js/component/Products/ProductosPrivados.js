@@ -1,7 +1,7 @@
-import React, { useContext} from "react";
+import React, { useContext } from "react";
 import { DataContext } from "../../store/Dataprovider";
 import { Context } from "../../store/appContext";
-import '../../../styles/index.css';
+import "../../../styles/index.css";
 import { Link } from "react-router-dom";
 
 export const ProductosPrivados = () => {
@@ -14,6 +14,7 @@ export const ProductosPrivados = () => {
     <div>
       {store.products.map((product, index) => {
         return (
+          <div className="productos">
             <div className="producto card2" key={index}>
               <a>
                 <div className="producto__img">
@@ -41,6 +42,7 @@ export const ProductosPrivados = () => {
                 </div>
               </div>
             </div>
+          </div>
         );
       })}
     </div>
