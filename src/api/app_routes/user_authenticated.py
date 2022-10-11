@@ -3,12 +3,13 @@ from api.models import db, User, TokenBlockedList
 from api.utils import generate_sitemap, APIException
 from flask import Flask, Blueprint, request, jsonify
 #from firebase_admin import storage
-import tempfile
+import tempfile, random, string
 
 from flask_jwt_extended import JWTManager, create_access_token, create_refresh_token, jwt_required, get_jwt_identity, get_jwt, get_jti
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from datetime import date, time, datetime, timezone
+from flask_mail import Mail, Message
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
@@ -86,11 +87,25 @@ def restore():
             "email": email,
             "message": "User found"
         }
+        
+        
+        temp_password = "".join(random.choice(string.ascii_uppercase + string.digits)for x in range(10))
+        password = bcrypt.generate_password_hash(temp_password, rounds = None).decode("utf-8")
+
+        mail = Mail() 
+        body = "Utiliza esta contraseña provisional para establecer una nueva."
+        msg = Message('Reestablecimiento de contraseña', sender = 'Kurius chocolate', recipients = [email])
+        msg.html = """
+        <h2> Hola """ + user.name + """, </h2>
+        <p>""" + body + """</p> 
+        <p>""" + temp_password + """</p> 
+        """ 
+        mail.send(msg)
         return jsonify(response_body), 201
 
     if request.method == 'PATCH':
         password = request.json.get("password", None)
-        try:        
+        try:
             password = bcrypt.generate_password_hash(password, rounds = None).decode("utf-8")
             setattr(user, "password", password)
             db.session.add(user)
