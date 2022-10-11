@@ -38,8 +38,13 @@
   font-family: var(--font-family-1);
 }
 .buttonRegister {
-  color: white;
+  color: var(--bg-landingpage);
   background-color: var(--kurius-darkgreen-color);
+}
+
+.buttonRegister:hover{
+  color: white;
+  background-color:green;
 }
 
 /* Julian */
@@ -87,6 +92,31 @@
   font-size: 1rem;
   font-weight: 700;
   background-color: crimson;
+}
+
+.iconos {
+  background-color: white;
+  fill: grey;
+  outline: none;
+  border: none;
+}
+
+.inputs {
+  border: none;
+  outline: none;
+}
+.inputs:focus {
+  border: none;
+  outline:none
+}
+
+.btn-kurius{
+  color: var(--bg-landingpage);
+  background-color: var(--ChocolateColor);
+}
+.btn-kurius:hover{
+  color: white;
+  background-color: hsl(15, 17%, 45%);
 }
 /* -------------------  CARRITO -------------------------  */
 
@@ -254,6 +284,8 @@
   color: white;
   background-color: green;
 }
+
+
 /*  ------------------  CHECKOUT  ----------------------- */
 .checkout {
   width: 100%;
