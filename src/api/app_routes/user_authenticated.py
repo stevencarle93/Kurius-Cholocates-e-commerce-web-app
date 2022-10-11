@@ -49,7 +49,7 @@ def signup():
             user = User(name = name, last_name = last_name, email = email, password = password, is_active = True)
             db.session.add(user)
             db.session.commit()
-            return jsonify({"message": "User registered"}), 201
+            return jsonify({"message": "Usuario registrado"}), 201
         except Exception as error:
             db.session.rollback()
             print(error) 
@@ -112,7 +112,7 @@ def restore():
             db.session.commit()
             response_body = {
                 #user.serialize()
-                "message": "Password restablished"
+                "message": "Contraseña reestablecida con éxito"
             }
             return jsonify(response_body), 200
         except Exception as error:

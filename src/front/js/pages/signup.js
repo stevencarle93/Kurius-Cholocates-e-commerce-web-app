@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { Context } from "../store/appContext"
 import "../../styles/index.css"
+import Swal from "sweetalert2"
 
 export const Signup = () => {
   const { store, actions } = useContext(Context)
@@ -21,11 +22,27 @@ export const Signup = () => {
       password: password,
     }
     let response = await actions.signup(signupData)
-    if (response.validation == "ok"){
-      alert(response.message)
+    if (response.validation == "ok") {
+      Swal.fire({
+        title: "Registro Exitoso",
+        text: response.message,
+        icon: "success",
+        confirmButtonText: "Aceptar",
+        confirmButtonColor: "green",
+        timer: "4000",
+        background: "#f2ebe1"
+      })
       navigate("/login") //se redirige para hacer el login
     }
-    else alert(response)
+    else Swal.fire({
+      title: "Rellene el formulario correctamente",
+      text: response.message,
+      icon: "error",
+      confirmButtonText: "Ok",
+      confirmButtonColor: "crimson",
+      timer: "4000",
+      background: "#f2ebe1"
+    })
   }
 
   return (
@@ -48,40 +65,53 @@ export const Signup = () => {
             <form onSubmit={(e) => signup(e)}>
               <div className=" d-flex flex-column bd-highlight mb-3">
                 <div className="row d-flex my-3 me-0 justify-content-center">
-                  <h6>Nombre:</h6>
-                  <input
-                    className="col-7"
-                    name="name"
-                    placeholder="Escriba aquí su nombre"
-                    type="string"
-                  />
+                  <label className="input-label">Nombre:</label>
+                  <div className="input-group justify-content-center">
+                    <span className="input-group-text iconos" id="basic-addon1"><box-icon className="input-group-text iconos" name="user" /></span>
+                    <input
+                      className="inputs col-5"
+                      name="name"
+                      placeholder="Escriba aquí su nombre"
+                      type="string" />
+                  </div>
                 </div>
                 <div className="row d-flex mb-3 me-0 justify-content-center">
-                  <h6>Apellido:</h6>
-                  <input
-                    className="col-7"
-                    name="last_name"
-                    placeholder="Escriba aquí su apellido"
-                    type="string"
-                  />
+                  <label className="input-label">Apellido:</label>
+                  <div className="input-group justify-content-center">
+                    <span className="input-group-text iconos" id="basic-addon1"><box-icon className="input-group-text iconos" name="user" /></span>
+                    <input
+                      className="inputs col-5"
+                      name="last_name"
+                      placeholder="Escriba aquí su apellido"
+                      type="string"
+                    />
+                  </div>
                 </div>
                 <div className="row d-flex mb-3 me-0 justify-content-center">
-                  <h6>Email:</h6>
-                  <input
-                    className="col-7"
-                    name="email"
-                    placeholder="Escriba aquí su email"
-                    type="email"
-                  />
+                  <label className="input-label">Email:</label>
+                  <div className="input-group justify-content-center">
+                    <span className="input-group-text iconos" id="basic-addon1"><box-icon className="input-group-text iconos" name="envelope" /></span>
+                    <input
+                      className="inputs col-5"
+                      name="email"
+                      placeholder="Escriba aquí su email"
+                      type="email"
+                    />
+                  </div>
+
                 </div>
                 <div className="row d-flex mb-3 me-0 justify-content-center">
-                  <h6>Contraseña:</h6>
-                  <input
-                    className="col-5"
-                    name="password"
-                    placeholder="Escriba aquí su clave"
-                    type="password"
-                  />
+                  <label className="input-label">Contraseña:</label>
+                  <div className="input-group justify-content-center">
+                    <span className="input-group-text iconos" id="basic-addon1"><box-icon className="input-group-text iconos" name="lock-open" /></span>
+                    <input
+                      className="inputs col-5"
+                      name="password"
+                      placeholder="Escriba aquí su clave"
+                      type="password"
+                    />
+                  </div>
+
                   <div>
                     <span id="passwordHelpInline" className="form-text">
                       Debe tener entre 8-20 caracteres

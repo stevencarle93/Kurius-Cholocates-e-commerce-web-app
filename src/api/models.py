@@ -29,7 +29,7 @@ class Order(db.Model):
     __tablename__ = 'order'
 
     id = db.Column(db.Integer, primary_key=True)
-    amount = db.Column(db.Integer, unique=True, nullable=False)
+    amount = db.Column(db.Integer, unique=False, nullable=False)
     shipping_address = db.Column(db.String(80), nullable=False)
     order_state = db.Column(db.String(80), nullable=False)
     
@@ -52,11 +52,17 @@ class Product(db.Model):
     __tablename__ = 'product'
 
     id = db.Column(db.Integer, primary_key=True)
-    product_type = db.Column(db.String(20), unique=True, nullable=False)
-    picture = db.Column(db.String(200), unique=False, nullable=True)
-    name = db.Column(db.String(20), unique=False, nullable=False)
+    product_type = db.Column(db.String(20), unique=False, nullable=False)
+    picture = db.Column(db.String(500), unique=False, nullable=True)
+    name = db.Column(db.String(50), unique=False, nullable=False)
     percentage = db.Column(db.Integer, nullable=False)
+
     description = db.Column(db.String(200), nullable=False)
+    curva_temperatura = db.Column(db.String(200), nullable=False)
+    uso = db.Column(db.String(200), nullable=False)
+    perfil_organoleptico = db.Column(db.String(200), nullable=False)
+    fluidez = db.Column(db.String(50), nullable=False)
+
     presentation = db.Column(db.Float, nullable=False)
     price = db.Column(db.Float(10), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
@@ -72,6 +78,10 @@ class Product(db.Model):
             "name": self.name,
             "percentage": self.percentage,
             "description": self.description,
+            "curva_temperatura": self.curva_temperatura,
+            "uso": self.uso,
+            "perfil_organoleptico": self.perfil_organoleptico,
+            "fluidez": self.fluidez,
             "presentation": self.presentation,
             "price": self.price,
             "quantity": self.quantity
