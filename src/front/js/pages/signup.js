@@ -98,6 +98,7 @@ export const Signup = () => {
                       type="email"
                     />
                   </div>
+
                 </div>
                 <div className="row d-flex mb-3 me-0 justify-content-center">
                   <label className="input-label">Contraseña:</label>

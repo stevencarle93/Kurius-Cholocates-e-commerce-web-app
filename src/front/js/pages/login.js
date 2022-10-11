@@ -25,14 +25,14 @@ export const Login = () => {
       password: password,
     };
     let response = await actions.login(loginData);
-    if (response == "ok") {
+    if (response == "ok"){
       Swal.fire({
         title: "Bienvenido",
         text: response.message,
         icon: "success",
         confirmButtonText: "Ok",
         confirmButtonColor: "green",
-        timer: "1000",
+        timer: "1500",
         background: "#f2ebe1"
       })
       navigate("/")

@@ -3,8 +3,10 @@ from api.models import db, OrderDetail
 from api.utils import generate_sitemap, APIException
 from flask import Flask, Blueprint, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from flask_jwt_extended import JWTManager, jwt_required, get_jwt_identity
 
 app = Flask(__name__)
+jwt = JWTManager(app)
 
 apiOrderDetail = Blueprint('apiOrderDetail', __name__)
 
@@ -27,6 +29,7 @@ def get_order_Detail(order_detail_id):
         return jsonify({"messsage":"order detail not found"})
 
 @apiOrderDetail.route('/order_detail', methods=['POST'])
+@jwt_required()
 def register_order_detail():
 
     order_detail = OrderDetail()

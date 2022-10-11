@@ -42,7 +42,7 @@ export const DataProvider = (props) => {
         }
     }
 
-  useEffect(() => {
+  /* useEffect(() => {
       const dataCarrito = JSON.parse(localStorage.getItem('dataCarrito'))
       if (dataCarrito) {
           setCarrito(dataCarrito)
@@ -51,7 +51,7 @@ export const DataProvider = (props) => {
 
     useEffect(() => {
         localStorage.setItem('dataCarrito', JSON.stringify(carrito))
-    }, [carrito])
+    }, [carrito]) */
 
     useEffect(() => {
         const getTotal = () => {

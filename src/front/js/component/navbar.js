@@ -52,7 +52,7 @@ export const Navbar = () => {
 		if (store.token != ""){
 			return (
 				<>
-					<div className="px-4 m-auto text-white">
+					<div className="px-4 m-auto text-dark bold">
 						¡Bienvenido {store.user}!
 					</div>
 						<button type="button" className="btn btn-warning" onClick={() => handleLogout()}>Logout</button>

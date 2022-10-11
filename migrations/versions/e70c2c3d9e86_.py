@@ -1,14 +1,8 @@
 """empty message
 
-<<<<<<<< HEAD:migrations/versions/c3be8b42b632_.py
-Revision ID: c3be8b42b632
+Revision ID: e70c2c3d9e86
 Revises: 
-Create Date: 2022-10-07 20:12:17.641061
-========
-Revision ID: 555ee98c9a7f
-Revises: 
-Create Date: 2022-10-10 23:06:17.622133
->>>>>>>> 94f5e6540711e6beac0cf74857e039fada2d98f7:migrations/versions/555ee98c9a7f_.py
+Create Date: 2022-10-11 00:40:16.969704
 
 """
 from alembic import op
@@ -16,11 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-<<<<<<<< HEAD:migrations/versions/c3be8b42b632_.py
-revision = 'c3be8b42b632'
-========
-revision = '555ee98c9a7f'
->>>>>>>> 94f5e6540711e6beac0cf74857e039fada2d98f7:migrations/versions/555ee98c9a7f_.py
+revision = 'e70c2c3d9e86'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -70,8 +60,7 @@ def upgrade():
     sa.Column('order_state', sa.String(length=80), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('amount')
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('order_detail',
     sa.Column('id', sa.Integer(), nullable=False),
