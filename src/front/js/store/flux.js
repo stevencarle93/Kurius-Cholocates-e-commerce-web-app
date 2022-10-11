@@ -1,3 +1,6 @@
+import Swal from 'sweetalert2'
+
+
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
@@ -6,8 +9,8 @@ const getState = ({ getStore, getActions, setStore }) => {
       loginDate: 0,
       user: "",
       message: null,
-      order: {"":""},
-      products:[],
+      order: { "": "" },
+      products: [],
       demo: [
         {
           title: "FIRST",
@@ -20,30 +23,59 @@ const getState = ({ getStore, getActions, setStore }) => {
           initial: "white",
         },
       ],
+      carrito: [
+
+      ],
+
     },
     actions: {
-      loadProducts:async() => {
-        try{
-          const URL = process.env.BACKEND_URL
-          let result = await fetch(URL+"/api/products")
+
+      addCarrito: (product) => {
+        const store = getStore()
+        for (let i = 0; i < store.carrito.length; i++) {
+          if (product.id === store.carrito[i].id) {
+            Swal.fire({
+              title: "Tu producto ya está en el carrito",
+              text: "Selecciona uno diferente para agregar",
+              icon: "error",
+              confirmButtonText: "Aceptar",
+              confirmButtonColor: "#6c7239",
+              timer: "4000",
+              background: "#f2ebe1"
+            })
+            return
+          }
+        }
+        setStore({ carrito: [...store.carrito, product] })
+      },
+      deleteCarrito: (product) => {
+        const store = getStore()
+        setStore({
+          carrito : store.carrito.filter(item => item.id != product.id)
+        })
+      },
+      loadProducts: async () => {
+        try {
+          let result = await getActions().apiFetch("products", "GET");
           if (result.ok) result = await result.json()
           else return
           const store = getStore()
-          setStore({...store,
+          setStore({
+            ...store,
             products: result
           })
-        } catch(error){
+        } catch (error) {
           console.error(error)
         }
       },
       // Use getActions to call a function within a fuction
       crearOrden: async (data) => {
-        const store = getStore()        
+        const store = getStore()
         try {
           let response = await getActions().apiFetch("order", "POST", data);
           if (response.ok) {
             let responseJson = await response.json()
-            setStore({order: responseJson,})
+            setStore({ order: responseJson, })
             console.log(responseJson)
             return "ok"
           } else {
@@ -77,7 +109,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           let response = await getActions().apiFetch("restore", "POST", data);
           if (response.ok) {
             let responseJson = await response.json()
-            setStore({user: responseJson.email,})
+            setStore({ user: responseJson.email, })
             return responseJson
           } else {
             let responseJson = await response.json()
@@ -90,13 +122,13 @@ const getState = ({ getStore, getActions, setStore }) => {
       restorePATCH: async (data) => {
         const store = getStore()
         let password = data.password.replaceAll(/\s/g, "")
-        if (password.length > 7){
-          data = {...data, email:store.user}
+        if (password.length > 7) {
+          data = { ...data, email: store.user }
           try {
             let response = await getActions().apiFetch("restore", "PATCH", data)
             if (response.ok) {
               let responseJson = await response.json()
-              setStore({user:""})
+              setStore({ user: "" })
               return responseJson
             } else {
               let responseJson = await response.json()
@@ -166,7 +198,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           if (firstResponse.ok) {
             let accessTokRevoked = await firstResponse.json()
             let refresh_token = store.refresh_token
-            setStore({ token: refresh_token})
+            setStore({ token: refresh_token })
             let secondResponse = await getActions().apiFetch("logout", "POST");
             if (secondResponse.ok) {
               let refreshTokRevoked = await secondResponse.json()
@@ -175,8 +207,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             }
             else {
               let refreshTokRevoked = await secondResponse.json()
-            if (refreshTokRevoked != undefined) return refreshTokRevoked.message;
-            else return "Internal error";
+              if (refreshTokRevoked != undefined) return refreshTokRevoked.message;
+              else return "Internal error";
             }
             //console.log(accessTokRevoked.msg);
           } else {
@@ -197,11 +229,11 @@ const getState = ({ getStore, getActions, setStore }) => {
             token: "",
             refresh_token: "",
             loginDate: 0,
-						user: ""
+            user: ""
           });
           return "Sesion expired";
         }
-				if (validation === "Missing Authorization Header") return "Sesion expired"
+        if (validation === "Missing Authorization Header") return "Sesion expired"
         if (validation === "Refresh successful" || "Token still valid") {
           try {
             let response = await getActions().apiFetch("checkout");
@@ -219,14 +251,14 @@ const getState = ({ getStore, getActions, setStore }) => {
       tokenTimeValidation: async () => {
         const store = getStore();
         let loginDate = store.loginDate;
-        let timeSession = process.env.JWT_ACCESS_TOKEN_EXPIRES_MINUTES*60000
+        let timeSession = process.env.JWT_ACCESS_TOKEN_EXPIRES_MINUTES * 60000
         if (loginDate + timeSession < Date.now()) {
           let refresh_token = store.refresh_token;
           setStore({ token: refresh_token });
           try {
             let response = await getActions().apiFetch("refresh", "POST");
             if (response.ok) {
-							console.log("Refreshing token")
+              console.log("Refreshing token")
               let responseJson = await response.json();
               setStore({
                 token: responseJson.token,

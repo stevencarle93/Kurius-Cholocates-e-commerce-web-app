@@ -8,7 +8,7 @@ import Swal from "sweetalert2"
 export const Navbar = () => {
 	const value = useContext(DataContext)
 	const [menu, setMenu] = value.menu
-	const [carrito] = value.carrito
+//	const [carrito] = value.carrito
 	const navigate = useNavigate();
 	const { store, actions } = useContext(Context)
 	const [reset] = useState([])
@@ -80,7 +80,7 @@ export const Navbar = () => {
 			<>
 				<div className="cart mx-5" onClick={() => toogleMenu()}>
 					<box-icon name="cart"></box-icon>
-					<span className="items__count">{carrito.length}</span>
+					<span className="items__count">{store.carrito.length}</span>
 				</div>
 			</>
 		)
