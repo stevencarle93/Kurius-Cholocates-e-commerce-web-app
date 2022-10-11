@@ -23,8 +23,8 @@ const getState = ({ getStore, getActions, setStore }) => {
     actions: {
       loadProducts:async() => {
         try{
-          const URL = "https://3001-itsmerichar-kuriuschoco-a05vahzresi.ws-us70.gitpod.io/api/"
-          let result = await fetch(URL+"products")
+          const URL = process.env.BACKEND_URL
+          let result = await fetch(URL+"/api/products")
           if (result.ok) result = await result.json()
           else return
           const store = getStore()
