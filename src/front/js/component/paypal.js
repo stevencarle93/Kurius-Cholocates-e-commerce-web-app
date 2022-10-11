@@ -3,11 +3,14 @@ import { useNavigate } from "react-router-dom"
 import { Context } from "../store/appContext"
 import { PayPalButtons } from "@paypal/react-paypal-js"
 import Swal from "sweetalert2"
-
+import { DataContext } from "../store/Dataprovider";
 
 export const PayPal = (props) => {
   const { store, actions } = useContext(Context)
   const navigate = useNavigate()
+  const value = useContext(DataContext)
+  const [carrito, setCarrito] = value.carrito
+  const [menu, setMenu] = value.menu
 
   const handleAprove = async (order) => {
     let shipping_address = 
@@ -29,22 +32,24 @@ export const PayPal = (props) => {
         text: "Tu orden ha sido creada",
         icon: "success",
         confirmButtonText: "Aceptar",
-        confirmButtonColor: "crimson",
-        timer: "2500",
+        confirmButtonColor: "green",
+        timer: "1500",
         background:"#f2ebe1"
       } )
       /* let response_details = await actions.orderDetails(orderData)
       if (response_details == "ok"){ */
         navigate("/")
+        setCarrito([])
+        setMenu(!menu)
       /* } */
     }
     else Swal.fire( {
-      title: "Pago realizado con exito",
+      title: "Hubo un error con el pago",
       text: response,
       icon: "error",
       confirmButtonText: "Aceptar",
       confirmButtonColor: "crimson",
-      timer: "2500",
+      timer: "1500",
       background:"#f2ebe1"
     } )
   }
@@ -71,6 +76,7 @@ export const PayPal = (props) => {
         } }
         onApprove = { async (data, actions) => {
           const order = await actions.order.capture()
+            console.log(order)
             handleAprove(order)
         } }
         onCancel={(data) => {

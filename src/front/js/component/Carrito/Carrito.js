@@ -97,11 +97,11 @@ export const Carrito = () => {
         </div>
         <div className="carrito__footer">
           <h3>Total: ${total}</h3>
-          {/* {store.token? */}
+          {store.token?
             <Link to="/checkout">
               <button className="btn">Comprar</button>
             </Link> 
-             {/* : 
+             : 
             <button className="btn" onClick={()=>(
               Swal.fire({
                 title: "Inicia sesión para proceder con el pago",
@@ -111,7 +111,7 @@ export const Carrito = () => {
                 confirmButtonColor: "crimson",
                 timer: "4000",
                 background:"#f2ebe1"
-            }), navigate("/login"))}>Comprar</button>}  */}
+            }), navigate("/login"))}>Comprar</button>} 
         </div>
       </div>
     </div>

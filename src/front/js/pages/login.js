@@ -33,7 +33,7 @@ export const Login = () => {
     else{
       Swal.fire({
         title: "Datos incorrectos",
-        text: toString(response.message),
+        text: response.message,
         icon: "error",
         confirmButtonText: "Aceptar",
         confirmButtonColor: "crimson",

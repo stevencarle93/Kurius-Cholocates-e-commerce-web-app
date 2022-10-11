@@ -62,7 +62,7 @@ export const Navbar = () => {
 		return (
 			<>
 				<Link to="/login">
-					<button type="button" className="btn btn-success me-2">Login</button>
+					<button type="button" className="btn btn-kurius me-2">Login</button>
 				</Link>
 				<Link to="/signup">
 					<button type="button" className="btn btn-warning">Sign-up</button>

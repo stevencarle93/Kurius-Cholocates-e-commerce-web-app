@@ -97,7 +97,7 @@ def restore():
             db.session.commit()
             response_body = {
                 #user.serialize()
-                "message": "Password restablished"
+                "message": "Contraseña reestablecida con éxito"
             }
             return jsonify(response_body), 200
         except Exception as error:
