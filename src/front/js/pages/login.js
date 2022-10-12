@@ -3,7 +3,7 @@ import { Context } from "../store/appContext"
 import { Link, useNavigate } from "react-router-dom"
 import "../../styles/index.css"
 import Swal from 'sweetalert2'
-import GoogleLogin from 'react-google-login'
+//import GoogleLogin from 'react-google-login'
 
 
 export const Login = () => {
@@ -111,13 +111,13 @@ export const Login = () => {
               </button>
             </form>
             <div className="my-3">
-              <GoogleLogin
+              {/* <GoogleLogin
                 clientId="1021110701454-onod3b950tsijemm2j610d09rhm2o1gp.apps.googleusercontent.com"
                 buttonText="Inicia sesión con Google"
                 onSuccess={responseGoogle}
                 onFailure={responseGoogle}
                 cookiePolicy={'single_host_origin'}
-              />
+              /> */}
             </div>
             <div className="mt-3">
               <Link to={"/restorepassword"} onClick={() => changeColor("#F2EBE1")}>
