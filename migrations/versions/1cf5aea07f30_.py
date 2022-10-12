@@ -1,5 +1,6 @@
 """empty message
 
+<<<<<<< HEAD:migrations/versions/e70c2c3d9e86_.py
 <<<<<<<< HEAD:migrations/versions/f5d6f40369a6_.py
 Revision ID: f5d6f40369a6
 Revises: 
@@ -9,6 +10,11 @@ Revision ID: e70c2c3d9e86
 Revises: 
 Create Date: 2022-10-11 00:40:16.969704
 >>>>>>>> 86577469e5776e0169df59b0a62766e93d73050e:migrations/versions/e70c2c3d9e86_.py
+=======
+Revision ID: 1cf5aea07f30
+Revises: 
+Create Date: 2022-10-11 23:10:59.472201
+>>>>>>> 6a620fbcc55931c318d4fa7df7847c8867a9be7f:migrations/versions/1cf5aea07f30_.py
 
 """
 from alembic import op
@@ -16,11 +22,15 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
+<<<<<<< HEAD:migrations/versions/e70c2c3d9e86_.py
 <<<<<<<< HEAD:migrations/versions/f5d6f40369a6_.py
 revision = 'f5d6f40369a6'
 ========
 revision = 'e70c2c3d9e86'
 >>>>>>>> 86577469e5776e0169df59b0a62766e93d73050e:migrations/versions/e70c2c3d9e86_.py
+=======
+revision = '1cf5aea07f30'
+>>>>>>> 6a620fbcc55931c318d4fa7df7847c8867a9be7f:migrations/versions/1cf5aea07f30_.py
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -42,6 +52,7 @@ def upgrade():
     sa.Column('presentation', sa.Float(), nullable=False),
     sa.Column('price', sa.Float(precision=10), nullable=False),
     sa.Column('quantity', sa.Integer(), nullable=False),
+    sa.Column('stock', sa.Integer(), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('token_blocked_list',

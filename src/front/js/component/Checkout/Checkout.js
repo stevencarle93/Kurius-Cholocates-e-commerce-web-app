@@ -3,12 +3,17 @@ import { DataContext } from "../../store/Dataprovider";
 import { PreviewCart } from "./VisualCart";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { PayPal } from "../paypal";
+import { Carrito } from "../Carrito/Carrito";
+import { Context } from "../../store/appContext";
+
 
 export const Checkout = (props) => {
   const value = useContext(DataContext);
-  const [menu, setMenu] = value.menu;
-  const [carrito, setCarrito] = value.carrito;
-  const [total] = value.total;
+  // const [menu, setMenu] = value.menu;
+  // const [carrito, setCarrito] = value.carrito;
+  // const [total] = value.total;
+
+  const { store, actions } = useContext(Context)
 
   // const show1 = menu ? "carrito-container show" : "carrito-container"
   // const show2 = menu ? "carrito show" : "carrito"
@@ -29,8 +34,8 @@ export const Checkout = (props) => {
           <div className="contenido">
             <div className="row">
               <div className="carrito__items2">
-                <h2>Valor de la compra: ${total}</h2>
-                <PayPal total={total} />
+                <h2>Valor de la compra: ${store.total}</h2>
+                <PayPal total={store.total} />
               </div>
             </div>
             <div className="row">

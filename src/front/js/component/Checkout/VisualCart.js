@@ -1,11 +1,13 @@
 import React, { useContext } from "react";
+import { Context } from "../../store/appContext";
 import { DataContext } from "../../store/Dataprovider";
 
 export const PreviewCart = () => {
   const value = useContext(DataContext);
   const [menu, setMenu] = value.menu;
-  const [carrito, setCarrito] = value.carrito;
   const [total] = value.total;
+
+  const { store, actions } = useContext(Context)
 
   const tooglefalse = () => {
     setMenu(false);
@@ -42,7 +44,7 @@ export const PreviewCart = () => {
 
   return (
     <>
-      {carrito.length === 0 ? (
+      {store.carrito.length === 0 ? (
         <h2
           style={{
             textAling: "center",
@@ -54,27 +56,27 @@ export const PreviewCart = () => {
         </h2>
       ) : (
         <>
-          {carrito.map((producto) => (
-            <div className="carrito__item" key={producto.id}>
-              <img src={producto.image.default} alt="" />
+          {store.carrito.map((product, index) => (
+            <div className="carrito__item" key={index}>
+              <img src={product.picture} alt="" />
               <div>
-                <h3>{producto.title}</h3>
-                <p className="price">${producto.price}</p>
+                <h3>{product.name}</h3>
+                <p className="price">${product.price}</p>
               </div>
               <div className="cantidades">
                 <box-icon
                   name="plus"
-                  onClick={() => suma(producto.id)}
+                  onClick={() => actions.suma(product.id)}
                 ></box-icon>
-                <p className="cantidad">{producto.cantidad}</p>
+                <p className="cantidad">{product.quantity}</p>
                 <box-icon
                   name="minus"
-                  onClick={() => resta(producto.id)}
+                  onClick={() => actions.resta(product.id)}
                 ></box-icon>
               </div>
               <div
                 className="remove__item"
-                onClick={() => removerProducto(producto.id)}
+                onClick={() => actions.deleteCarrito(product)}
               >
                 <box-icon name="trash"></box-icon>
               </div>
@@ -85,3 +87,7 @@ export const PreviewCart = () => {
     </>
   );
 };
+
+
+
+PreviewCart

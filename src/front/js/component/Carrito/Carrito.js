@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { DataContext } from "../../store/Dataprovider";
 import { Context } from '../../store/appContext'
@@ -7,7 +7,7 @@ import Swal from "sweetalert2"
 export const Carrito = () => {
   const value = useContext(DataContext);
   const [menu, setMenu] = value.menu;
-  const [carrito, setCarrito] = value.carrito;
+  //const [carrito, setCarrito] = value.carrito;
   const [total] = value.total;
   const navigate = useNavigate();
   const { store, actions } = useContext(Context);
@@ -19,31 +19,36 @@ export const Carrito = () => {
   const show1 = menu ? "carrito-container show" : "carrito-container";
   const show2 = menu ? "carrito show" : "carrito";
 
-  const resta = (id) => {
-    carrito.forEach((item) => {
-      if (item.id === id) {
-        item.cantidad === 1 ? (item.cantidad = 1) : (item.cantidad -= 1);
-      }
-    });
-    setCarrito([...carrito]);
-  };
-  const suma = (id) => {
-    carrito.forEach((item) => {
-      if (item.id === id) {
-        item.cantidad += 1;
-      }
-    });
-    setCarrito([...carrito]);
-  };
-  const removerProducto = (id) => {
-    carrito.forEach((item, index) => {
-      if (item.id === id) {
-        item.cantidad = 1;
-        carrito.splice(index, 1);
-      }
-    });
-    setCarrito([...carrito]);
-  };
+  // const resta = (id) => {
+  //   carrito.forEach((item) => {
+  //     if (item.id === id) {
+  //       item.cantidad === 1 ? (item.cantidad = 1) : (item.cantidad -= 1);
+  //     }
+  //   });
+  //   setCarrito([...carrito]);
+  // };
+  // const suma = (id) => {
+  //   carrito.forEach((item) => {
+  //     if (item.id === id) {
+  //       item.cantidad += 1;
+  //     }
+  //   });
+  //   setCarrito([...carrito]);
+  // };
+  // const removerProduct = (id) => {
+  //   carrito.forEach((item, index) => {
+  //     if (item.id === id) {
+  //       item.cantidad = 1;
+  //       carrito.splice(index, 1);
+  //     }
+  //   });
+  //   setCarrito([...carrito]);
+  // };
+  
+  
+  useEffect
+
+
 
   return (
     <div className={show1}>
@@ -54,7 +59,7 @@ export const Carrito = () => {
         <h2>Su carrito</h2>
 
         <div className="carrito__items">
-          {carrito.length === 0 ? (
+          {store.carrito.length === 0 ? (
             <h2
               style={{
                 textAling: "center",
@@ -66,27 +71,27 @@ export const Carrito = () => {
             </h2>
           ) : (
             <>
-              {carrito.map((producto) => (
-                <div className="carrito__item" key={producto.id}>
-                  <img src={producto.image.default} alt="" />
+              {store.carrito.map((product, index) => (
+                <div className="carrito__item" key={index}>
+                  <img src={product.picture} alt="" />
                   <div>
-                    <h3>{producto.title}</h3>
-                    <p className="price">${producto.price}</p>
+                    <h3>{product.name}</h3>
+                    <p className="price">${product.price}</p>
                   </div>
                   <div className="cantidades">
                     <box-icon
                       name="plus"
-                      onClick={() => suma(producto.id)}
+                      onClick={() => actions.suma(product.id)}
                     ></box-icon>
-                    <p className="cantidad">{producto.cantidad}</p>
+                    <p className="cantidad">{product.quantity}</p>
                     <box-icon
                       name="minus"
-                      onClick={() => resta(producto.id)}
+                      onClick={() => actions.resta(product.id)}
                     ></box-icon>
                   </div>
                   <div
                     className="remove__item"
-                    onClick={() => removerProducto(producto.id)}
+                    onClick={() => actions.deleteCarrito(product)}
                   >
                     <box-icon name="trash"></box-icon>
                   </div>
@@ -96,7 +101,7 @@ export const Carrito = () => {
           )}
         </div>
         <div className="carrito__footer">
-          <h3>Total: ${total}</h3>
+          <h3>Total: ${store.total}</h3>
           {store.token?
             <Link to="/checkout">
               <button className="btn">Comprar</button>
