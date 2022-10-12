@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 
 
 export const ProductsDetails1 = () => {
+  //LO QUE NO ESTA COMENTADO ES LA ULTIMA IDEA QUE ENSAYE BASADO EN MI CODIGO DE STAR WARS
+
   const { store, actions } = useContext(Context);
   const params = useParams();
   useEffect(async () => {
@@ -73,6 +75,8 @@ export const ProductsDetails1 = () => {
       })}
       ;
     </div>*/
+
+  //NO ESTOY RETORNANDO NADA PORQUE QUIERO SIMPLEMENTE ENSAYAR EL CONSOLE.LOG DE ARRIBA Y VER QUE ME LLEGA PERO LLEGA VACIO
   return (
 <div></div>
   );

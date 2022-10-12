@@ -53,15 +53,16 @@ const Layout = () => {
               <Route element={<Single />} path="/single/:theid" />
               <Route element={<Checkout/>} path="/checkout"/>
               <Route element={<h1>Not found!</h1>} />
+              {/*MODIFIQUE ESTAS RUTAS DE LOS PRODUCTOS PARA QUE ALCANZARAN LOS IDs DE CADA PRODUCTO*/}
               <Route element={<ProductsDetails1 />} path="/:ProductId" />
               <Route element={<ProductsDetails2 />} path="/:ProductId" />
-              <Route element={<ProductsDetails3 />} path=":ProductId" />
-              <Route element={<ProductsDetails4 />} path=":ProductId" />
-              <Route element={<ProductsDetails5 />} path=":ProductId" />
-              <Route element={<ProductsDetails6 />} path=":ProductId" />
-              <Route element={<ProductsDetails7 />} path=":ProductId" />
-              <Route element={<ProductsDetails8 />} path=":ProductId" />
-              <Route element={<ProductsDetails9 />} path=":ProductId" />
+              <Route element={<ProductsDetails3 />} path="/:ProductId" />
+              <Route element={<ProductsDetails4 />} path="/:ProductId" />
+              <Route element={<ProductsDetails5 />} path="/:ProductId" />
+              <Route element={<ProductsDetails6 />} path="/:ProductId" />
+              <Route element={<ProductsDetails7 />} path="/:ProductId" />
+              <Route element={<ProductsDetails8 />} path="/:ProductId" />
+              <Route element={<ProductsDetails9 />} path="/:ProductId" />
             </Routes>
             <Footer />
           </ScrollToTop>

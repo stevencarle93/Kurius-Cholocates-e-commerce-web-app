@@ -36,6 +36,8 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.error(error)
         }
       },
+      
+      //AGREGUE ESTE ACTION PARA PODER CARGAR LOS DETALLES 
       loadProductDetails: async (id) => {
         try {
           let response = await fetch(

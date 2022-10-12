@@ -35,6 +35,7 @@ export const ProductosPrivados = () => {
                     Añadir al carrito
                   </button>
                   <div>
+                    {/*MODIFIQUE ESTA RUTA PARA VER SI PODIA LLEGAR DIRECTAMENTE AL DETALLE DEL PRODUCTO SIN ENFOCARME EN LA PALABRA "DETAILS" QUE TENIA ANTES DEL "/"*/}
                     <Link to={"/" + product.id} className="btn">
                       Ver más
                     </Link>

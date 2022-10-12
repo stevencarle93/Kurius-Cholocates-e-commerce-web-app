@@ -21,6 +21,7 @@ const injectContext = PassedComponent => {
 			})
 		);
 
+		//AGREGUE LA FUNCION DE PRODUCT DETAILS AL USEEFFECT
 		useEffect(() => {
 			state.actions.loadProducts()
 			state.actions.loadProductDetails()
