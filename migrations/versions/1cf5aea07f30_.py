@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: e70c2c3d9e86
+Revision ID: 1cf5aea07f30
 Revises: 
-Create Date: 2022-10-11 00:40:16.969704
+Create Date: 2022-10-11 23:10:59.472201
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'e70c2c3d9e86'
+revision = '1cf5aea07f30'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -32,6 +32,7 @@ def upgrade():
     sa.Column('presentation', sa.Float(), nullable=False),
     sa.Column('price', sa.Float(precision=10), nullable=False),
     sa.Column('quantity', sa.Integer(), nullable=False),
+    sa.Column('stock', sa.Integer(), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('token_blocked_list',

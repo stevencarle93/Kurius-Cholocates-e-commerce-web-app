@@ -44,6 +44,7 @@ def register_product():
     product.presentation = body["presentation"]
     product.price = body["price"]
     product.quantity = body["quantity"]
+    product.stock = body["stock"]
 
     try:        
         db.session.add(product)
@@ -72,6 +73,7 @@ def update_product(product_id):
     product.presentation = body["presentation"]
     product.price = body["price"]
     product.quantity = body["quantity"]
+    product.stock = body["stock"]
 
     try:        
         db.session.add(product)

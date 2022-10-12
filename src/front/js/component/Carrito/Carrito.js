@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { DataContext } from "../../store/Dataprovider";
 import { Context } from '../../store/appContext'
@@ -19,22 +19,22 @@ export const Carrito = () => {
   const show1 = menu ? "carrito-container show" : "carrito-container";
   const show2 = menu ? "carrito show" : "carrito";
 
-  const resta = (id) => {
-    carrito.forEach((item) => {
-      if (item.id === id) {
-        item.cantidad === 1 ? (item.cantidad = 1) : (item.cantidad -= 1);
-      }
-    });
-    setCarrito([...carrito]);
-  };
-  const suma = (id) => {
-    carrito.forEach((item) => {
-      if (item.id === id) {
-        item.cantidad += 1;
-      }
-    });
-    setCarrito([...carrito]);
-  };
+  // const resta = (id) => {
+  //   carrito.forEach((item) => {
+  //     if (item.id === id) {
+  //       item.cantidad === 1 ? (item.cantidad = 1) : (item.cantidad -= 1);
+  //     }
+  //   });
+  //   setCarrito([...carrito]);
+  // };
+  // const suma = (id) => {
+  //   carrito.forEach((item) => {
+  //     if (item.id === id) {
+  //       item.cantidad += 1;
+  //     }
+  //   });
+  //   setCarrito([...carrito]);
+  // };
   // const removerProduct = (id) => {
   //   carrito.forEach((item, index) => {
   //     if (item.id === id) {
@@ -44,6 +44,11 @@ export const Carrito = () => {
   //   });
   //   setCarrito([...carrito]);
   // };
+  
+  
+  useEffect
+
+
 
   return (
     <div className={show1}>
@@ -76,12 +81,12 @@ export const Carrito = () => {
                   <div className="cantidades">
                     <box-icon
                       name="plus"
-                      onClick={() => suma(product.id)}
+                      onClick={() => actions.suma(product.id)}
                     ></box-icon>
                     <p className="cantidad">{product.quantity}</p>
                     <box-icon
                       name="minus"
-                      onClick={() => resta(product.id)}
+                      onClick={() => actions.resta(product.id)}
                     ></box-icon>
                   </div>
                   <div
@@ -96,7 +101,7 @@ export const Carrito = () => {
           )}
         </div>
         <div className="carrito__footer">
-          <h3>Total: ${total}</h3>
+          <h3>Total: ${store.total}</h3>
           {store.token?
             <Link to="/checkout">
               <button className="btn">Comprar</button>

@@ -26,7 +26,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       carrito: [
 
       ],
-
+      total: 0
     },
     actions: {
 
@@ -47,13 +47,50 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
         }
         setStore({ carrito: [...store.carrito, product] })
+        console.log(store.products)
+        return  getActions().getTotal()
       },
       deleteCarrito: (product) => {
         const store = getStore()
         setStore({
-          carrito : store.carrito.filter(item => item.id != product.id)
+          carrito: store.carrito.filter(item => item.id != product.id)
+        })
+        return  getActions().getTotal()
+      },
+      suma: (id) => {
+        const store = getStore()
+        store.carrito.forEach((product) => {
+          if (product.id === id) {
+            product.quantity += 1;
+          }
+        })
+        setStore({
+          carrito: [...store.carrito]
+        })
+        return  getActions().getTotal()
+      },
+      resta: (id) => {
+        const store = getStore()
+        store.carrito.forEach((product) => {
+          if (product.id === id) {
+            product.quantity === 1 ? (product.quantity = 1) : (product.quantity -= 1);
+          }
+        })
+        setStore({
+          carrito: [...store.carrito]
+        })
+        return  getActions().getTotal() 
+      },
+      getTotal: () => {
+        const store = getStore()
+        const res = store.carrito.reduce((prev, product) => 
+          prev + (product.price * product.quantity), 0)
+          console.log(res)
+        setStore({
+            total: res
         })
       },
+
       loadProducts: async () => {
         try {
           let result = await getActions().apiFetch("products", "GET");
