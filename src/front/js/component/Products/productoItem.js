@@ -11,7 +11,7 @@ export const ProductoItem = ({
     description}) => {
 
         const value = useContext(DataContext);
-        const addCarrito = value.addCarrito;
+        //const addCarrito = value.addCarrito;
 
     return(
         <div>

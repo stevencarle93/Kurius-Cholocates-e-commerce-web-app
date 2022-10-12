@@ -9,7 +9,6 @@ export const PayPal = (props) => {
   const { store, actions } = useContext(Context)
   const navigate = useNavigate()
   const value = useContext(DataContext)
-  const [carrito, setCarrito] = value.carrito
   const [menu, setMenu] = value.menu
 
   const handleAprove = async (order) => {
@@ -20,7 +19,7 @@ export const PayPal = (props) => {
       order.payer.address.postal_code
 
     let orderData = {
-      amount: props.total,
+      amount: store.total,
       shipping_address: shipping_address,
       order_state: order.status,
       user_id: "",
@@ -39,7 +38,7 @@ export const PayPal = (props) => {
       /* let response_details = await actions.orderDetails(orderData)
       if (response_details == "ok"){ */
         navigate("/")
-        setCarrito([])
+        
         setMenu(!menu)
       /* } */
     }
@@ -70,7 +69,7 @@ export const PayPal = (props) => {
           return actions.order.create({
             purchase_units: [ { amount: {
                 currency_code: "USD",
-                value: props.total,
+                value: store.total,
               } } ]
           } )
         } }

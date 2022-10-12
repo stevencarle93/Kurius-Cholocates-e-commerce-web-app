@@ -1,14 +1,15 @@
+import os
 from datetime import date, time, datetime, timezone, timedelta
 from api.models import db, User, TokenBlockedList
 from api.utils import generate_sitemap, APIException
 from flask import Flask, Blueprint, request, jsonify
 #from firebase_admin import storage
-import tempfile
+import tempfile, random, string
 
 from flask_jwt_extended import JWTManager, create_access_token, create_refresh_token, jwt_required, get_jwt_identity, get_jwt, get_jti
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
-from datetime import date, time, datetime, timezone
+from flask_mail import Mail, Message
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
@@ -64,46 +65,74 @@ def login():
     user = User.query.filter_by(email = email).first()
     
     if user is None:
-        return jsonify({"message": "Login failed, user not found"}), 401
+        return jsonify({"message": "Login fallido, usuario no encontrado"}), 401
     
     if not bcrypt.check_password_hash(user.password, password):
-        return jsonify({"message": "Wrong password, please try again"}), 401
+        return jsonify({"message": "Login fallido, clave incorrecta"}), 401
 
     access_token = create_access_token(identity = user.id)
     access_token_jti = get_jti(access_token)
     refresh_token = create_refresh_token(identity = user.id, additional_claims={"access_token":access_token_jti})
     return jsonify({"token": access_token, "refresh_token": refresh_token })
 
-@apiAuthUser.route('/restore', methods = ['POST', 'PATCH'])
-def restore():
+@apiAuthUser.route('/restore', methods = ['POST'])
+def restore_request():
     email = request.json.get("email", None)
     user = User.query.filter_by(email = email).first()
-    
-    if request.method == 'POST':
-        if user is None:
-            return jsonify({"message": "User not found"}), 400
-        response_body = {
-            "email": email,
-            "message": "User found"
-        }
-        return jsonify(response_body), 201
 
-    if request.method == 'PATCH':
-        password = request.json.get("password", None)
-        try:        
-            password = bcrypt.generate_password_hash(password, rounds = None).decode("utf-8")
-            setattr(user, "password", password)
-            db.session.add(user)
-            db.session.commit()
-            response_body = {
-                #user.serialize()
-                "message": "Contraseña reestablecida con éxito"
-            }
-            return jsonify(response_body), 200
-        except Exception as error:
-            print(error)
-            db.session.rollback()
-            return jsonify({"message": error}), 400
+    if user is None:
+        return jsonify({"message": "El correo electrónico no está registrado"}), 400
+    
+    access_token = create_access_token(identity = user.id)
+    #access_token = timedelta(minutes = int(2))
+    temp_URL = "".join(random.choice(string.ascii_uppercase + string.digits)for x in range(10))
+    hashed_URL = bcrypt.generate_password_hash(temp_URL, rounds = None).decode("utf-8")
+    setattr(user, "password", hashed_URL)
+    db.session.add(user)
+    db.session.commit()
+
+    mail = Mail() 
+    body = "Haz click en el siguiente link para reestablecer tu contraseña."
+    msg = Message('Reestablecimiento de contraseña', sender = 'Kurius chocolate', recipients = [email])
+    msg.html = """
+    <h2> Hola """ + user.name + """, </h2>
+    <p>""" + body + """</p> 
+    <a href=" """+ os.getenv("FRONTEND_URL") +"""/restorepassword/"""+ temp_URL +""" ">Click aquí</p> 
+    """ 
+    mail.send(msg)
+
+    response_body = {
+        "email": email,
+        "message": "User found",
+        "restore_URL": temp_URL
+    }
+    return jsonify(response_body), 201
+
+@apiAuthUser.route('/restore/<authorization>', methods = ['PATCH'])
+def restore_password(authorization):
+    password = request.json.get("authorization", None)
+    new_password = request.json.get("password", None)
+    email = request.json.get("email", None)
+    user = User.query.filter_by(email = email).first()
+
+    print(user.password)
+    
+    if not bcrypt.check_password_hash(user.password, password):
+        return jsonify({"message": "Login fallido, clave incorrecta"}), 401
+
+    try:
+        password = bcrypt.generate_password_hash(new_password, rounds = None).decode("utf-8")
+        setattr(user, "password", password)
+        db.session.add(user)
+        db.session.commit()
+        response_body = {
+            "message": "Contraseña reestablecida con éxito"
+        }
+        return jsonify(response_body), 200
+    except Exception as error:
+        print(error)
+        db.session.rollback()
+        return jsonify({"message": error}), 400
 
 @apiAuthUser.route('/refresh', methods=['POST'])
 @jwt_required(refresh = True)

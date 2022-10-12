@@ -17,7 +17,8 @@ import { ProductsDetails9 } from "./component/ProductsDetails9";
 import injectContext from "./store/appContext";
 import { Signup } from "./pages/signup";
 import { Login } from "./pages/login";
-import { RestorePassword } from "./pages/restorepassword";
+import { Restore_Password_Request } from "./pages/restore_password_request";
+import { Restore_Password_Restore } from "./pages/restore_password_restore";
 import { DataProvider } from './store/Dataprovider'
 import { Checkout } from './component/Checkout/Checkout'
 import { Navbar } from "./component/navbar";
@@ -48,7 +49,10 @@ const Layout = () => {
               <Route element={<Home />} path="/" />
               <Route element={<Signup />} path="/signup" />
               <Route element={<Login />} path="/login" />
-              <Route element={<RestorePassword />} path="/restorepassword" />
+              <Route path="//restorepassword" >
+                <Route index element = {<Restore_Password_Request />} />
+                <Route path=":authorization" element={<Restore_Password_Restore />} />
+              </Route>
               <Route element={<Demo />} path="/demo" />
               <Route element={<Single />} path="/single/:theid" />
               <Route element={<Checkout/>} path="/checkout"/>
