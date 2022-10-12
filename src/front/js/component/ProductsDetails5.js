@@ -19,7 +19,7 @@ export const ProductsDetails5 = () => {
         <div className="col">
           <div className="card-body">
             <h5 className="card-title col-md-12 text-center">Cobertura de Blanco 35%</h5> <br></br>
-            <div className="row">
+            <div className="row cobertura_info">
               <br></br>
               <div className="col-md-4">
                 <h6>Curva de Temperatura</h6> Fusión: 40° - 45° (max) <br></br>

@@ -456,6 +456,11 @@ a:active {
 }
 
 /* Steven */
+.cobertura_info {
+  display: flex;
+  justify-content: center;
+}
+
 .card2 {
   position: relative;
   transition: transform 0.2s;

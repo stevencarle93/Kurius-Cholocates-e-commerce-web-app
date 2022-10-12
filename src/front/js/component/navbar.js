@@ -89,7 +89,7 @@ export const Navbar = () => {
 
 	
 	return (
-		<nav className="navbar navbar-black fixed-top">
+		<nav className="navbar navbar-black">
 			<div className="mx-5">
 				<ul className="nav col-12 col-lg-auto me-lg-auto mb-2 align-items-center mb-md-0">
 					<li><Link to="/" className="nav-link px-2 text-warning bold" onClick={() => changeColor("#0000") [reset]}><img className="logoNavbar" src={Logo} width="110px"/></Link></li>
