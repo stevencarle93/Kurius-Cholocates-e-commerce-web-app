@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 export const ProductsDetails1 = () => {
   const value = useContext(DataContext);
   const { store, actions } = useContext(Context);
-  console.log (store)
+  console.log (store.products[0])
   /*<div>
   {store.products?.map((product, index) => {
   <div className="card mb-3" key={index}>
@@ -47,8 +47,7 @@ export const ProductsDetails1 = () => {
     <div>
       {store.products.map((product, index) => {
         <div className="card mb-3" key={index}>
-          {console.log (index)}
-          {console.log (product)}
+          {console.log (product.picture)}
           <div className="row no-gutters">
             <div className="col-md-4">
               <img src={product.picture} className="card-img" alt="..."></img>
