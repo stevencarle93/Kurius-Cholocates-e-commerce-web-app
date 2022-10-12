@@ -6,6 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
     store: {
       token: "",
       refresh_token: "",
+      restore_authorization: "",
       loginDate: 0,
       user: "",
       message: null,
@@ -143,13 +144,13 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.error({ error })
         }
       }, */
-      restorePOST: async (data) => {
+      restoreRequest: async (data) => {
         const store = getStore()
         try {
           let response = await getActions().apiFetch("restore", "POST", data);
           if (response.ok) {
             let responseJson = await response.json()
-            setStore({ user: responseJson.email, })
+            setStore({user: responseJson.email, restore_authorization:responseJson.restore_URL})
             return responseJson
           } else {
             let responseJson = await response.json()
@@ -160,25 +161,22 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
       restorePATCH: async (data) => {
-        const store = getStore()
         let password = data.password.replaceAll(/\s/g, "")
-        if (password.length > 7) {
-          data = { ...data, email: store.user }
+        if (password.length > 7){
           try {
-            let response = await getActions().apiFetch("restore", "PATCH", data)
+            let response = await getActions().apiFetch(`restore/${data.authorization}`, "PATCH", data)
             if (response.ok) {
               let responseJson = await response.json()
-              setStore({ user: "" })
               return responseJson
             } else {
               let responseJson = await response.json()
-              return responseJson;
+              return responseJson
             }
           } catch (error) {
             console.log("en el error")
             console.error({ error });
           }
-        } else return "Invalid password"
+        } else return "La clave debe tener mínimo 8 caratéres y sin espacios"
       },
       signup: async (data) => {
         for (const key in data) {
