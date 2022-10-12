@@ -114,6 +114,9 @@ const getState = ({ getStore, getActions, setStore }) => {
             let responseJson = await response.json()
             setStore({ order: responseJson, })
             console.log(responseJson)
+            setStore({
+              carrito: []
+            })
             return "ok"
           } else {
             let responseJson = await response.json()

@@ -17,7 +17,7 @@ export const Home = () => {
   return (
     <>
       <Carousel />
-      <Carrito carrito={store.carrito}  />
+      <Carrito />
       <h2 className="border-bottom mx-5">Nuestros Productos</h2>
       <ProductosPrivados products={store.products.result} />
       <ReviewsCarousel />
