@@ -18,11 +18,8 @@ export const Home = () => {
     <>
       <Carousel />
       <Carrito />
-      {/* <h2 className="border-bottom mx-5">Nuestros Productos</h2> */}
-      <ProductList/>
-      <div className="productos">
-        <ProductosPrivados products={store.products.result} />
-      </div>
+      <h2 className="border-bottom mx-5">Nuestros Productos</h2>
+      <ProductosPrivados products={store.products.result} />
       <ReviewsCarousel />
     </>
   );

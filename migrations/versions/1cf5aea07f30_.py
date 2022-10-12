@@ -1,14 +1,8 @@
 """empty message
 
-<<<<<<<< HEAD:migrations/versions/7fe53fcfeb10_.py
-Revision ID: 7fe53fcfeb10
+Revision ID: 1cf5aea07f30
 Revises: 
-Create Date: 2022-10-09 03:20:09.329324
-========
-Revision ID: 555ee98c9a7f
-Revises: 
-Create Date: 2022-10-10 23:06:17.622133
->>>>>>>> 94f5e6540711e6beac0cf74857e039fada2d98f7:migrations/versions/555ee98c9a7f_.py
+Create Date: 2022-10-11 23:10:59.472201
 
 """
 from alembic import op
@@ -16,11 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-<<<<<<<< HEAD:migrations/versions/7fe53fcfeb10_.py
-revision = '7fe53fcfeb10'
-========
-revision = '555ee98c9a7f'
->>>>>>>> 94f5e6540711e6beac0cf74857e039fada2d98f7:migrations/versions/555ee98c9a7f_.py
+revision = '1cf5aea07f30'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -42,6 +32,7 @@ def upgrade():
     sa.Column('presentation', sa.Float(), nullable=False),
     sa.Column('price', sa.Float(precision=10), nullable=False),
     sa.Column('quantity', sa.Integer(), nullable=False),
+    sa.Column('stock', sa.Integer(), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('token_blocked_list',

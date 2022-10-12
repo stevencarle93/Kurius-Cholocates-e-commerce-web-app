@@ -66,6 +66,8 @@ class Product(db.Model):
     presentation = db.Column(db.Float, nullable=False)
     price = db.Column(db.Float(10), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
+    
+    stock = db.Column(db.Integer, nullable=False)
 
     def __repr__(self):
         return f'<Product {self.name}>'
@@ -84,7 +86,8 @@ class Product(db.Model):
             "fluidez": self.fluidez,
             "presentation": self.presentation,
             "price": self.price,
-            "quantity": self.quantity
+            "quantity": self.quantity,
+            "stock": self.stock
         }
 
 class OrderDetail(db.Model):
