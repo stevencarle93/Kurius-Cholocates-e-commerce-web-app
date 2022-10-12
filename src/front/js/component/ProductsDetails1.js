@@ -1,14 +1,24 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../../styles/index.css";
 import { DataContext } from "../store/Dataprovider";
 import Barra_Blanco_35 from "../../img/Barras/barra-blanco-35.png";
 import { Context } from "../store/appContext";
+import { useParams } from 'react-router-dom';
 import { Link } from "react-router-dom";
 
+
 export const ProductsDetails1 = () => {
-  const value = useContext(DataContext);
   const { store, actions } = useContext(Context);
-  console.log (store.products[0])
+  const params = useParams();
+  useEffect(async () => {
+    await actions.loadProductDetails(params.ProductId);
+  }, []);
+  const { product } = store;
+  console.log (product)
+  /*return <>{person ? <p>{person.properties.name}</p> : ""}</>;*/
+  /*const value = useContext(DataContext);
+  const { store, actions } = useContext(Context);
+  console.log (store.products[0])*/
   /*<div>
   {store.products?.map((product, index) => {
   <div className="card mb-3" key={index}>
@@ -43,11 +53,11 @@ export const ProductsDetails1 = () => {
   </div>
 </div>
 </div>*/
-  return (
-    <div>
+
+/*    <div>
       {store.products.map((product, index) => {
         <div className="card mb-3" key={index}>
-          {console.log (product.picture)}
+          {console.log(product.picture)}
           <div className="row no-gutters">
             <div className="col-md-4">
               <img src={product.picture} className="card-img" alt="..."></img>
@@ -62,6 +72,8 @@ export const ProductsDetails1 = () => {
         </div>;
       })}
       ;
-    </div>
+    </div>*/
+  return (
+<div></div>
   );
 };

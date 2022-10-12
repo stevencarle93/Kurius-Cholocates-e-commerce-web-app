@@ -36,6 +36,23 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.error(error)
         }
       },
+      loadProductDetails: async (id) => {
+        try {
+          let response = await fetch(
+            `https://3000-itsmerichar-kuriuschoco-y94fsccy3gf.ws-us70.gitpod.io/api/products/${id}`
+          )
+          if (response.ok) response = await response.json();
+          else return;
+          console.log(response);
+          const store = getStore();
+          setStore({
+            ...store,
+            product: response,
+          })
+        } catch (error) {
+          console.error(error)
+        }
+      },
       // Use getActions to call a function within a fuction
       crearOrden: async (data) => {
         const store = getStore()        

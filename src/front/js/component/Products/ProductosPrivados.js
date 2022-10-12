@@ -35,7 +35,7 @@ export const ProductosPrivados = () => {
                     Añadir al carrito
                   </button>
                   <div>
-                    <Link to={"/Details/" + product.id} className="btn">
+                    <Link to={"/" + product.id} className="btn">
                       Ver más
                     </Link>
                   </div>

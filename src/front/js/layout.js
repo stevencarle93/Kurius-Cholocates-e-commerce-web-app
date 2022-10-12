@@ -28,6 +28,15 @@ const Layout = () => {
   //the basename is used when your project is published in a subdirectory and not in the root of the domain
   // you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
   const basename = process.env.BASENAME || "";
+  /*<Route element={<ProductsDetails1 />} path="/Details/1" />
+  <Route element={<ProductsDetails2 />} path="/Details/2" />
+  <Route element={<ProductsDetails3 />} path="/Details/3" />
+  <Route element={<ProductsDetails4 />} path="/Details/4" />
+  <Route element={<ProductsDetails5 />} path="/Details/5" />
+  <Route element={<ProductsDetails6 />} path="/Details/6" />
+  <Route element={<ProductsDetails7 />} path="/Details/7" />
+  <Route element={<ProductsDetails8 />} path="/Details/8" />
+  <Route element={<ProductsDetails9 />} path="/Details/9" />*/
 
   return (
     <DataProvider>
@@ -44,15 +53,15 @@ const Layout = () => {
               <Route element={<Single />} path="/single/:theid" />
               <Route element={<Checkout/>} path="/checkout"/>
               <Route element={<h1>Not found!</h1>} />
-              <Route element={<ProductsDetails1 />} path="/Details/1" />
-              <Route element={<ProductsDetails2 />} path="/Details/2" />
-              <Route element={<ProductsDetails3 />} path="/Details/3" />
-              <Route element={<ProductsDetails4 />} path="/Details/4" />
-              <Route element={<ProductsDetails5 />} path="/Details/5" />
-              <Route element={<ProductsDetails6 />} path="/Details/6" />
-              <Route element={<ProductsDetails7 />} path="/Details/7" />
-              <Route element={<ProductsDetails8 />} path="/Details/8" />
-              <Route element={<ProductsDetails9 />} path="/Details/9" />
+              <Route element={<ProductsDetails1 />} path="/:ProductId" />
+              <Route element={<ProductsDetails2 />} path="/:ProductId" />
+              <Route element={<ProductsDetails3 />} path=":ProductId" />
+              <Route element={<ProductsDetails4 />} path=":ProductId" />
+              <Route element={<ProductsDetails5 />} path=":ProductId" />
+              <Route element={<ProductsDetails6 />} path=":ProductId" />
+              <Route element={<ProductsDetails7 />} path=":ProductId" />
+              <Route element={<ProductsDetails8 />} path=":ProductId" />
+              <Route element={<ProductsDetails9 />} path=":ProductId" />
             </Routes>
             <Footer />
           </ScrollToTop>
