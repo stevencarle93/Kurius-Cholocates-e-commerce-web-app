@@ -1,80 +1,68 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useContext, useEffect } from "react"
+import { useParams, useNavigate } from 'react-router-dom'
 import { Context } from "../store/appContext"
-import { Link, useNavigate } from "react-router-dom"
+import Swal from "sweetalert2"
 import "../../styles/index.css"
-import Swal from 'sweetalert2'
-//import GoogleLogin from 'react-google-login'
 
-
-export const Login = () => {
+export const Restore_Password_Restore = () => {
   const { store, actions } = useContext(Context)
   const navigate = useNavigate()
-
-  const login = async (e) => {
-    e.preventDefault()
+  const params = useParams()
+  console.log(params.authorization)
+  //const restore_token = window.location.href.substr(process.env.FRONTEND_URL.length+1)
+  //console.log(restore_token)    
+  
+  const restore = async (e) => {
+    e.preventDefault();
     const data = new FormData(e.target)
     let email = data.get("email")
     let password = data.get("password")
-    let loginData = {
-      email: email,
+    let restoreData = { 
+      authorization: params.authorization, 
       password: password,
-    };
-    let response = await actions.login(loginData);
-    if (response == "ok"){
+      email: email }
+    let response = await actions.restorePATCH(restoreData)
+    console.log(response)
+    if (response.message == "Contraseña reestablecida con éxito"){
       Swal.fire({
-        title: "Bienvenido",
-        text: response.message,
+        title: response.message,
+        text: "Ahora puedes hacer login",
         icon: "success",
-        confirmButtonText: "Ok",
+        confirmButtonText: "Aceptar",
         confirmButtonColor: "green",
-        timer: "1500",
+        timer: "4000",
         background: "#f2ebe1"
       })
-      navigate("/")
+      navigate("/login") //se redirige para hacer el login
     }
     else {
+      console.log(response)
       Swal.fire({
-        title: "Datos incorrectos",
-        text: response,
+        title: "No se puedo reestablecer la contraseña",
+        //text: "Ahora puedes hacer login",
         icon: "error",
         confirmButtonText: "Aceptar",
-        confirmButtonColor: "crimson",
-        timer: "3000",
+        confirmButtonColor: "crisom",
+        timer: "4000",
         background: "#f2ebe1"
       })
     }
-
-  };
-
-  const responseGoogle = (response) => {
-    // if  {
-    console.log(response)
-    // }
-    // else return
-    // Swal.fire({
-    //   title: "No se pudo iniciar sesión",
-    //   text: response.message,
-    //   icon: "warning",
-    //   confirmButtonText: "Ok",
-    //   confirmButtonColor: "orange",
-    //   timer: "4000",
-    //   background: "#f2ebe1"
-    // })
   }
-
+  
   return (
     <>
+      {/* {restore_token != "" ? */}
       <div
         className="container d-flex justify-content-center align-items-center letraKurius"
         style={{ minHeight: "40vw", maxHeight: "100%", marginTop: "5%" }}
       >
         <div className="card text-center border-0" style={{ minWidth: "50%", maxWidth: "100%", maxHeight: "100%" }}>
           <div className="card-header cabezoteRegistro" style={{ width: "100%" }}>
-            <h3>Login</h3>
+            <h3>Reestablecer contraseña</h3>
           </div>
           <div className="card-body cajatextoRegistro" style={{ width: "100%" }}>
-            <form onSubmit={(e) => login(e)}>
-              <div className=" d-flex flex-column bd-highlight mb-3">
+            <form onSubmit={(e) => restore(e)}>
+            <div className=" d-flex flex-column bd-highlight mb-3">
                 <div className="mb-3">
                   <h5>Email:</h5>
                   <div className="input-group justify-content-center">
@@ -87,9 +75,8 @@ export const Login = () => {
                     />
                   </div>
                 </div>
-
                 <div>
-                  <h5>Contraseña:</h5>
+                  <h5>Nueva contraseña:</h5>
                   <div className="input-group justify-content-center">
                     <span className="input-group-text iconos" id="basic-addon1"><box-icon className="input-group-text iconos" name="lock-open" /></span>
                     <input
@@ -102,31 +89,23 @@ export const Login = () => {
                 </div>
               </div>
               <button className="btn buttonRegister" type="submit">
-                Acceder
+                Confirmar
               </button>
-            </form>
-            <div className="my-3">
-              {/* <GoogleLogin
-                clientId="1021110701454-onod3b950tsijemm2j610d09rhm2o1gp.apps.googleusercontent.com"
-                buttonText="Inicia sesión con Google"
-                onSuccess={responseGoogle}
-                onFailure={responseGoogle}
-                cookiePolicy={'single_host_origin'}
-              /> */}
-            </div>
-            <div className="mt-3">
-              <Link to={"/restorepassword"} onClick={() => changeColor("#F2EBE1")}>
-                <span>Olvidé mi contraseña</span>
-              </Link>
-            </div>
-            <div>
-              <Link to={"/signup"} onClick={() => changeColor("#F2EBE1")}>
-                <span>¿Aún no eres usuario? Regístrate</span>
-              </Link>
-            </div>
+            </form>            
           </div>
         </div>
       </div>
+    {/* : 
+      Swal.fire({
+        title: "Acceso denegado",
+        text: "El tiempo para reestablecer la contrase;a termino. Inténtalo nuevamente",
+        icon: "error",
+        confirmButtonText: "Ok",
+        confirmButtonColor: "crimson",
+        timer: "1500",
+        background: "#f2ebe1"
+      })
+    } */}
     </>
   )
 }

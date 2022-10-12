@@ -14,6 +14,7 @@ from flask_jwt_extended import JWTManager, create_access_token, create_refresh_t
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from datetime import timedelta
+from flask_mail import Mail
 
 ENV = os.getenv("FLASK_ENV")
 static_file_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../public/')
@@ -34,6 +35,15 @@ def check_token_blocklist(jwt_header, jwt_payload)-> bool:
         return True
     else:
         return False  
+
+# Configuracion MailTrap
+app.config['MAIL_SERVER']='smtp.mailtrap.io'
+app.config['MAIL_PORT'] = 2525
+app.config['MAIL_USERNAME'] = os.getenv("MAIL_USERNAME")
+app.config['MAIL_PASSWORD'] = os.getenv("MAIL_PASSWORD")
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USE_SSL'] = False
+mail = Mail(app)
 
 db_url = os.getenv("DATABASE_URL")
 if db_url is not None:
