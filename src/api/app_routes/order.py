@@ -3,8 +3,10 @@ from api.models import db, Order
 from api.utils import generate_sitemap, APIException
 from flask import Flask, Blueprint, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from flask_jwt_extended import JWTManager, jwt_required, get_jwt_identity
 
 app = Flask(__name__)
+jwt = JWTManager(app)
 
 apiOrder = Blueprint('apiOrder', __name__)
 
@@ -27,15 +29,16 @@ def get_order(order_id):
         return jsonify({"messsage":"order not found"})
 
 @apiOrder.route('/order', methods=['POST'])
+@jwt_required()
 def register_order():
-
+    user = get_jwt_identity()
     order = Order()
     body = request.json
     
     order.amount = body["amount"]
     order.shipping_address = body["shipping_address"]
     order.order_state = body["order_state"]
-    order.user_id = body["user_id"]
+    order.user_id = user
 
     try:        
         db.session.add(order)

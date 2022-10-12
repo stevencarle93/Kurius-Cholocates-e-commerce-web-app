@@ -52,7 +52,7 @@ export const Navbar = () => {
 		if (store.token != ""){
 			return (
 				<>
-					<div className="px-4 m-auto text-white">
+					<div className="px-4 m-auto text-dark bold">
 						¡Bienvenido {store.user}!
 					</div>
 						<button type="button" className="btn btn-warning" onClick={() => handleLogout()}>Logout</button>
@@ -62,7 +62,7 @@ export const Navbar = () => {
 		return (
 			<>
 				<Link to="/login">
-					<button type="button" className="btn btn-success me-2">Login</button>
+					<button type="button" className="btn btn-kurius me-2">Login</button>
 				</Link>
 				<Link to="/signup">
 					<button type="button" className="btn btn-warning">Sign-up</button>
@@ -89,7 +89,7 @@ export const Navbar = () => {
 
 	
 	return (
-		<nav className="navbar navbar-black">
+		<nav className="navbar navbar-black fixed-top">
 			<div className="mx-5">
 				<ul className="nav col-12 col-lg-auto me-lg-auto mb-2 align-items-center mb-md-0">
 					<li><Link to="/" className="nav-link px-2 text-warning bold" onClick={() => changeColor("#0000") [reset]}><img className="logoNavbar" src={Logo} width="110px"/></Link></li>
