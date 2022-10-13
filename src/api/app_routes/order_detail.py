@@ -1,5 +1,5 @@
 import tempfile
-from api.models import db, OrderDetail
+from api.models import db, OrderDetail, Product, Order
 from api.utils import generate_sitemap, APIException
 from flask import Flask, Blueprint, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
@@ -15,6 +15,12 @@ def get_orders_Detail():
 
     orders_detail = OrderDetail.query.all()
     orders_detail = list(map(lambda order_detail: order_detail.serialize(), orders_detail))
+
+    results = db.session.query(Order, OrderDetail, Product). \
+    select_from(OrderDetail).join(Order).join(Product).all()
+
+    for order, order_detail, product in results:
+        print(order.user_id, order_detail.quantity, product.name)
 
     return jsonify(orders_detail), 200
 
