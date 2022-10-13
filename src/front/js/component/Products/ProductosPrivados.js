@@ -11,17 +11,10 @@ export const ProductosPrivados = () => {
   const { store, actions } = useContext(Context);
 
   return (
-<<<<<<< HEAD
     <div>
       {store.products.map((product, index) => {
         return (
           <div className="productos">
-=======
-    <>
-      <div className="productos">
-        {store.products.map((product, index) => {
-          return (
->>>>>>> develop
             <div className="producto card2" key={index}>
               <a>
                 <div className="producto__img">
@@ -42,28 +35,17 @@ export const ProductosPrivados = () => {
                     Añadir al carrito
                   </button>
                   <div>
-<<<<<<< HEAD
                     {/*MODIFIQUE ESTA RUTA PARA VER SI PODIA LLEGAR DIRECTAMENTE AL DETALLE DEL PRODUCTO SIN ENFOCARME EN LA PALABRA "DETAILS" QUE TENIA ANTES DEL "/"*/}
                     <Link to={"/" + product.id} className="btn">
-=======
-                    <Link to={"/Details/" + product} className="btn">
->>>>>>> develop
                       Ver más
                     </Link>
                   </div>
                 </div>
               </div>
             </div>
-<<<<<<< HEAD
           </div>
         );
       })}
     </div>
-=======
-          );
-        })}
-      </div>
-    </>
->>>>>>> develop
   );
 };
