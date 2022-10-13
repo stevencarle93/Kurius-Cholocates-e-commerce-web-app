@@ -13,16 +13,13 @@ apiOrderDetail = Blueprint('apiOrderDetail', __name__)
 @apiOrderDetail.route('/orders_detail', methods = ['GET'])
 def get_orders_Detail():
 
-    orders_detail = OrderDetail.query.all()
-    orders_detail = list(map(lambda order_detail: order_detail.serialize(), orders_detail))
+    orderData=Order.query.get(1)
+    print(orderData)
+    results=list(map(lambda order_detail: order_detail.serialize(), orderData.details))
+    
+    print(results)
 
-    results = db.session.query(Order, OrderDetail, Product). \
-    select_from(OrderDetail).join(Order).join(Product).all()
-
-    for order, order_detail, product in results:
-        print(order.user_id, order_detail.quantity, product.name)
-
-    return jsonify(orders_detail), 200
+    return jsonify(results), 200
 
 @apiOrderDetail.route('/order_detail/<order_detail_id>', methods = ['GET'])
 def get_order_Detail(order_detail_id):

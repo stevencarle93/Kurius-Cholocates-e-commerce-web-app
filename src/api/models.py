@@ -36,6 +36,9 @@ class Order(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship(User)
 
+    details =db.relationship("OrderDetail", backref="order", lazy=True)
+
+
     def __repr__(self):
         return f'<Order {self.id}>'
 
@@ -72,6 +75,13 @@ class Product(db.Model):
     def __repr__(self):
         return f'<Product {self.name}>'
 
+    def detail(self):
+         return {
+            "id": self.id,
+            "name": self.name,
+            "description": self.description
+         }
+
     def serialize(self):
         return {
             "id": self.id,
@@ -99,10 +109,10 @@ class OrderDetail(db.Model):
     quantity = db.Column(db.Integer, nullable=False)
     
     order_id = db.Column(db.Integer, db.ForeignKey('order.id'))
-    order = db.relationship(Order)
 
     product_id = db.Column(db.Integer, db.ForeignKey('product.id'))
-    product = db.relationship(Product)
+    product = db.relationship(Product, backref="order_detail", lazy=False)
+
 
     def __repr__(self):
         return f'<OrderDetail {self.id}>'
@@ -111,7 +121,8 @@ class OrderDetail(db.Model):
         return {
             "id": self.id,
             "price": self.price,
-            "quantity": self.quantity
+            "quantity": self.quantity,
+            "product":self.product.detail()
         }
 
 #List of bloked tokens from authenticated users
@@ -129,16 +140,3 @@ class TokenBlockedList(db.Model):
             "email": self.email,
             "created_at": self.created_at
         }
-
-class Parent(Base):
-    __tablename__ = 'parent'
-
-    id = Column(Integer, primary_key=True)
-    children = relationship("Child", back_populates="parent")
-
-class Child(Base):
-    __tablename__ = 'child'
-    
-    id = Column(Integer, primary_key=True)
-    parent_id = Column(Integer, ForeignKey('parent.id'))
-    parent = relationship("Parent", back_populates="children")
