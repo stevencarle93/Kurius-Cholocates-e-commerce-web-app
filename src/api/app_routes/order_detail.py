@@ -28,19 +28,24 @@ def get_order_Detail(order_detail_id):
     else:
         return jsonify({"messsage":"order detail not found"})
 
-@apiOrderDetail.route('/order_detail', methods=['POST'])
-@jwt_required()
-def register_order_detail():
-
+@apiOrderDetail.route('/order_detail/<order_id>', methods=['POST'])
+#@jwt_required()
+def register_order_detail(order_id):
+    
     order_detail = OrderDetail()
     body = request.json
+    for x in body:
+        if type(x) == 'dict':
+            for i in x:
+                order_detail.price = i["price"]
+                order_detail.quantity = i["quantity"]
+                order_detail.product_id = i["id"]
+        else: order_detail.order_id = x['order_id']
     
-    order_detail.price = body["price"]
-    order_detail.quantity = body["quantity"]
-    order_detail.order_id = body["order_id"]
-    order_detail.product_id = body["product_id"]
+    #print(order_detail.order_id)
+    #print(type(x))
 
-    try:        
+    try:
         db.session.add(order_detail)
         db.session.commit()
         return jsonify(order_detail.serialize()), 201

@@ -7,7 +7,7 @@ import { Carrito } from "../Carrito/Carrito";
 import { Context } from "../../store/appContext";
 
 
-export const Checkout = (props) => {
+export const Checkout = () => {
   const value = useContext(DataContext);
   // const [menu, setMenu] = value.menu;
   // const [carrito, setCarrito] = value.carrito;
@@ -35,7 +35,7 @@ export const Checkout = (props) => {
             <div className="row">
               <div className="carrito__items2">
                 <h2>Valor de la compra: ${store.total}</h2>
-                <PayPal total={store.total} />
+                <PayPal />
               </div>
             </div>
             <div className="row">

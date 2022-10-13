@@ -5,7 +5,7 @@ import { PayPalButtons } from "@paypal/react-paypal-js"
 import Swal from "sweetalert2"
 import { DataContext } from "../store/Dataprovider";
 
-export const PayPal = (props) => {
+export const PayPal = () => {
   const { store, actions } = useContext(Context)
   const navigate = useNavigate()
   const value = useContext(DataContext)
@@ -22,7 +22,6 @@ export const PayPal = (props) => {
       amount: store.total,
       shipping_address: shipping_address,
       order_state: order.status,
-      user_id: "",
     }
     let response = await actions.crearOrden(orderData)
     if (response == "ok"){
@@ -35,12 +34,11 @@ export const PayPal = (props) => {
         timer: "1500",
         background:"#f2ebe1"
       } )
-      /* let response_details = await actions.orderDetails(orderData)
-      if (response_details == "ok"){ */
+      
+      if (response_details == "ok"){
         navigate("/")
-        
         setMenu(!menu)
-      /* } */
+      }
     }
     else Swal.fire( {
       title: "Hubo un error con el pago",

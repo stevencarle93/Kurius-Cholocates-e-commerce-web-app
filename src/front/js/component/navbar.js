@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react"
+import React, { useContext } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { Context } from '../store/appContext'
 import { DataContext } from "../store/Dataprovider"
@@ -8,16 +8,8 @@ import Swal from "sweetalert2"
 export const Navbar = () => {
 	const value = useContext(DataContext)
 	const [menu, setMenu] = value.menu
-//	const [carrito] = value.carrito
 	const navigate = useNavigate();
 	const { store, actions } = useContext(Context)
-	const [reset] = useState([])
-	const [color, changeColor] = useState("#0000");
-	document.body.style.backgroundColor = color;
-
-	const toogleMenu = () => {
-		setMenu(!menu)
-	}
 
 	const handleLogout = async () => {
 		let response = await actions.logout()
@@ -27,25 +19,6 @@ export const Navbar = () => {
     else{
       alert(response)
     }
-	}
-
-	const protectedCall = async () => {
-		let response = await actions.protectedTest()
-		if (response == "ok"){
-      console.log("Successfull request")
-    }
-    else{
-      console.log(response)
-    }
-		if (response == "Sesion expired") Swal.fire({
-			title: "Sesión expirada",
-			text: "Inicie sesión nuevamente",
-			icon: "warning",
-			confirmButtonText: "Ok",
-			confirmButtonColor: "orange",
-			timer: "4000",
-			background:"#f2ebe1"
-		})
 	}
 
 	const loginBar = () => {
@@ -78,7 +51,7 @@ export const Navbar = () => {
 		}
 		return (
 			<>
-				<div className="cart mx-5" onClick={() => toogleMenu()}>
+				<div className="cart mx-5" onClick={() => setMenu(!menu)}>
 					<box-icon name="cart"></box-icon>
 					<span className="items__count">{store.carrito.length}</span>
 				</div>
@@ -92,7 +65,11 @@ export const Navbar = () => {
 		<nav className="navbar navbar-black fixed-top">
 			<div className="mx-5">
 				<ul className="nav col-12 col-lg-auto me-lg-auto mb-2 align-items-center mb-md-0">
-					<li><Link to="/" className="nav-link px-2 text-warning bold" onClick={() => setMenu(!menu)}><img className="logoNavbar" src={Logo} width="110px"/></Link></li>
+					<li>
+						<Link to="/" className="nav-link px-2 text-warning bold" >
+							<img className="logoNavbar" src={Logo} width="110px"/>
+						</Link>
+					</li>
 				</ul>
 			</div>
 			<div className="d-flex align-items-center text-end mx-5">

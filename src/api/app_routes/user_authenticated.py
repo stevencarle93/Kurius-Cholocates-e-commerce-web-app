@@ -83,9 +83,9 @@ def restore_request():
     if user is None:
         return jsonify({"message": "El correo electrónico no está registrado"}), 400
     
-    access_token = create_access_token(identity = user.id)
-    #access_token = timedelta(minutes = int(2))
-    temp_URL = "".join(random.choice(string.ascii_uppercase + string.digits)for x in range(10))
+    #access_token = create_access_token(identity = user.id, expires_delta = 120)
+    #access_token = expires_delta(minutes = int(2))
+    temp_URL = "".join(random.choice(string.ascii_uppercase + string.digits)for x in range(100))
     hashed_URL = bcrypt.generate_password_hash(temp_URL, rounds = None).decode("utf-8")
     setattr(user, "password", hashed_URL)
     db.session.add(user)

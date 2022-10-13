@@ -24,9 +24,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           initial: "white",
         },
       ],
-      carrito: [
-
-      ],
+      carrito: [],
       total: 0
     },
     actions: {
@@ -91,7 +89,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             total: res
         })
       },
-
       loadProducts: async () => {
         try {
           let result = await getActions().apiFetch("products", "GET");
@@ -115,10 +112,19 @@ const getState = ({ getStore, getActions, setStore }) => {
             let responseJson = await response.json()
             setStore({ order: responseJson, })
             console.log(responseJson)
-            setStore({
-              carrito: []
-            })
-            return "ok"
+            setStore({carrito: [], total: 0})
+            let dataDetails = [store.carrito, {order_id:responseJson.id}]
+            let response_details = await getActions().orderDetails(store.carrito)
+            if (response_details.ok) {
+              let responseDetails = await response_details.json()
+              console.log(responseDetails)
+              return "ok"
+            }
+            else {
+              let responseDetails = await response_details.json()
+              console.log(responseDetails)
+              return responseDetails
+            }
           } else {
             let responseJson = await response.json()
             return responseJson.message
@@ -127,13 +133,12 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.error({ error })
         }
       },
-      /* orderDetails: async (data) => {
+      orderDetails: async (data) => {
         const store = getStore()        
         try {
-          let response = await getActions().apiFetch("order_details", "POST", data);
+          let response = await getActions().apiFetch("order_detail", "POST", data);
           if (response.ok) {
             let responseJson = await response.json()
-            setStore({order: responseJson,})
             console.log(responseJson)
             return "ok"
           } else {
@@ -143,7 +148,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         } catch (error) {
           console.error({ error })
         }
-      }, */
+      },
       restoreRequest: async (data) => {
         const store = getStore()
         try {

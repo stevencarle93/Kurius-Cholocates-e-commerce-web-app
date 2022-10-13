@@ -1,9 +1,8 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import "boxicons";
 import { Carrito } from "../component/Carrito/Carrito";
 import "../../styles/index.css";
-import { ProductList } from "../component/Products/ProductList";
 import { ReviewsCarousel } from "../component/ReviewsCarousel";
 import { Carousel } from "../component/Carousel";
 import { ProductosPrivados } from "../component/Products/ProductosPrivados";

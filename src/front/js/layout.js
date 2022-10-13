@@ -40,7 +40,7 @@ const Layout = () => {
               <Route element={<Home />} path="/" />
               <Route element={<Signup />} path="/signup" />
               <Route element={<Login />} path="/login" />
-              <Route path="//restorepassword" >
+              <Route path="/restorepassword" >
                 <Route index element = {<Restore_Password_Request />} />
                 <Route path=":authorization" element={<Restore_Password_Restore />} />
               </Route>
