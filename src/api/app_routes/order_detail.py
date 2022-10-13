@@ -28,9 +28,9 @@ def get_order_Detail(order_detail_id):
     else:
         return jsonify({"messsage":"order detail not found"})
 
-@apiOrderDetail.route('/order_detail/<order_id>', methods=['POST'])
+""" @apiOrderDetail.route('/order_detail/', methods=['POST'])
 #@jwt_required()
-def register_order_detail(order_id):
+def register_order_detail():
     
     order_detail = OrderDetail()
     body = request.json
@@ -53,7 +53,7 @@ def register_order_detail(order_id):
         print(error)
         db.session.rollback()
         return jsonify({"message":"something went wrong registering the order detail"}), 400
-
+ """
 @apiOrderDetail.route('/order_detail/<order_detail_id>', methods=['PUT'])
 def update_order_detail(order_detail_id):
 

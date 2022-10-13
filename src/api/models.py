@@ -29,15 +29,11 @@ class Order(db.Model):
     __tablename__ = 'order'
 
     id = db.Column(db.Integer, primary_key=True)
-    amount = db.Column(db.Integer, unique=False, nullable=False)
     shipping_address = db.Column(db.String(80), nullable=False)
     order_state = db.Column(db.String(80), nullable=False)
     
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    user = db.relationship(User)
-
-    details =db.relationship("OrderDetail", backref="order", lazy=True)
-
+    user = db.relationship("User", backref = "order", lazy = False)
 
     def __repr__(self):
         return f'<Order {self.id}>'
@@ -45,9 +41,9 @@ class Order(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "amount": self.amount,
             "shipping_address": self.shipping_address,
-            "order_state": self.order_state
+            "order_state": self.order_state,
+            "user": self.user.serialize()
         }
 
 class Product(db.Model):
@@ -69,7 +65,6 @@ class Product(db.Model):
     presentation = db.Column(db.Float, nullable=False)
     price = db.Column(db.Float(10), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
-    
     stock = db.Column(db.Integer, nullable=False)
 
     def __repr__(self):
@@ -78,8 +73,11 @@ class Product(db.Model):
     def detail(self):
          return {
             "id": self.id,
+            "picture": self.picture,
             "name": self.name,
-            "description": self.description
+            "description": self.description,
+            "price": self.price,
+            "quantity": self.quantity
          }
 
     def serialize(self):
@@ -109,6 +107,7 @@ class OrderDetail(db.Model):
     quantity = db.Column(db.Integer, nullable=False)
     
     order_id = db.Column(db.Integer, db.ForeignKey('order.id'))
+    order = db.relationship(Order, backref="order_detail", lazy=False)
 
     product_id = db.Column(db.Integer, db.ForeignKey('product.id'))
     product = db.relationship(Product, backref="order_detail", lazy=False)
@@ -122,7 +121,8 @@ class OrderDetail(db.Model):
             "id": self.id,
             "price": self.price,
             "quantity": self.quantity,
-            "product":self.product.detail()
+            "order": self.order.serialize(),
+            "product": self.product.detail()
         }
 
 #List of bloked tokens from authenticated users
