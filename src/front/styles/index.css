@@ -42,9 +42,9 @@
   background-color: var(--kurius-darkgreen-color);
 }
 
-.buttonRegister:hover{
+.buttonRegister:hover {
   color: white;
-  background-color:green;
+  background-color: green;
 }
 
 /* Julian */
@@ -107,14 +107,14 @@
 }
 .inputs:focus {
   border: none;
-  outline:none
+  outline: none;
 }
 
-.btn-kurius{
+.btn-kurius {
   color: var(--bg-landingpage);
   background-color: var(--ChocolateColor);
 }
-.btn-kurius:hover{
+.btn-kurius:hover {
   color: white;
   background-color: hsl(15, 17%, 45%);
 }
@@ -284,7 +284,6 @@
   color: white;
   background-color: green;
 }
-
 
 /*  ------------------  CHECKOUT  ----------------------- */
 .checkout {
@@ -476,6 +475,88 @@ a:active {
   height: 500px;
 }
 
+.OrderDetails img {
+  width: 200px;
+}
+
+.order__items {
+  width: 50%;
+}
+
+.orderData {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.DetallesButton {
+  color: var(--bg-landingpage);
+  display: flex;
+  justify-content: center;
+  max-width: 180px;
+  background-color: var(--kurius-green-color);
+  border-radius: 5px;
+}
+.DetallesButton:hover {
+  background-color: rgb(0, 145, 0);
+}
+.DetallesButton .btn{
+  color: var(--bg-landingpage);
+  
+}
+.DetallesButton .btn:hover{
+  color: white;
+}
+.order-cont {
+  justify-content: space-between;
+}
+
+.OrderDetails {
+  max-height: 300px;
+  display: flex;
+  align-items: center;
+}
+
+.state {
+  font-weight: var(--font-weight-bold);
+}
+
+.OrderInfo {
+  display: flex;
+}
+
+.orderhisto {
+  margin-left: 3rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.order__shipping {
+  padding-left: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.orderheader {
+  padding-top: 0.5rem;
+  height: 10%;
+  background-color: var(--kurius-green-color);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: var(--bg-landingpage);
+  font-size: 22px;
+  font-weight: var(--font-weight-bold);
+}
+
+.orders-container {
+  margin-top: 3rem;
+  -webkit-box-shadow: 0px 0px 6px 1.5px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 0px 6px 1.5px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 6px 1.5px rgba(0, 0, 0, 0.5);
+}
 /* Richard */
 
 /* ------------- MEDIA --------------- */
@@ -576,11 +657,10 @@ a:active {
     box-shadow: 1px 11px 30px -21px #000;
     display: flex;
     flex-wrap: wrap;
-    
   }
 }
 
-@media only screen and (width:390px) {
+@media only screen and (width: 390px) {
   .productos {
     padding: 5rem 3rem;
     margin: 0 auto;
