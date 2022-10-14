@@ -18,11 +18,13 @@ export const PayPal = () => {
       order.payer.address.country_code + ", " +
       order.payer.address.postal_code
 
-    let orderData = {
-      amount: store.total,
-      shipping_address: shipping_address,
-      order_state: order.status,
-    }
+    let orderData = [
+      store.carrito,
+      {
+        shipping_address: shipping_address,
+        order_state: order.status
+      }
+    ]
     let response = await actions.crearOrden(orderData)
     if (response == "ok"){
       Swal.fire( {
@@ -34,11 +36,8 @@ export const PayPal = () => {
         timer: "1500",
         background:"#f2ebe1"
       } )
-      
-      if (response_details == "ok"){
-        navigate("/")
-        setMenu(!menu)
-      }
+      navigate("/")
+      setMenu(!menu)
     }
     else Swal.fire( {
       title: "Hubo un error con el pago",

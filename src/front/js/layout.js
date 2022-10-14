@@ -19,6 +19,7 @@ import { Signup } from "./pages/signup";
 import { Login } from "./pages/login";
 import { Restore_Password_Request } from "./pages/restore_password_request";
 import { Restore_Password_Restore } from "./pages/restore_password_restore";
+import { OrdersDetail } from "./pages/orders_detail"
 import { DataProvider } from './store/Dataprovider'
 import { Checkout } from './component/Checkout/Checkout'
 import { Navbar } from "./component/navbar";
@@ -44,10 +45,11 @@ const Layout = () => {
                 <Route index element = {<Restore_Password_Request />} />
                 <Route path=":authorization" element={<Restore_Password_Restore />} />
               </Route>
-              <Route element={<Demo />} path="/demo" />
-              <Route element={<Single />} path="/single/:theid" />
+              <Route element={<OrdersDetail/>} path="/orders"/>
               <Route element={<Checkout/>} path="/checkout"/>
               <Route element={<h1>Not found!</h1>} />
+              <Route element={<Single />} path="/single/:theid" />
+              <Route element={<Demo />} path="/demo" />
               <Route element={<ProductsDetails1 />} path="/Details/1" />
               <Route element={<ProductsDetails2 />} path="/Details/2" />
               <Route element={<ProductsDetails3 />} path="/Details/3" />

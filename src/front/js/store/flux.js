@@ -10,7 +10,8 @@ const getState = ({ getStore, getActions, setStore }) => {
       loginDate: 0,
       user: "",
       message: null,
-      order: { "": "" },
+      order: {},
+      orders_detail: [],
       products: [],
       demo: [
         {
@@ -46,7 +47,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
         }
         setStore({ carrito: [...store.carrito, product] })
-        console.log(store.products)
         return  getActions().getTotal()
       },
       deleteCarrito: (product) => {
@@ -84,7 +84,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         const store = getStore()
         const res = store.carrito.reduce((prev, product) => 
           prev + (product.price * product.quantity), 0)
-          console.log(res)
         setStore({
             total: res
         })
@@ -111,20 +110,9 @@ const getState = ({ getStore, getActions, setStore }) => {
           if (response.ok) {
             let responseJson = await response.json()
             setStore({ order: responseJson, })
-            console.log(responseJson)
+            console.log(store.order)
             setStore({carrito: [], total: 0})
-            let dataDetails = [store.carrito, {order_id:responseJson.id}]
-            let response_details = await getActions().orderDetails(store.carrito)
-            if (response_details.ok) {
-              let responseDetails = await response_details.json()
-              console.log(responseDetails)
-              return "ok"
-            }
-            else {
-              let responseDetails = await response_details.json()
-              console.log(responseDetails)
-              return responseDetails
-            }
+            return "ok"
           } else {
             let responseJson = await response.json()
             return responseJson.message
@@ -133,13 +121,15 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.error({ error })
         }
       },
-      orderDetails: async (data) => {
+      orderDetails: async () => {
         const store = getStore()        
         try {
-          let response = await getActions().apiFetch("order_detail", "POST", data);
+          let response = await getActions().apiFetch("orders_detail");
           if (response.ok) {
             let responseJson = await response.json()
-            console.log(responseJson)
+            setStore({
+              orders_detail: responseJson
+            })
             return "ok"
           } else {
             let responseJson = await response.json()
@@ -242,10 +232,12 @@ const getState = ({ getStore, getActions, setStore }) => {
             let accessTokRevoked = await firstResponse.json()
             let refresh_token = store.refresh_token
             setStore({ token: refresh_token })
+            console.log("access_token revocado")
             let secondResponse = await getActions().apiFetch("logout", "POST");
             if (secondResponse.ok) {
               let refreshTokRevoked = await secondResponse.json()
               setStore({ token: "", refresh_token: "", loginDate: 0, user: "" }); //se resetea todo el store
+              console.log("regresh_token revocado")
               return "ok";
             }
             else {
@@ -253,7 +245,6 @@ const getState = ({ getStore, getActions, setStore }) => {
               if (refreshTokRevoked != undefined) return refreshTokRevoked.message;
               else return "Internal error";
             }
-            //console.log(accessTokRevoked.msg);
           } else {
             let accessTokRevoked = await firstResponse.json()
             if (accessTokRevoked != undefined) return accessTokRevoked.message;
@@ -307,7 +298,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                 token: responseJson.token,
                 refresh_token: responseJson.refresh_token,
                 loginDate: Date.now(),
-              });
+              })
+              console.log("Token renovado")
               return "Refresh successful";
             } else {
               let responseJson = await response.json();

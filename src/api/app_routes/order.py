@@ -29,17 +29,17 @@ def get_order(order_id):
         return jsonify({"messsage":"order not found"})
 
 @apiOrder.route('/order', methods=['POST'])
-#@jwt_required()
+@jwt_required()
 def register_order():
 
-    #user = get_jwt_identity()
+    user = get_jwt_identity()
     order = Order()
     order_body = request.json[1]
     order_detail_body = request.json[0]
     
     order.shipping_address = order_body["shipping_address"]
     order.order_state = order_body["order_state"]
-    order.user_id = order_body["user_id"]
+    order.user_id = user
     
     try:        
         db.session.add(order)

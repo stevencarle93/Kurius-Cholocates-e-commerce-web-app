@@ -1,5 +1,5 @@
 import tempfile
-from api.models import db, OrderDetail, Product, Order
+from api.models import db, User, OrderDetail, Product, Order
 from api.utils import generate_sitemap, APIException
 from flask import Flask, Blueprint, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
@@ -11,12 +11,17 @@ jwt = JWTManager(app)
 apiOrderDetail = Blueprint('apiOrderDetail', __name__)
 
 @apiOrderDetail.route('/orders_detail', methods = ['GET'])
+@jwt_required()
 def get_orders_Detail():
+    user = User.query.get(get_jwt_identity())
+    orders = Order.query.filter_by(user_id = user.id).all()
+    all_orders_detail = []
+    for i in orders:
+        orders_detail = OrderDetail.query.filter_by(order_id = i.id).all()
+        orders_detail = list(map(lambda order_detail: order_detail.serialize(), orders_detail))
+        all_orders_detail.append(orders_detail)
 
-    orders_detail = OrderDetail.query.all()
-    orders_detail = list(map(lambda order_detail: order_detail.serialize(), orders_detail))
-
-    return jsonify(orders_detail), 200
+    return jsonify(all_orders_detail), 200
 
 @apiOrderDetail.route('/order_detail/<order_detail_id>', methods = ['GET'])
 def get_order_Detail(order_detail_id):

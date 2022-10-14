@@ -21,6 +21,16 @@ export const Navbar = () => {
     }
 	}
 
+	const load_orders = async () => {
+		let response = await actions.orderDetails()
+		if (response == "ok"){
+      navigate("/orders")
+    }
+    else{
+      alert(response)
+    }
+	}
+
 	const loginBar = () => {
 		if (store.token != ""){
 			return (
@@ -28,7 +38,8 @@ export const Navbar = () => {
 					<div className="px-4 m-auto text-dark bold">
 						¡Bienvenido {store.user}!
 					</div>
-						<button type="button" className="btn btn-warning" onClick={() => handleLogout()}>Logout</button>
+					<button type="button" className="btn btn-kurius me-2" onClick={() => load_orders()}>Pedidos</button>
+					<button type="button" className="btn btn-warning" onClick={() => handleLogout()}>Logout</button>
 				</>
 			)
 		}
