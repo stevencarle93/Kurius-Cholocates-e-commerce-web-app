@@ -7,6 +7,8 @@ import { ProductList } from "../component/Products/ProductList";
 import { ReviewsCarousel } from "../component/ReviewsCarousel";
 import { Carousel } from "../component/Carousel";
 import { ProductosPrivados } from "../component/Products/ProductosPrivados";
+import { Barras } from "../component/Products/Barras";
+
 
 export const Home = () => {
   const [color, changeColor] = useState("#ffffff");
@@ -16,11 +18,9 @@ export const Home = () => {
 
   return (
     <>
-      <Carousel />
+      <Carousel />  
       <Carrito />
-      <h2 className="border-bottom mx-5">Nuestros Productos</h2>
       <ProductosPrivados products={store.products.result} />
-      <ReviewsCarousel />
     </>
   );
 };
