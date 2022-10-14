@@ -68,7 +68,7 @@ export const OrdersDetail = () => {
                           </div>
                           <div className="DetallesButton button">
                             <Link
-                              to={`/products/${product_in_order.id}`}
+                              to={`/products/${product_in_order.product.id}`}
                               className="btn"
                             >
                               Comprar de nuevo
