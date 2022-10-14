@@ -8,10 +8,7 @@ export const Restore_Password_Restore = () => {
   const { store, actions } = useContext(Context)
   const navigate = useNavigate()
   const params = useParams()
-  console.log(params.authorization)
-  //const restore_token = window.location.href.substr(process.env.FRONTEND_URL.length+1)
-  //console.log(restore_token)    
-  
+    
   const restore = async (e) => {
     e.preventDefault();
     const data = new FormData(e.target)

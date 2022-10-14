@@ -29,12 +29,11 @@ class Order(db.Model):
     __tablename__ = 'order'
 
     id = db.Column(db.Integer, primary_key=True)
-    amount = db.Column(db.Integer, unique=False, nullable=False)
     shipping_address = db.Column(db.String(80), nullable=False)
     order_state = db.Column(db.String(80), nullable=False)
     
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    user = db.relationship(User)
+    user = db.relationship("User", backref = "order", lazy = False)
 
     def __repr__(self):
         return f'<Order {self.id}>'
@@ -42,9 +41,9 @@ class Order(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "amount": self.amount,
             "shipping_address": self.shipping_address,
-            "order_state": self.order_state
+            "order_state": self.order_state,
+            "user": self.user.serialize()
         }
 
 class Product(db.Model):
@@ -66,11 +65,20 @@ class Product(db.Model):
     presentation = db.Column(db.Float, nullable=False)
     price = db.Column(db.Float(10), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
-    
     stock = db.Column(db.Integer, nullable=False)
 
     def __repr__(self):
         return f'<Product {self.name}>'
+
+    def detail(self):
+         return {
+            "id": self.id,
+            "picture": self.picture,
+            "name": self.name,
+            "description": self.description,
+            "price": self.price,
+            "quantity": self.quantity
+         }
 
     def serialize(self):
         return {
@@ -99,10 +107,11 @@ class OrderDetail(db.Model):
     quantity = db.Column(db.Integer, nullable=False)
     
     order_id = db.Column(db.Integer, db.ForeignKey('order.id'))
-    order = db.relationship(Order)
+    order = db.relationship(Order, backref="order_detail", lazy=False)
 
     product_id = db.Column(db.Integer, db.ForeignKey('product.id'))
-    product = db.relationship(Product)
+    product = db.relationship(Product, backref="order_detail", lazy=False)
+
 
     def __repr__(self):
         return f'<OrderDetail {self.id}>'
@@ -111,7 +120,9 @@ class OrderDetail(db.Model):
         return {
             "id": self.id,
             "price": self.price,
-            "quantity": self.quantity
+            "quantity": self.quantity,
+            "order": self.order.serialize(),
+            "product": self.product.detail()
         }
 
 #List of bloked tokens from authenticated users

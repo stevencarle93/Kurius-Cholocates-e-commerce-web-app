@@ -10,8 +10,10 @@ const getState = ({ getStore, getActions, setStore }) => {
       loginDate: 0,
       user: "",
       message: null,
-      order: { "": "" },
+      order: {},
+      orders_detail: [],
       products: [],
+      product: [],
       demo: [
         {
           title: "FIRST",
@@ -24,9 +26,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           initial: "white",
         },
       ],
-      carrito: [
-
-      ],
+      carrito: [],
       total: 0
     },
     actions: {
@@ -48,7 +48,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
         }
         setStore({ carrito: [...store.carrito, product] })
-        console.log(store.products)
         return  getActions().getTotal()
       },
       deleteCarrito: (product) => {
@@ -86,21 +85,33 @@ const getState = ({ getStore, getActions, setStore }) => {
         const store = getStore()
         const res = store.carrito.reduce((prev, product) => 
           prev + (product.price * product.quantity), 0)
-          console.log(res)
         setStore({
             total: res
         })
       },
-
       loadProducts: async () => {
         try {
-          let result = await getActions().apiFetch("products", "GET");
+          let results = await getActions().apiFetch("products", "GET");
+          if (results.ok) results = await results.json()
+          else return
+          const store = getStore()
+          setStore({
+            ...store,
+            products:results
+          })
+        } catch (error) {
+          console.error(error)
+        }
+      },
+      loadProductsDetails: async(id) => {
+        try {
+          let result = await getActions().apiFetch(`product/${id}`, "GET", );
           if (result.ok) result = await result.json()
           else return
           const store = getStore()
           setStore({
             ...store,
-            products: result
+            product:result
           })
         } catch (error) {
           console.error(error)
@@ -109,41 +120,66 @@ const getState = ({ getStore, getActions, setStore }) => {
       // Use getActions to call a function within a fuction
       crearOrden: async (data) => {
         const store = getStore()
-        try {
-          let response = await getActions().apiFetch("order", "POST", data);
-          if (response.ok) {
-            let responseJson = await response.json()
-            setStore({ order: responseJson, })
-            console.log(responseJson)
-            setStore({
-              carrito: []
-            })
-            return "ok"
-          } else {
-            let responseJson = await response.json()
-            return responseJson.message
+        let validation = await getActions().tokenTimeValidation();
+        if (validation === "Token has expired") {
+          setStore({
+            token: "",
+            refresh_token: "",
+            loginDate: 0,
+            user: ""
+          });
+          return "Sesion expired";
+        }
+        if (validation === "Missing Authorization Header") return "Sesion expired"
+        if (validation === "Refresh successful" || "Token still valid") {
+          try {
+            let response = await getActions().apiFetch("order", "POST", data);
+            if (response.ok) {
+              let responseJson = await response.json()
+              setStore({ order: responseJson, })
+              console.log(store.order)
+              setStore({carrito: [], total: 0})
+              return "ok"
+            } else {
+              let responseJson = await response.json()
+              return responseJson.message
+            }
+          } catch (error) {
+            console.error({ error })
           }
-        } catch (error) {
-          console.error({ error })
         }
       },
-      /* orderDetails: async (data) => {
-        const store = getStore()        
-        try {
-          let response = await getActions().apiFetch("order_details", "POST", data);
-          if (response.ok) {
-            let responseJson = await response.json()
-            setStore({order: responseJson,})
-            console.log(responseJson)
-            return "ok"
-          } else {
-            let responseJson = await response.json()
-            return responseJson.message
-          }
-        } catch (error) {
-          console.error({ error })
+      orderDetails: async () => {
+        const store = getStore()
+        let validation = await getActions().tokenTimeValidation();
+        if (validation === "Token has expired") {
+          setStore({
+            token: "",
+            refresh_token: "",
+            loginDate: 0,
+            user: ""
+          });
+          return "Sesion expired";
         }
-      }, */
+        if (validation === "Missing Authorization Header") return "Sesion expired"
+        if (validation === "Refresh successful" || "Token still valid") {
+          try {
+            let response = await getActions().apiFetch("orders_detail");
+            if (response.ok) {
+              let responseJson = await response.json()
+              setStore({
+                orders_detail: responseJson
+              })
+              return "ok"
+            } else {
+              let responseJson = await response.json()
+              return responseJson.message
+            }
+          } catch (error) {
+            console.error({ error })
+          }
+        }
+      },
       restoreRequest: async (data) => {
         const store = getStore()
         try {
@@ -231,32 +267,46 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       logout: async () => {
         const store = getStore();
-        try {
-          let firstResponse = await getActions().apiFetch("logout", "POST");
-          if (firstResponse.ok) {
-            let accessTokRevoked = await firstResponse.json()
-            let refresh_token = store.refresh_token
-            setStore({ token: refresh_token })
-            let secondResponse = await getActions().apiFetch("logout", "POST");
-            if (secondResponse.ok) {
-              let refreshTokRevoked = await secondResponse.json()
-              setStore({ token: "", refresh_token: "", loginDate: 0, user: "" }); //se resetea todo el store
-              return "ok";
-            }
-            else {
-              let refreshTokRevoked = await secondResponse.json()
-              if (refreshTokRevoked != undefined) return refreshTokRevoked.message;
+        let validation = await getActions().tokenTimeValidation();
+        if (validation === "Token has expired") {
+          setStore({
+            token: "",
+            refresh_token: "",
+            loginDate: 0,
+            user: ""
+          });
+          return "Sesion expired";
+        }
+        if (validation === "Missing Authorization Header") return "Sesion expired"
+        if (validation === "Refresh successful" || "Token still valid") {
+          try {
+            let firstResponse = await getActions().apiFetch("logout", "POST");
+            if (firstResponse.ok) {
+              let accessTokRevoked = await firstResponse.json()
+              let refresh_token = store.refresh_token
+              setStore({ token: refresh_token })
+              console.log("access_token revocado")
+              let secondResponse = await getActions().apiFetch("logout", "POST");
+              if (secondResponse.ok) {
+                let refreshTokRevoked = await secondResponse.json()
+                setStore({ token: "", refresh_token: "", loginDate: 0, user: "" }); //se resetea todo el store
+                console.log("refresh_token revocado")
+                return "ok";
+              }
+              else {
+                let refreshTokRevoked = await secondResponse.json()
+                if (refreshTokRevoked != undefined) return refreshTokRevoked.message;
+                else return "Internal error";
+              }
+            } else {
+              let accessTokRevoked = await firstResponse.json()
+              if (accessTokRevoked != undefined) return accessTokRevoked.message;
               else return "Internal error";
             }
-            //console.log(accessTokRevoked.msg);
-          } else {
-            let accessTokRevoked = await firstResponse.json()
-            if (accessTokRevoked != undefined) return accessTokRevoked.message;
-            else return "Internal error";
+          } catch (error) {
+            console.error({ error });
           }
-        } catch (error) {
-          console.error({ error });
-        }
+        }        
       },
       /* protectedTest: async () => {
         const store = getStore();
@@ -289,20 +339,20 @@ const getState = ({ getStore, getActions, setStore }) => {
       tokenTimeValidation: async () => {
         const store = getStore();
         let loginDate = store.loginDate;
-        let timeSession = process.env.JWT_ACCESS_TOKEN_EXPIRES_MINUTES * 60000
+        let timeSession = (process.env.JWT_ACCESS_TOKEN_EXPIRES_MINUTES - 1) * 60000
         if (loginDate + timeSession < Date.now()) {
           let refresh_token = store.refresh_token;
           setStore({ token: refresh_token });
           try {
             let response = await getActions().apiFetch("refresh", "POST");
-            if (response.ok) {
+            if (response.ok || response.msg === "Token has expired") {
               console.log("Refreshing token")
               let responseJson = await response.json();
               setStore({
                 token: responseJson.token,
                 refresh_token: responseJson.refresh_token,
                 loginDate: Date.now(),
-              });
+              })
               return "Refresh successful";
             } else {
               let responseJson = await response.json();

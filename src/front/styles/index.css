@@ -1,6 +1,8 @@
 /* 
     General Styles used on every website (Don't Repeat Yourself)
 */
+@import url("https://fonts.googleapis.com/css2?family=Special+Elite&display=swap");
+
 :root {
   /* Colors */
   --kurius-green-color: rgb(108, 114, 57);
@@ -42,14 +44,17 @@
   background-color: var(--kurius-darkgreen-color);
 }
 
-.buttonRegister:hover{
+.buttonRegister:hover {
   color: white;
-  background-color:green;
+  background-color: green;
 }
 
 /* Julian */
-
+body {
+  margin-top: 60px;
+}
 .App {
+  margin-top: 60px;
   width: 100%;
   min-height: 100vh;
   margin: 0 auto;
@@ -107,14 +112,14 @@
 }
 .inputs:focus {
   border: none;
-  outline:none
+  outline: none;
 }
 
-.btn-kurius{
+.btn-kurius {
   color: var(--bg-landingpage);
   background-color: var(--ChocolateColor);
 }
-.btn-kurius:hover{
+.btn-kurius:hover {
   color: white;
   background-color: hsl(15, 17%, 45%);
 }
@@ -285,7 +290,6 @@
   background-color: green;
 }
 
-
 /*  ------------------  CHECKOUT  ----------------------- */
 .checkout {
   width: 100%;
@@ -378,8 +382,9 @@
   font-size: var(--font-size-3);
 }
 .producto__footer .price {
-  font-size: var(--font-family-1);
+  font-size: 1.5rem;
   color: var(--kurius-darkgreen-color);
+  font-weight: bold;
 }
 
 .producto .button {
@@ -455,6 +460,122 @@ a:active {
   font-weight: var(--font-weight-bold);
 }
 
+.container-detalles {
+  width: 100%;
+}
+
+.container-details {
+  margin-top: 2rem;
+  width: 100%;
+}
+
+.container-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pricebutton {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.detailsprice {
+  margin-top: 1.5rem;
+}
+
+.detailsimg {
+  max-width: 100%;
+}
+
+.detailsimg img {
+  max-width: 100%;
+}
+
+.carousel-item {
+  align-items: center;
+}
+.text-carousel {
+  margin-top: 5em;
+  margin-left: 5em;
+  font-family: "Special Elite", cursive;
+  font-size: 60px;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(
+    -45deg,
+    #4d2b1e,
+    #4d2b1e,
+    #f2ebe1,
+    #f2ebe1,
+    #867732,
+    #867731
+  );
+  background-size: 300%;
+  font-weight: 500;
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: animated_text 6s ease-in-out infinite;
+  -moz-animation: animated_text 6s ease-in-out infinite;
+  -webkit-animation: animated_text 6s ease-in-out infinite;
+}
+
+@keyframes animated_text {
+  0% {
+    background-position: 0px 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0px 50%;
+  }
+}
+
+.tituloproductos {
+  padding-top: 60px;
+}
+
+.title2 {
+  font-size: var(--font-size-1);
+  color: var(--kurius-darkgreen-color);
+}
+
+.letradescription {
+  font-family: var(--font-family-1);
+  font-size: 22px;
+}
+
+.letradescription > li box-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.nav {
+  gap: 1rem;
+  flex-wrap: nowrap;
+}
+.FooterKurius {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.FooterKurius img {
+  width: 250px;
+  margin-bottom: 10px;
+}
+
+.listadeinfo {
+  margin-top: 5rem;
+}
+
+.container-detalles {
+  padding-top: 50px;
+  background-color: var(--bg-landingpage);
+}
 /* Steven */
 .card2 {
   position: relative;
@@ -476,11 +597,93 @@ a:active {
   height: 500px;
 }
 
+.OrderDetails img {
+  width: 200px;
+}
+
+.order__items {
+  width: 80%;
+}
+
+.orderData {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.DetallesButton {
+  color: var(--bg-landingpage);
+  display: flex;
+  justify-content: center;
+  max-width: 180px;
+  background-color: var(--kurius-green-color);
+  border-radius: 5px;
+}
+.DetallesButton:hover {
+  background-color: rgb(0, 145, 0);
+}
+.DetallesButton .btn{
+  color: var(--bg-landingpage);
+  
+}
+.DetallesButton .btn:hover{
+  color: white;
+}
+.order-cont {
+  justify-content: space-between;
+}
+
+.OrderDetails {
+  max-height: 300px;
+  display: flex;
+  align-items: center;
+}
+
+.state {
+  font-weight: var(--font-weight-bold);
+}
+
+.OrderInfo {
+  display: flex;
+}
+
+.orderhisto {
+  margin-left: 3rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.order__shipping {
+  padding-left: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.orderheader {
+  padding-top: 0.5rem;
+  height: 10%;
+  background-color: var(--kurius-green-color);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: var(--bg-landingpage);
+  font-size: 22px;
+  font-weight: var(--font-weight-bold);
+}
+
+.orders-container {
+  margin-top: 3rem;
+  -webkit-box-shadow: 0px 0px 6px 1.5px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 0px 6px 1.5px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 6px 1.5px rgba(0, 0, 0, 0.5);
+}
 /* Richard */
 
 /* ------------- MEDIA --------------- */
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (width: 1000px) {
   .carrito__item {
     width: 90%;
   }
@@ -491,8 +694,45 @@ a:active {
     margin-top: 2rem;
     margin-right: 2rem;
   }
+  .text-carousel {
+    margin-top: 5em;
+    margin-left: 5em;
+    font-family: "Special Elite", cursive;
+    font-size: 60px;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(
+      -45deg,
+      #4d2b1e,
+      #4d2b1e,
+      #f2ebe1,
+      #f2ebe1,
+      #867732,
+      #867731
+    );
+    background-size: 300%;
+    font-weight: 500;
+  
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: animated_text 6s ease-in-out infinite;
+    -moz-animation: animated_text 6s ease-in-out infinite;
+    -webkit-animation: animated_text 6s ease-in-out infinite;
+  }
+  
+  @keyframes animated_text {
+    0% {
+      background-position: 0px 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0px 50%;
+    }
+  }
 }
-@media only screen and (width: 680px) {
+
+@media only screen and (width < 680px) {
   .carrito__item {
     width: 90%;
   }
@@ -502,6 +742,46 @@ a:active {
     fill: crimson;
     margin-top: 2rem;
     margin-right: 5rem;
+  }
+
+  .carousel-inner{
+    padding-top: 70px;
+  }
+  .text-carousel {
+    margin-top: 3em;
+    margin-left: 2em;
+    font-family: "Special Elite", cursive;
+    font-size: 16px;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(
+      -45deg,
+      #4d2b1e,
+      #4d2b1e,
+      #f2ebe1,
+      #f2ebe1,
+      #867732,
+      #867731
+    );
+    background-size: 300%;
+    font-weight: 500;
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: animated_text 6s ease-in-out infinite;
+    -moz-animation: animated_text 6s ease-in-out infinite;
+    -webkit-animation: animated_text 6s ease-in-out infinite;
+  }
+
+  @keyframes animated_text {
+    0% {
+      background-position: 0px 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0px 50%;
+    }
   }
 }
 
@@ -576,11 +856,10 @@ a:active {
     box-shadow: 1px 11px 30px -21px #000;
     display: flex;
     flex-wrap: wrap;
-    
   }
 }
 
-@media only screen and (width:390px) {
+@media only screen and (width: 390px) {
   .productos {
     padding: 5rem 3rem;
     margin: 0 auto;

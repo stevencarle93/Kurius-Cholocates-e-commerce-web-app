@@ -3,7 +3,7 @@ import { Context } from "../store/appContext"
 import { Link, useNavigate } from "react-router-dom"
 import "../../styles/index.css"
 import Swal from 'sweetalert2'
-import GoogleLogin from 'react-google-login'
+//import GoogleLogin from 'react-google-login'
 
 
 export const Login = () => {
