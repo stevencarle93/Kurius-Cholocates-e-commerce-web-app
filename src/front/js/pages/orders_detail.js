@@ -11,15 +11,14 @@ export const OrdersDetail = () => {
   
   return (
     <>
-      <div>
-        <h2>Histórico de compras</h2>
+      <div style={{ fontSize: "8em", marginTop: "16vh"}}>
+        <h2 className="text-center">Histórico de compras</h2>
       </div>
-      <div className="carrito__items">
+      <div className="carrito__items m-auto" >
         {
           all_orders.length === 0 ? (
-              <h2
+              <h2 className="text-center"
                 style={{
-                  textAling: "center",
                   fontSize: "3rem",
                 }}
               >
@@ -30,7 +29,7 @@ export const OrdersDetail = () => {
             all_orders.map((each_order,i) =>{
               return (
                 <div key={i}>
-                  <p className="price">Orden No. {each_order[i].order.id}</p>
+                  <p>Orden No. {each_order[i].order.id}</p>
                   {
                     each_order.map((product_in_order,j) => {
                       return (
@@ -38,7 +37,7 @@ export const OrdersDetail = () => {
                           <img src={product_in_order.product.picture} alt="" />
                           <div>
                             <h3>{product_in_order.product.name}</h3>
-                            <p className="price">Cantidad {product_in_order.quantity}</p>
+                            <p className="cantidad">Cantidad {product_in_order.quantity}</p>
                             <p className="price">Precio unitario ${product_in_order.price}</p>
                           </div>
                         </div>

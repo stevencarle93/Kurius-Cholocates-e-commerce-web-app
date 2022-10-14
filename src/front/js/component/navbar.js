@@ -38,8 +38,8 @@ export const Navbar = () => {
 					<div className="px-4 m-auto text-dark bold">
 						¡Bienvenido {store.user}!
 					</div>
-					<button type="button" className="btn btn-kurius me-2" onClick={() => load_orders()}>Pedidos</button>
-					<button type="button" className="btn btn-warning" onClick={() => handleLogout()}>Logout</button>
+					<button type="button" className="btn btn-warning mx-1" onClick={() => load_orders()}>Pedidos</button>
+					<button type="button" className="btn btn-kurius me-2 mx-2" onClick={() => handleLogout()}>Logout</button>
 				</>
 			)
 		}

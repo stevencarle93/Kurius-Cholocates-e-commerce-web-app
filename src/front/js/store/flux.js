@@ -275,7 +275,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               if (secondResponse.ok) {
                 let refreshTokRevoked = await secondResponse.json()
                 setStore({ token: "", refresh_token: "", loginDate: 0, user: "" }); //se resetea todo el store
-                console.log("regresh_token revocado")
+                console.log("refresh_token revocado")
                 return "ok";
               }
               else {
