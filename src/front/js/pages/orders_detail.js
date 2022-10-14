@@ -36,23 +36,29 @@ export const OrdersDetail = () => {
                   {each_order.map((product_in_order, j) => {
                     return (
                       <div
-                        className="row border-bottom OrderDetails px-5"
+                        className="border-bottom OrderDetails pe-5"
                         key={j}
                       >
-                        <div className="orderData">
-                        <img src={product_in_order.product.picture} alt="" />
-                          <div className="col-4 OrderInfo">
-                            <h4>{product_in_order.product.name}</h4>
-                            <div className="col-4 orderhisto">
-                              <p className="cantidad">
-                                Cantidad: {product_in_order.quantity}
-                              </p>
-                              <p className="price">
-                                Precio unitario: ${product_in_order.price}
-                              </p>
+                        <div className="orderData ps-0 justify-content-between">
+                          <div className="">
+                            <img src={product_in_order.product.picture} alt="" />
+                          </div>
+                          <div className="OrderInfo" style={{width: "35vw"}}>
+                            <div className="d-flex">
+                              <div style={{width: "26vw"}}>
+                                <h4>{product_in_order.product.name}</h4>
+                              </div>
+                              <div className="orderhisto ms-0">
+                                <p className="cantidad">
+                                  Cantidad: {product_in_order.quantity}
+                                </p>
+                                <p className="price">
+                                  Precio unitario: ${product_in_order.price}
+                                </p>
+                              </div>
                             </div>
                           </div>
-                          <div className="col-4 order__shipping">
+                          <div className="order__shipping ps-0" style={{width: "19vw"}}>
                             <p className="state text-success">
                               {each_order[i].order.order_state}
                             </p>
@@ -60,8 +66,11 @@ export const OrdersDetail = () => {
                               {each_order[i].order.shipping_address}
                             </p>
                           </div>
-                          <div className="DetallesButton button col-3">
-                            <Link to={`/products/${product_in_order.id}`} className="btn">
+                          <div className="DetallesButton button">
+                            <Link
+                              to={`/products/${product_in_order.id}`}
+                              className="btn"
+                            >
                               Comprar de nuevo
                             </Link>
                           </div>
