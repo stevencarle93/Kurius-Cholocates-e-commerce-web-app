@@ -9,12 +9,11 @@ export const Footer = () => (
 				<span className="mx-5 mb-3 mb-md-0 text-muted">© Copyright, Kurius Inc e-commerce 2022 </span>
 			</div>
 			<ul className="nav">
-				<li className=""><a className="text-muted" href="#"><box-icon name='facebook' size='lg' border='circle' type='logo'></box-icon></a></li>
-				<li className=""><a className="text-muted" href="#"><box-icon name='instagram' size='lg' border='circle' type='logo'></box-icon></a></li>
-				<li className=""><a className="text-muted" href="#"><box-icon name='github' size='lg' border='circle' type='logo'></box-icon></a></li>
+				<li className=""><a className="text-muted" href="https://www.facebook.com/kuriuschocolate" target="_blank"><box-icon name='facebook' size='lg' border='circle' type='logo'></box-icon></a></li>
+				<li className=""><a className="text-muted" href="https://www.instagram.com/kuriuschocolate" target="_blank"><box-icon name='instagram' size='lg' border='circle' type='logo'></box-icon></a></li>
+				<li className=""><a className="text-muted" href="https://github.com/ItsMeRichArt/kuriuschocolate-ecommerce-webpage/tree/develop" target="_blank"><box-icon name='github' size='lg' border='circle' type='logo'></box-icon></a></li>
 			</ul>
 		</div>
-
 		<div className="col mb-3">
 
 		</div>
